@@ -1,7 +1,7 @@
 using System;
 namespace Controller {
-	public interface IButler {
-		void Redirect(ref object client_Client);
+	public interface Butler : IButler {
+		void Redirect(IClient client);
 
 	}
 

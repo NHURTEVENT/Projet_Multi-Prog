@@ -1,4 +1,7 @@
 using System;
+using System.Drawing;
+using Model;
+
 public class PartyChef : KitchenPersonnel  {
 	private String ustensil;
 	private String currentDish;
@@ -12,11 +15,21 @@ public class PartyChef : KitchenPersonnel  {
 	public void Move(ref Point position) {
 		throw new System.Exception("Not implemented");
 	}
-	public Kitchen GetKitchen() {
+	public IKitchen GetKitchen() {
 		throw new System.Exception("Not implemented");
 	}
 
-	private KitchenClerk[] kitchenClerks;
+    public void Move(Point position)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IAction GetAction()
+    {
+        throw new NotImplementedException();
+    }
+
+    private KitchenClerk[] kitchenClerks;
 
 
 }

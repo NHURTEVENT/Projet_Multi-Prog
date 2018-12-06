@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0B02DD2-A47E-45EC-87F5-D191A0543FA2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{88B6220F-9B9F-44FF-AB32-C642699F9C26}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Shared</RootNamespace>
     <AssemblyName>Shared</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,18 +42,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Controller\iButler.cs" />
+    <Compile Include="Controller\iClient.cs" />
+    <Compile Include="Controller\iController.cs" />
+    <Compile Include="Controller\iDishCleanerController.cs" />
+    <Compile Include="Controller\iHeadWaiter.cs" />
+    <Compile Include="Controller\iKitchenChefController.cs" />
+    <Compile Include="Controller\iKitchenClerkController.cs" />
+    <Compile Include="Controller\iKitchenController.cs" />
+    <Compile Include="Controller\iRoomClerk.cs" />
+    <Compile Include="Controller\iRoomController.cs" />
+    <Compile Include="Controller\iWaiter.cs" />
     <Compile Include="DAO\DAO.cs" />
     <Compile Include="DAO\Dish.cs" />
     <Compile Include="DAO\Ingredient.cs" />
     <Compile Include="DAO\Recipe.cs" />
     <Compile Include="DAO\Stock.cs" />
-    <Compile Include="Person\iPerson.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Model\iAction.cs" />
+    <Compile Include="Model\IKitchen.cs" />
+    <Compile Include="Model\IMachine.cs" />
+    <Compile Include="Model\iPersonnel.cs" />
+    <Compile Include="Model\IRecipe.cs" />
+    <Compile Include="Model\IRestaurant.cs" />
+    <Compile Include="Model\IRoom.cs" />
+    <Compile Include="Model\ITable.cs" />
+    <Compile Include="Model\IUstensil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Folder Include="View\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

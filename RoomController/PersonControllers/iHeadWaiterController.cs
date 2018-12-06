@@ -1,9 +1,17 @@
+using Shared.Model;
 using System;
 namespace Controller {
-	public interface IHeadWaiter {
-		void TakeOrder(ref object client_Client);
-		void DressTable(ref object table_Table);
+	public class HeadWaiter : IHeadWaiter {
 
-	}
+        public void TakeOrder(IClient client)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DressTable(ITable table)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }

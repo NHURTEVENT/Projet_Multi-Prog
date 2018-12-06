@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+
 public class Table {
 	private String squareNumber;
 	private String row;

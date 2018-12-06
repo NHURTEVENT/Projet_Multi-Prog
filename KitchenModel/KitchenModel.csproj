@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2E7F584E-6A91-432A-A88F-62C0BD7D853C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D6ECEA93-281C-443D-8100-96C3DBE468C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KitchenModel</RootNamespace>
     <AssemblyName>KitchenModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,24 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Items\Counter.cs" />
-    <Compile Include="Items\Cupboard.cs" />
-    <Compile Include="Items\Dishwasher.cs" />
-    <Compile Include="Items\Drawer.cs" />
-    <Compile Include="Items\Machine.cs" />
-    <Compile Include="Items\Ustensil.cs" />
-    <Compile Include="Items\WashingMachine.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Item\Counter.cs" />
+    <Compile Include="Item\Cupboard.cs" />
+    <Compile Include="Item\Dishwasher.cs" />
+    <Compile Include="Item\Drawer.cs" />
+    <Compile Include="Item\Machine.cs" />
+    <Compile Include="Item\Ustensil.cs" />
+    <Compile Include="Item\WashingMachine.cs" />
     <Compile Include="Persons\DishCleaner.cs" />
+    <Compile Include="Persons\IKitchen.cs" />
     <Compile Include="Persons\KitchenChef.cs" />
     <Compile Include="Persons\KitchenClerk.cs" />
     <Compile Include="Persons\KitchenPartyChef.cs" />
     <Compile Include="Persons\KitchenPersonnel.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{88b6220f-9b9f-44ff-ab32-c642699f9c26}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

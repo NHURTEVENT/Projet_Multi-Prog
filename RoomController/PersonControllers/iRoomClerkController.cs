@@ -1,9 +1,17 @@
+using Shared.Model;
 using System;
 namespace Controller {
-	public interface IRoomClerk {
-		void RefillWater(ref Model.Room.Table table);
-		void RefillBread(ref Model.Room.Table table);
+	public class RoomClerk : IRoomClerk {
 
-	}
+        public void RefillWater(ITable table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RefillBread(ITable table)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }

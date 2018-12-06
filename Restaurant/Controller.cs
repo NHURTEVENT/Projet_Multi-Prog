@@ -1,3 +1,4 @@
+using Shared.Model;
 using System;
 namespace Controller {
 	public class Controller : IController  {
@@ -10,7 +11,7 @@ namespace Controller {
 		public IRoomController GetRoomController() {
 			throw new System.Exception("Not implemented");
 		}
-		public Model.IRestaurant GetRestaurant() {
+		public IRestaurant GetRestaurant() {
 			throw new System.Exception("Not implemented");
 		}
 
