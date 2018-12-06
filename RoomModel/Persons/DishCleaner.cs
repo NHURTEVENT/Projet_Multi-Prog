@@ -3,7 +3,7 @@ using Shared.Model;
 using System;
 using System.Drawing;
 
-public class DishCleaner : KitchenPersonnel  {
+public class DishCleaner : IKitchenPersonnel  {
 	public Point GetPosition() {
 		throw new System.Exception("Not implemented");
 	}

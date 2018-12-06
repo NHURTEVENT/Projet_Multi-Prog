@@ -2,24 +2,24 @@ using System;
 using System.Collections.Generic;
 
 namespace Controller {
-	public class Client : IClient {
+	public class Waiter : IWaiter {
 		
-        void IClient.Book()
+        void IWaiter.CleanTable()
         {
             throw new NotImplementedException();
         }
 
-        List<Dish> IClient.GetOrder()
+        public void GiveOrder(ref object client_iClient)
         {
             throw new NotImplementedException();
         }
 
-        void IClient.ConsumeWaterAndBread()
+        public void FetchOrder(ref List<Dish> order)
         {
             throw new NotImplementedException();
         }
 
-        void IClient.Pay()
+        public void GiveOrder(IClient client)
         {
             throw new NotImplementedException();
         }

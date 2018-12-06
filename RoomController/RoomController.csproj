@@ -42,12 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="PersonControllers\iButlerController.cs" />
-    <Compile Include="PersonControllers\iClientController.cs" />
-    <Compile Include="PersonControllers\iHeadWaiterController.cs" />
-    <Compile Include="PersonControllers\iRoomClerkController.cs" />
-    <Compile Include="PersonControllers\iWaiterController.cs" />
+    <Compile Include="PersonControllers\ButlerController.cs" />
+    <Compile Include="PersonControllers\ClientController.cs" />
+    <Compile Include="PersonControllers\HeadWaiterController.cs" />
+    <Compile Include="PersonControllers\RoomClerkController.cs" />
+    <Compile Include="PersonControllers\WaiterController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">

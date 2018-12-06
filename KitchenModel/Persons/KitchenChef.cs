@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using Model;
+using Shared.Model;
 
 public class KitchenChef : KitchenPersonnel  {
 	public Point GetPosition() {
@@ -19,6 +20,11 @@ public class KitchenChef : KitchenPersonnel  {
     }
 
     public IAction GetAction()
+    {
+        throw new NotImplementedException();
+    }
+
+    IKitchen KitchenPersonnel.GetKitchen()
     {
         throw new NotImplementedException();
     }

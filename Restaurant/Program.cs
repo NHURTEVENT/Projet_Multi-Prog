@@ -10,6 +10,7 @@ namespace Restaurant
     {
         static void Main(string[] args)
         {
+            Restaurant r = new Restaurant();
         }
     }
 }

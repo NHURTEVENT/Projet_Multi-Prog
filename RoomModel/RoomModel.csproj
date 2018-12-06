@@ -45,11 +45,12 @@
     <Compile Include="Items\Counter.cs" />
     <Compile Include="Items\Machine.cs" />
     <Compile Include="Items\Table.cs" />
+    <Compile Include="Persons\Butler.cs" />
+    <Compile Include="Persons\Client.cs" />
     <Compile Include="Persons\DishCleaner.cs" />
-    <Compile Include="Persons\KitchenChef.cs" />
-    <Compile Include="Persons\KitchenClerk.cs" />
-    <Compile Include="Persons\KitchenPartyChef.cs" />
-    <Compile Include="Persons\KitchenPersonnel.cs" />
+    <Compile Include="Persons\HeadWaiter.cs" />
+    <Compile Include="Persons\RoomClerk.cs" />
+    <Compile Include="Persons\Waiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
