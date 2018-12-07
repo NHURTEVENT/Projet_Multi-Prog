@@ -1,5 +1,6 @@
 using System;
-namespace Controller {
+
+namespace Shared {
 	public interface IKitchenController {
 	}
 

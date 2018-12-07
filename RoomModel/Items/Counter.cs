@@ -1,8 +1,13 @@
 using System;
-public class Counter {
-	private String size;
+using Shared;
 
-	private Dish dish;
+namespace Model {
+    public class Counter
+    {
+        private String size;
+
+        private Dish dish;
 
 
+    }
 }

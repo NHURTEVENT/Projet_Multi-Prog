@@ -1,34 +1,36 @@
 using System;
 using System.Drawing;
-using Model;
-using Shared.Model;
+using Shared;
 
-public class KitchenChef : KitchenPersonnel  {
-	public Point GetPosition() {
-		throw new System.Exception("Not implemented");
-	}
-	public void Move(ref Point position) {
-		throw new System.Exception("Not implemented");
-	}
-	public IKitchen GetKitchen() {
-		throw new System.Exception("Not implemented");
-	}
+namespace Model
+{
 
-    public void Move(Point position)
+    public class KitchenChef : KitchenPersonnel
     {
-        throw new NotImplementedException();
+        public Point GetPosition()
+        {
+            throw new System.Exception("Not implemented");
+        }
+        public void Move(ref Point position)
+        {
+            throw new System.Exception("Not implemented");
+        }
+        public IKitchen GetKitchen()
+        {
+            throw new System.Exception("Not implemented");
+        }
+
+        public void Move(Point position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IAction GetAction()
+        {
+            throw new NotImplementedException();
+        }
+
+        private PartyChef[] partyChefs;
+
     }
-
-    public IAction GetAction()
-    {
-        throw new NotImplementedException();
-    }
-
-    IKitchen KitchenPersonnel.GetKitchen()
-    {
-        throw new NotImplementedException();
-    }
-
-    private PartyChef[] partyChefs;
-
 }

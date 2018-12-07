@@ -1,8 +1,6 @@
-using Model;
-using RoomController;
-using Shared.Model;
+using Controller;
+using Shared;
 using System;
-using RoomModel.Persons;
 using System.Collections.Generic;
 using System.Windows.Forms;
 

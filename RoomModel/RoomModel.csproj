@@ -42,9 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="RoomPersonnelFactory.cs" />
+    <Compile Include="ClientFactory.cs" />
     <Compile Include="Items\Counter.cs" />
-    <Compile Include="Items\Machine.cs" />
     <Compile Include="Items\Table.cs" />
     <Compile Include="Persons\Butler.cs" />
     <Compile Include="Persons\Client.cs" />

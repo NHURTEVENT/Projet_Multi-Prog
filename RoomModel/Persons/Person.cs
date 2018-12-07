@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Shared;
 
-namespace RoomModel.Persons
+namespace Model
 {
     class Person : IPerson
     {

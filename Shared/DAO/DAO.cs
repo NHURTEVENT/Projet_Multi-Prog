@@ -1,5 +1,6 @@
 using System;
-namespace Model {
+
+namespace Shared {
 	public class DAO {
 
 	}

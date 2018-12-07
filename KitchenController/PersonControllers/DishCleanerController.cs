@@ -1,4 +1,6 @@
 using System;
+using Shared;
+
 namespace Controller
 {
     public class DishCleanerController : IDishCleanerController

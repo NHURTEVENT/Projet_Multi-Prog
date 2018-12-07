@@ -1,8 +1,8 @@
-using Shared.Model;
+using Shared;
 using System;
 using System.Collections.Generic;
 
-namespace Controller {
+namespace Model{
     public class Client : IClient
     {
         public void Book()

@@ -1,4 +1,9 @@
-using Shared.Model;
+using Shared;
 using System;
-public class Dishwasher : Machine  {
+
+namespace Model
+{
+    public class Dishwasher : Machine
+    {
+    }
 }

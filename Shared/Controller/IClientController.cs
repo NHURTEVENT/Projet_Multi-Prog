@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace Controller {
+namespace Shared {
+
 	public interface IClientController {
 		void Book();
 		List<Dish> GetOrder();

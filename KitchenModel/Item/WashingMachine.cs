@@ -1,3 +1,8 @@
 using System;
-public class WashingMachine : Machine  {
+
+namespace Model
+{
+    public class WashingMachine : Machine
+    {
+    }
 }

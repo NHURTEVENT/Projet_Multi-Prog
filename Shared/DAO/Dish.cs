@@ -1,3 +1,8 @@
 using System;
-public enum Dish {
+
+namespace Shared
+{
+    public enum Dish
+    {
+    }
 }

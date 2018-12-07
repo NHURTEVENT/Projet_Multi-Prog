@@ -1,6 +1,6 @@
-using Shared.Models;
 using System;
-namespace Controller {
+namespace Shared {
+
 	public interface IKitchenChefController {
 		void Cook(Dish dish);
 		void RequestUstensil(IUstensil ustensil);

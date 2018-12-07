@@ -1,6 +1,7 @@
-using Shared.Model;
+using Shared;
 using System;
-namespace Controller {
+
+namespace Restaurant {
 	public class Controller : IController  {
 		public void Ticked() {
 			throw new System.Exception("Not implemented");

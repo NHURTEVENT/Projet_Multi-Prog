@@ -1,4 +1,5 @@
 using System;
+
 namespace View {
 	public class KitchenRoom {
 		public void CreateView() {

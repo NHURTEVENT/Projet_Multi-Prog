@@ -1,27 +1,30 @@
-using Model;
-using Shared.Model;
+using Shared;
 using System;
 using System.Drawing;
 
-public class DishCleaner : KitchenPersonnel
+namespace Model
 {
-    public IAction GetAction()
-    {
-        throw new NotImplementedException();
-    }
 
-    public IKitchen GetKitchen()
+    public class DishCleaner : KitchenPersonnel
     {
-        throw new NotImplementedException();
-    }
+        public IAction GetAction()
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Move(Point position)
-    {
-        throw new NotImplementedException();
-    }
+        public IKitchen GetKitchen()
+        {
+            throw new NotImplementedException();
+        }
 
-    Point IPersonnel.GetPosition()
-    {
-        throw new NotImplementedException();
+        public void Move(Point position)
+        {
+            throw new NotImplementedException();
+        }
+
+        Point GetPosition()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

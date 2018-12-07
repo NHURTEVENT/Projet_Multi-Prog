@@ -1,3 +1,8 @@
 using System;
-public enum Ingredient {
+
+namespace Shared
+{
+    public enum Ingredient
+    {
+    }
 }

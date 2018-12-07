@@ -1,7 +1,8 @@
-using Shared.Model;
+using Shared;
 using System;
-namespace Controller {
-	public interface Butler : IButler {
+
+namespace Model {
+	public interface Butler : IPerson {
 		void Redirect(IClient client);
 
 	}

@@ -1,5 +1,10 @@
 using System;
-public class Stock {
-	private Ingredient[] ingredient;
 
+namespace Shared
+{
+    public class Stock
+    {
+        private Ingredient[] ingredient;
+
+    }
 }

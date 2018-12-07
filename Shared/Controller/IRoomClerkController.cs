@@ -1,6 +1,6 @@
-using Shared.Model;
 using System;
-namespace Controller {
+
+namespace Shared {
 	public interface IRoomClerk {
 		void RefillWater(ITable table);
 		void RefillBread(ITable table);

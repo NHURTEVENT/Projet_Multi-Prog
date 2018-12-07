@@ -1,6 +1,6 @@
-using Shared.Model;
 using System;
-namespace Controller {
+
+namespace Shared {
 	public interface IRoomController {
 		void AddClient();
 		void RemoveClient(IClient client);

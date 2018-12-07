@@ -1,9 +1,15 @@
-using Shared.Models;
+using Shared;
 using System;
-public class Ustensil : IUstensil {
-	private String nom;
 
-	private Dish dish2;
+namespace Model
+{
+
+    public class Ustensil : IUstensil
+    {
+        private String nom;
+
+        private Dish dish2;
 
 
+    }
 }

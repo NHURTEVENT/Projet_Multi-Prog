@@ -1,7 +1,12 @@
-using Shared.Model;
+using Shared;
 using System;
-namespace Controller {
-	public class HeadWaiter : IHeadWaiter {
+using System.Drawing;
+
+namespace Model {
+	public class HeadWaiter : IPerson {
+
+        public int remainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string currentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void TakeOrder(IClient client)
         {
@@ -9,6 +14,21 @@ namespace Controller {
         }
 
         public void DressTable(ITable table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Point GetPosition()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Move(Point position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void setTask(string task)
         {
             throw new NotImplementedException();
         }

@@ -1,10 +1,14 @@
+using Shared;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
-namespace Controller {
-	public class Waiter : IWaiter {
-		
-        void IWaiter.CleanTable()
+namespace Model {
+	public class Waiter : IPerson {
+        public int remainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string currentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        void CleanTable()
         {
             throw new NotImplementedException();
         }
@@ -20,6 +24,21 @@ namespace Controller {
         }
 
         public void GiveOrder(IClient client)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Point GetPosition()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Move(Point position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void setTask(string task)
         {
             throw new NotImplementedException();
         }

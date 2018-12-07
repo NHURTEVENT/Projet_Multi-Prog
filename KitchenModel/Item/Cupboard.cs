@@ -1,11 +1,17 @@
-using Shared.Models;
+using Shared;
 using System;
-public class Cupboard {
-	public IUstensil GetUstensil(String nom) {
-		throw new System.Exception("Not implemented");
-	}
 
-	private Drawer[] drawers;
+namespace Model{
+
+    public class Cupboard
+    {
+        public IUstensil GetUstensil(String nom)
+        {
+            throw new System.Exception("Not implemented");
+        }
+
+        private Drawer[] drawers;
 
 
+    }
 }

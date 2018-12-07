@@ -42,18 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Controller\IButler.cs" />
-    <Compile Include="Controller\IClient.cs" />
+    <Compile Include="Controller\IButlerController.cs" />
+    <Compile Include="Controller\IClientController.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\IDishCleanerController.cs" />
-    <Compile Include="Controller\IHeadWaiter.cs" />
+    <Compile Include="Controller\IHeadWaiterController.cs" />
     <Compile Include="Controller\IKitchenChefController.cs" />
     <Compile Include="Controller\IKitchenClerkController.cs" />
     <Compile Include="Controller\IKitchenController.cs" />
-    <Compile Include="Controller\IRoomClerk.cs" />
+    <Compile Include="Controller\IRoomClerkController.cs" />
     <Compile Include="Controller\IRoomController.cs" />
-    <Compile Include="Controller\IWaiter.cs" />
+    <Compile Include="Controller\IWaiterController.cs" />
     <Compile Include="DAO\Configuration.cs" />
     <Compile Include="DAO\DAO.cs" />
     <Compile Include="DAO\Dish.cs" />

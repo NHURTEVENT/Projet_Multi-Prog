@@ -1,26 +1,41 @@
 using Model;
-using Shared.Model;
+using Shared;
 using System;
 using System.Drawing;
 
-public class DishCleaner : IKitchenPersonnel  {
-	public Point GetPosition() {
-		throw new System.Exception("Not implemented");
-	}
-	public void Move(ref Point position) {
-		throw new System.Exception("Not implemented");
-	}
-	public IKitchen GetKitchen() {
-		throw new System.Exception("Not implemented");
-	}
-
-    public void Move(Point position)
+namespace Model
+{
+    public class DishCleaner : IPerson
     {
-        throw new NotImplementedException();
-    }
+        public int remainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string currentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-    public IAction GetAction()
-    {
-        throw new NotImplementedException();
+        public Point GetPosition()
+        {
+            throw new System.Exception("Not implemented");
+        }
+        public void Move(ref Point position)
+        {
+            throw new System.Exception("Not implemented");
+        }
+        public IKitchen GetKitchen()
+        {
+            throw new System.Exception("Not implemented");
+        }
+
+        public void Move(Point position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IAction GetAction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void setTask(string task)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

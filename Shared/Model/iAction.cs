@@ -1,5 +1,6 @@
 using System;
-namespace Model {
+
+namespace Shared {
 	public interface IAction {
 		void Act();
         int getRemainingTicks();

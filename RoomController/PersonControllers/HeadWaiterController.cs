@@ -1,5 +1,6 @@
-using Shared.Model;
+using Shared;
 using System;
+
 namespace Controller {
 	public class HeadWaiter : IHeadWaiter {
 

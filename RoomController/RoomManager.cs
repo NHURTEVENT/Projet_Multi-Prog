@@ -1,13 +1,11 @@
-﻿using Model;
-using Shared.DAO;
-using Shared.Model;
+﻿using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomController
+namespace Controller
 {
     public class RoomManager : IManager
     {

@@ -1,5 +1,6 @@
-using Shared.Models;
+using Shared;
 using System;
+
 namespace Controller {
 	public class KitchenChefController : IKitchenChefController
     {

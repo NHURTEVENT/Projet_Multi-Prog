@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace Model {
+namespace Shared {
 	public interface IPerson {
 
 		Point GetPosition();

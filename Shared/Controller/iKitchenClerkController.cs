@@ -1,6 +1,6 @@
-using Shared.Model;
 using System;
-namespace Controller {
+
+namespace Shared {
 	public interface IKitchenClerkController {
 		void Prepare(IRecipe recipe);
 

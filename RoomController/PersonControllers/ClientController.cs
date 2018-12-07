@@ -1,3 +1,4 @@
+using Shared;
 using System;
 using System.Collections.Generic;
 
@@ -24,5 +25,4 @@ namespace Controller {
             throw new NotImplementedException();
         }
     }
-
 }
