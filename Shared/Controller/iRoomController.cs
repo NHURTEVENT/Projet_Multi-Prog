@@ -1,3 +1,4 @@
+using Shared.Model;
 using System;
 namespace Controller {
 	public interface IRoomController {

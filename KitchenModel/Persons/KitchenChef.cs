@@ -3,7 +3,7 @@ using System.Drawing;
 using Model;
 using Shared.Model;
 
-public class KitchenChef : KitchenPersonnel  {
+public class KitchenChef : IKitchenPersonnel  {
 	public Point GetPosition() {
 		throw new System.Exception("Not implemented");
 	}
@@ -24,7 +24,22 @@ public class KitchenChef : KitchenPersonnel  {
         throw new NotImplementedException();
     }
 
-    IKitchen KitchenPersonnel.GetKitchen()
+    public string getCurrentAction()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void setTask(string task)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int getRemainingTicks()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void setRemainingTicks(int tick)
     {
         throw new NotImplementedException();
     }

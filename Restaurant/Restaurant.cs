@@ -14,6 +14,12 @@ namespace Restaurant {
 
         public Restaurant()
         {
+            RunTimer();
+
+        }
+
+        public void RunTimer()
+        {
             myTimer.Tick += new EventHandler(TimerEventProcessor);
 
             // Sets the timer interval to 5 seconds.
@@ -35,6 +41,7 @@ namespace Restaurant {
 
             // Displays a message box asking whether to continue running the timer.
             Console.WriteLine("ding, ding");
+            
         }
     }
 

@@ -1,10 +1,11 @@
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 
 namespace Controller {
-	public class Waiter : IWaiter {
+	public class WaiterController : IWaiterController {
 		
-        void IWaiter.CleanTable()
+        public void CleanTable()
         {
             throw new NotImplementedException();
         }

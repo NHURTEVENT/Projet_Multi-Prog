@@ -1,7 +1,13 @@
+using Model;
+using Shared.Model;
 using System;
 namespace Controller {
-	public interface Butler : IButler {
-		void Redirect(IClient client);
+	public class ButlerController : IButlerController {
+
+        public void Redirect(IClient client)
+        {
+            throw new NotImplementedException();
+        }
 
 	}
 
