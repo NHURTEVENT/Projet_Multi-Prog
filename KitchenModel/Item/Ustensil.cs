@@ -4,12 +4,16 @@ using System;
 namespace Model
 {
 
-    public class Ustensil : IUstensil
+    public class Ustensil //: IUstensil
     {
-        private String nom;
+        public int ID { get; set; }
+        public string name { get; set; }
+        public Dish dish { get; set; }
 
-        private Dish dish2;
-
-
+        public Ustensil(Dish dish, String name)
+        {
+            this.dish = dish;
+            this.name = name;
+        }
     }
 }

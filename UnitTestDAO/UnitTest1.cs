@@ -1,4 +1,5 @@
 ﻿using System;
+using KitchenModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestDAO
@@ -7,8 +8,17 @@ namespace UnitTestDAO
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GivenConfigurationFileReturnsConnectionString()
         {
+            TestWrapper wrapper = new TestWrapper();
+            Assert.IsNotNull(wrapper.getConnectionString());
+        }
+
+        [TestMethod]
+        public void GivenDatabaseConnects()
+        {
+            TestWrapper wrapper = new TestWrapper();
+            Assert.IsNotNull(wrapper.testConnection(wrapper.getConnectionString()));
         }
     }
 }

@@ -4,5 +4,6 @@ namespace Shared
 {
     public enum Dish
     {
+        NONE, CHICKEN, FRENCHFRIES
     }
 }

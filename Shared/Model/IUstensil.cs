@@ -8,5 +8,10 @@ namespace Shared
 {
     public interface IUstensil
     {
+        int ID { get; set; }
+
+        String name { get; set; }
+
+        Dish? dish { get; set; }
     }
 }
