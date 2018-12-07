@@ -8,9 +8,14 @@ namespace Shared
 {
     public interface IClient
     {
+        int RemainingTicks { get; set; }
+        IAction CurrentAction { get; set; }
+        string Name { get; set; }
+
         void Book();
         void ConsumeWaterAndBread();
-        List<Dish> GetOrder();
         void Pay();
+        List<Dish> GetOrder();
+        
     }
 }

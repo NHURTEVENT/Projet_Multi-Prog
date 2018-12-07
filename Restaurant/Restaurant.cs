@@ -1,5 +1,6 @@
 using Controller;
 using Shared;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -7,14 +8,12 @@ using System.Windows.Forms;
 namespace Restaurant {
 	public class Restaurant : IRestaurant  {
 
-        private List<IPerson> personList;
-
-        // TODO Instancier des personnes !
-        //private IPerson = new
-
         private IKitchen kitchen;
         private IRoom room;
-		private DAO dao;
+        private DAO dao;
+        private List<IClient> ClientList;
+        private RoomManager RoomManager;
+
 
 
 
@@ -24,9 +23,21 @@ namespace Restaurant {
         public Restaurant()
         {
 
-            RoomManager roomManager = new RoomManager(personList);
+            ClientList = new List<IClient>();
+            ClientList.Add(ClientFactory.CreateEatingClient());
+            ClientList.Add(ClientFactory.CreateClient());
 
-            myTimer.Tick += new EventHandler(TimerEventProcessor);
+
+            // TODO Instancier des personnes !
+            //private IPerson = new
+
+
+
+
+
+            RoomManager = new RoomManager(ClientList);
+
+            myTimer.Tick += new EventHandler(RoomManager.onTick);
 
             // Sets the timer interval to 1 seconds.
             myTimer.Interval = 1000;
@@ -46,7 +57,7 @@ namespace Restaurant {
             //myTimer.Stop();
 
             // Displays a message box asking whether to continue running the timer.
-            Console.WriteLine("ding, ding");
+            
         }
     }
 

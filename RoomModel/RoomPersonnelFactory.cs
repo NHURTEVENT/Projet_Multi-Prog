@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class RoomPersonnelFactory
+    public static class RoomPersonnelFactory
     {
+
+
+
     }
 }

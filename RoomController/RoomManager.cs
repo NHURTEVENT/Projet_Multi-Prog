@@ -9,37 +9,41 @@ namespace Controller
 {
     public class RoomManager : IManager
     {
-        List<IPerson> persons = new List<IPerson>();
+        List<IClient> clients = new List<IClient>();
 
-        public RoomManager(List<IPerson> persons/*, Configuration config*/)
+        public RoomManager(List<IClient> clients/*, Configuration config*/)
         {
-            this.persons = persons;
+            this.clients = clients;
         }
 
         public void onTick(Object myObject, EventArgs myEventArgs)
         {
-            //Console.WriteLine("DING DING");
 
-            foreach (IPerson person in persons)
+            foreach (IClient client in clients)
             {
-                person.remainingTicks--;
+                client.RemainingTicks--;
 
-                if (person.remainingTicks == 0)
+                if (client.RemainingTicks == 0)
                 {
                     //person.getCurrentAction().release();
                     //TODO : trier la liste des actions
                     //TODO : si il y a une action dansla liste, la faire
                     //TODO : choisir une nouvelle tâche en fonction de plein de trucs et la acquire()
-                    switch (person.currentAction)
+                    switch (client.CurrentAction)
                     {
-                        case "waiting":
-                            person.setTask("eating");
+                        case "Waiting":
+                            client.CurrentAction = "Eating";
+                            client.RemainingTicks = 1;
+                            Console.WriteLine(client.Name + " " + client.CurrentAction);
                             break;
-                        case "eating":
-                            person.setTask("digest");
+                        case "Eating":
+                            client.CurrentAction = "Digest";
+                            client.RemainingTicks = 1;
+                            Console.WriteLine(client.Name + " " + client.CurrentAction);
                             break;
-                        case "digest":
-                            person.setTask("waiting");
+                        case "Digest":
+                            client.CurrentAction = "Waiting";
+                            Console.WriteLine(client.Name + " " + client.CurrentAction);
                             break;
                             /*case PersonsTypes.HeadWaiter:
                                 break;
