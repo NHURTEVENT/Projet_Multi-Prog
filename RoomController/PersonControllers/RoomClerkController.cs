@@ -1,7 +1,7 @@
 using Shared.Model;
 using System;
 namespace Controller {
-	public class RoomClerkController : IRoomClerkController {
+	public class RoomClerk : IRoomClerk {
 
         public void RefillWater(ITable table)
         {

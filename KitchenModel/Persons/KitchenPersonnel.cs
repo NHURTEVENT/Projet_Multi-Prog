@@ -1,7 +1,7 @@
 using Model;
 using Shared.Model;
 using System;
-public interface IKitchenPersonnel : IPerson  {
+public interface KitchenPersonnel : IPersonnel  {
 	IKitchen GetKitchen();
 	// method move is inherited from base class
 

@@ -1,7 +1,7 @@
 using Shared.Model;
 using System;
 namespace Controller {
-	public interface IHeadWaiterController {
+	public interface IHeadWaiter {
 		void TakeOrder(IClient client);
 		void DressTable(ITable table);
 

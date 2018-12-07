@@ -1,10 +1,8 @@
-using Model;
 using Shared.Model;
 using System;
 namespace Controller {
 	public interface IKitchenClerkController {
-
-        void Prepare(IRecipe recipe);
+		void Prepare(IRecipe recipe);
 
 	}
 
