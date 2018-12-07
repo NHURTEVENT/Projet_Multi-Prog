@@ -9,13 +9,8 @@ namespace Shared.Model
     public interface IClient
     {
         void Book();
-
         void ConsumeWaterAndBread();
-
-
         List<Dish> GetOrder();
-
-
         void Pay();
     }
 }

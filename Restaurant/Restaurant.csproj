@@ -53,6 +53,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RoomController\RoomController.csproj">
+      <Project>{D21E3287-3698-4B22-B4D0-85F8AF5134E2}</Project>
+      <Name>RoomController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoomModel\RoomModel.csproj">
+      <Project>{f3c227b1-1f64-4c56-9025-277444292d24}</Project>
+      <Name>RoomModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoomView\RoomView.csproj">
+      <Project>{e2b87df2-e0c3-4bee-96aa-83b31682d702}</Project>
+      <Name>RoomView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{88b6220f-9b9f-44ff-ab32-c642699f9c26}</Project>
       <Name>Shared</Name>
