@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions_\ActionFactory.cs" />
+    <Compile Include="Actions_\Action_.cs" />
+    <Compile Include="Actions_\IAction.cs" />
     <Compile Include="Controller\IButlerController.cs" />
     <Compile Include="Controller\IClientController.cs" />
     <Compile Include="Controller\IController.cs" />
@@ -59,7 +62,6 @@
     <Compile Include="DAO\Ingredient.cs" />
     <Compile Include="DAO\Recipe.cs" />
     <Compile Include="DAO\Stock.cs" />
-    <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IKitchen.cs" />
     <Compile Include="Model\IMachine.cs" />
