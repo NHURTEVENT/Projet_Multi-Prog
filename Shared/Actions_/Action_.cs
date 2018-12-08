@@ -14,11 +14,11 @@ namespace Shared
         public int ID { get; set; }
         public IUstensil Ustensil { get; set; }
 
-        public Action_(string Name, int Duration, IUstensil ustensil = null)
+        public Action_(string Name, int Duration, IUstensil Ustensil = null)
         {
             this.Name = Name;
             this.Duration = Duration;
-            this.Ustensil = ustensil;
+            this.Ustensil = Ustensil;
         }
 
     }

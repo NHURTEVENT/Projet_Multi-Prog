@@ -10,14 +10,14 @@ namespace Model
     public static class ClientFactory
     {
 
-        public static IClient CreateEatingClient()
+        public static IClient CreateEatingClient(string Name)
         {
-            return new Client("Michel","Eating", 2);
+            return new Client(ActionFactory.CreateAction_("Eat"), Name);
         }
 
         public static IClient CreateClient()
         {
-            return new Client();
+            return new Client(ActionFactory.CreateAction_());
         }
 
     }

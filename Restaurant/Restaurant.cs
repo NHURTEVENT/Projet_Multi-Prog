@@ -11,9 +11,9 @@ namespace Restaurant {
         private IKitchen kitchen;
         private IRoom room;
         private DAO dao;
-        private List<IClient> ClientList;
         private RoomManager RoomManager;
 
+        private List<IClient> ClientList;
 
 
 
@@ -24,7 +24,7 @@ namespace Restaurant {
         {
 
             ClientList = new List<IClient>();
-            ClientList.Add(ClientFactory.CreateEatingClient());
+            ClientList.Add(ClientFactory.CreateEatingClient("Michel"));
             ClientList.Add(ClientFactory.CreateClient());
 
 
@@ -32,12 +32,12 @@ namespace Restaurant {
             //private IPerson = new
 
 
-
-
-
             RoomManager = new RoomManager(ClientList);
 
             myTimer.Tick += new EventHandler(RoomManager.onTick);
+            //myTimer.Tick += new EventHandler(TimerEventProcessor1);
+            //myTimer.Tick += new EventHandler(TimerEventProcessor2);
+
 
             // Sets the timer interval to 1 seconds.
             myTimer.Interval = 1000;
@@ -51,13 +51,16 @@ namespace Restaurant {
             }
         }
 
-        private static void TimerEventProcessor(Object myObject,
-                                            EventArgs myEventArgs)
+        private static void TimerEventProcessor1(Object myObject, EventArgs myEventArgs)
         {
             //myTimer.Stop();
+            Console.WriteLine("Test1");
 
-            // Displays a message box asking whether to continue running the timer.
-            
+        }
+        private static void TimerEventProcessor2(Object myObject, EventArgs myEventArgs)
+        {
+            Console.WriteLine("Test2");
+
         }
     }
 

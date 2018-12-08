@@ -14,20 +14,22 @@ namespace Shared
             switch (Name)
             {
                 case "WaitOutside":
-                return new Action_("WaitOutside", 1);
-                    break;
+                    return new Action_("WaitOutside", 1);
+
                 case "WaitForDish":
                     return new Action_("WaitForDish", 1);
-                    break;
+
                 case "WaitToPay":
                     return new Action_("WaitToPay", 1);
-                    break;
+
                 case "Eat":
-                return new Action_("Eat", 3);
-                    break;
+                    return new Action_("Eat", 3);
+
+                case "Diggest":
+                    return new Action_("Diggest", 3);
+
                 default:
-                return new Action_("Wait", 1);
-                    break;
+                    return new Action_("Wait", 1);
 
             }
         }

@@ -11,10 +11,10 @@ namespace Model{
 
 
 
-        public Client(string Name = "Lucien", IAction CurrentAction = null, int RemainingTicks = 3)
+        public Client(IAction CurrentAction, string Name = "Lucien")
         {
             this.CurrentAction = CurrentAction;
-            this.RemainingTicks = RemainingTicks;
+            this.RemainingTicks = CurrentAction.Duration;
             this.Name = Name;
         }
 
@@ -38,6 +38,35 @@ namespace Model{
             throw new NotImplementedException();
         }
 
+        public void ChangeAction(IAction Action)
+        {
+            this.CurrentAction = Action;
+            RemainingTicks = Action.Duration;
+            Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+        }
+
+        public void onTick()
+        {
+            RemainingTicks--;
+            if (RemainingTicks == 0)
+            {
+                switch (CurrentAction.Name)
+                {
+                    case "Eat":
+                        ChangeAction(ActionFactory.CreateAction_("Diggest"));
+                        break;
+                    case "Diggest":
+                        ChangeAction(ActionFactory.CreateAction_("Wait"));
+                        break;
+                    case "Wait":
+                        Console.WriteLine(Name + " is waiting");
+                        RemainingTicks++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         
     }
 
