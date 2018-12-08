@@ -17,9 +17,9 @@ namespace KitchenModel
             Seed(context);
         }
 
-        private string getConnectionString()
+        public string getConnectionString()
         {
-            return System.Configuration.ConfigurationManager.ConnectionStrings["myContext"].ConnectionString.ToString();
+            return System.Configuration.ConfigurationManager.ConnectionStrings["KitchenContext"].ConnectionString.ToString();
         }
 
         public SqlConnection connect()

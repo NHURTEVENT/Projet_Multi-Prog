@@ -1,32 +1,22 @@
-﻿using Model;
-using Shared;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-
-using System.Threading.Tasks;
-
 namespace KitchenModel
 {
-    public class KitchenContext : DbContext
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using Model;
+
+    public partial class KitchenContext : DbContext
     {
-        public DbSet<Ustensil> Ustensils { get; set; }
-        //public DbSet<Table> Tables { get; set; }
-
-        //public DbSet<Dish> Dishes;
-
-
-        public KitchenContext() : base("myContext")
+        public KitchenContext()
+            : base("name=KitchenContext")
         {
-
         }
+
+        public DbSet<Ustensil> Ustensils { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }
 }

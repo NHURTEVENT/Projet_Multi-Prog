@@ -19,15 +19,6 @@ namespace UnitTestDAO
             return co;
         }
 
-        public string getConnectionString()
-        {
-            ConnectionStringSettingsCollection settings = ConfigurationManager.ConnectionStrings;
-            foreach (ConnectionStringSettings cs in settings)
-            {
-                return cs.ConnectionString;
-            }
-
-            throw new Exception("no connection string found exception");
-        }
+        
     }
 }
