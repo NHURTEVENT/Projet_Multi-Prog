@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IUstensil
+    public interface IUtensil
     {
-        int ID { get; set; }
-
-        String name { get; set; }
-
-        Dish? dish { get; set; }
+        String Name { get; set; }
+        Dish Dish { get; set; }
     }
 }

@@ -82,7 +82,7 @@
     <Compile Include="Model\IRestaurant.cs" />
     <Compile Include="Model\IRoom.cs" />
     <Compile Include="Model\ITable.cs" />
-    <Compile Include="Model\IUstensil.cs" />
+    <Compile Include="Model\IUtensil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

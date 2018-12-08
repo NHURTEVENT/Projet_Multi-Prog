@@ -1,4 +1,4 @@
-namespace KitchenModel
+namespace Model
 {
     using System;
     using System.Data.Entity;
@@ -13,7 +13,10 @@ namespace KitchenModel
         {
         }
 
-        public DbSet<Ustensil> Ustensils { get; set; }
+        public DbSet<UtensilEntry> Ustensils { get; set; }
+        public DbSet<MachineDBEntry> Machines { get; set; }
+        //public DbSet<Drawer> Drawers { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -58,6 +58,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Item\MachineDBEntry.cs" />
+    <Compile Include="Item\Recipe.cs" />
+    <Compile Include="Item\RecipeStep.cs" />
+    <Compile Include="Item\UtensilEntry.cs" />
+    <Compile Include="Item\UtensilFactory.cs" />
     <Compile Include="KitchenContext.cs" />
     <Compile Include="KitchenPersonnelFactory.cs" />
     <Compile Include="Item\Counter.cs" />
@@ -65,7 +70,7 @@
     <Compile Include="Item\Dishwasher.cs" />
     <Compile Include="Item\Drawer.cs" />
     <Compile Include="Item\Machine.cs" />
-    <Compile Include="Item\Ustensil.cs" />
+    <Compile Include="Item\Utensil.cs" />
     <Compile Include="Item\WashingMachine.cs" />
     <Compile Include="ModelDAOInitializer.cs" />
     <Compile Include="Persons\DishCleaner.cs" />

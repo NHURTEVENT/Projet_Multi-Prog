@@ -29,13 +29,22 @@ namespace KitchenModel
 
         protected override void Seed(KitchenContext context)
         {
-            var ustensils = new List<Ustensil>
-            {
-                new Ustensil(Dish.NONE, "spork"),
-                new Ustensil(Dish.CHICKEN, "pan")
+            var ustensils = new List<UtensilEntry>
+            {/*
+                new UtensilEntry("fork",10),
+                new UtensilEntry("spork",20),
+                new UtensilEntry("knife",30)*/
             };
-            ustensils.ForEach(s => context.Ustensils.Add(s));
+            ustensils.ForEach(u => context.Ustensils.Add(u));
 
+            context.SaveChanges();
+
+            var machines = new List<MachineDBEntry>
+            {/*
+                new MachineDBEntry("washing",10,1,30,1,3),
+                new MachineDBEntry("washing",30,1,60,1,3)*/
+            };
+            machines.ForEach(m => context.Machines.Add(m));
             context.SaveChanges();
         }
     }
