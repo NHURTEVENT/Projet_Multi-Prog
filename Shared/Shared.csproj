@@ -62,6 +62,7 @@
     <Compile Include="DAO\Ingredient.cs" />
     <Compile Include="DAO\Recipe.cs" />
     <Compile Include="DAO\Stock.cs" />
+    <Compile Include="Model\IButler.cs" />
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IKitchen.cs" />
     <Compile Include="Model\IMachine.cs" />

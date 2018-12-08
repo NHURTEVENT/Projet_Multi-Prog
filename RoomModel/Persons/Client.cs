@@ -1,22 +1,26 @@
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Model{
     public class Client : IClient
     {
         public string Name { get; set; }
+        public string Type { get; set; }
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
-
+        public Point Position { get; set; }
 
 
         public Client(IAction CurrentAction, string Name = "Lucien")
         {
-            this.CurrentAction = CurrentAction;
-            this.RemainingTicks = CurrentAction.Duration;
             this.Name = Name;
+            this.Type = "Client";
+            ChangeAction(CurrentAction);
+            Position = new Point(0,0);
         }
+
 
         public void Book()
         {
@@ -37,6 +41,17 @@ namespace Model{
         {
             throw new NotImplementedException();
         }
+
+        public Point GetPosition()
+        {
+            return this.Position;
+        }
+
+        public void Move(Point position)
+        {
+            this.Position = position;
+        }
+
 
         public void ChangeAction(IAction Action)
         {
@@ -67,7 +82,12 @@ namespace Model{
                 }
             }
         }
-        
+
+        public void GetTable(ITable table)
+        {
+            //Observer
+        }
+
     }
 
 }

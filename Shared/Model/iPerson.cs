@@ -4,14 +4,22 @@ using System.Drawing;
 namespace Shared {
 	public interface IPerson {
 
-		Point GetPosition();
-		void Move(Point position);
-        void setTask(String task);
+
+        string Name { get; set; }
+        string Type { get; set; }
+        IAction CurrentAction { get; set; }
+        int RemainingTicks { get; set; }
+        Point Position { get; set; }
+
+
+        void onTick();
+        void ChangeAction(IAction Action);
+
+
+        Point GetPosition();
+        void Move(Point position);
         //PersonType getType();
 
-        int remainingTicks { get; set; }
-        string currentAction { get; set; }
-        
     }
 
 }

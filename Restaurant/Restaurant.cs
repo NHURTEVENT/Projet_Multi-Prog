@@ -28,15 +28,9 @@ namespace Restaurant {
             ClientList.Add(ClientFactory.CreateClient());
 
 
-            // TODO Instancier des personnes !
-            //private IPerson = new
-
-
             RoomManager = new RoomManager(ClientList);
 
             myTimer.Tick += new EventHandler(RoomManager.onTick);
-            //myTimer.Tick += new EventHandler(TimerEventProcessor1);
-            //myTimer.Tick += new EventHandler(TimerEventProcessor2);
 
 
             // Sets the timer interval to 1 seconds.

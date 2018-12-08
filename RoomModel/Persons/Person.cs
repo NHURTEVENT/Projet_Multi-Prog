@@ -9,7 +9,7 @@ using Shared;
 
 namespace Model
 {
-    class Person : IPerson
+    class Person //: IPerson
     {
         public Person(int remainingTicks, string currentAction)
         {

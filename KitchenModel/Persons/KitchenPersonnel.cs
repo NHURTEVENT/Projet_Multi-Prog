@@ -5,7 +5,7 @@ using Shared;
 namespace Model
 {
 
-    public class KitchenPersonnel : IPerson
+    public class KitchenPersonnel //: IPerson
     {
         public int remainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string currentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

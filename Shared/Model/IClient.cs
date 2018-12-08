@@ -6,22 +6,13 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IClient
+    public interface IClient : IPerson
     {
-        int RemainingTicks { get; set; }
-        string Name { get; set; }
-        IAction CurrentAction { get; set; }
-
-
-
-        void onTick();
-        void ChangeAction(IAction Action);
-
 
         void Book();
         void ConsumeWaterAndBread();
         void Pay();
         List<Dish> GetOrder();
-        
+        void GetTable(ITable table);
     }
 }

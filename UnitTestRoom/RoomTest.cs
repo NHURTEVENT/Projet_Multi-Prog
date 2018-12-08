@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using Shared;
+using System.Collections.Generic;
 
 namespace UnitTestRoom
 {
@@ -18,6 +19,18 @@ namespace UnitTestRoom
         }
     }
 
+    [TestClass]
+    public class RoomPersonnelFactoryTest
+    {
+        [TestMethod]
+        public void TestCreateButler()
+        {
+            List<ITable> tables = new List<ITable>();
+            var butler = new Butler(tables);
+            Assert.AreEqual(butler.GetType(), RoomPersonnelFactory.CreateButler(tables).GetType());
+
+        }
+    }
 
     [TestClass]
     public class ActionFactoryTest

@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace Model
 {
-    public class DishCleaner : IPerson
+    public class DishCleaner //: IPerson
     {
         public int remainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string currentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

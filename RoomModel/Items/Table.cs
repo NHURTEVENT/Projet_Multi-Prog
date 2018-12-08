@@ -6,14 +6,25 @@ namespace Model
 {
     public class Table : ITable
     {
-        private String squareNumber;
-        private String row;
-        private String position;
-        private String size;
-        private Semaphore available;
+        public string squareNumber { get; set; }
+        public string row { get; set; }
+        public string position { get; set; }
+        public int size { get; set; }
+        public bool available { get; set; }
 
         public Table()
         {
+            this.available = true;
+            this.size = 4;
+
         }
+
+
+        public void IsOccuped()
+        {
+
+        }
+
+
     }
 }
