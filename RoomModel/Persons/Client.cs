@@ -24,6 +24,8 @@ namespace Model{
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
+
+            Dishes = new List<Dish>();
         }
 
 

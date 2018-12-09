@@ -100,4 +100,28 @@ namespace UnitTestRoom
         }
     }
 
+
+    [TestClass]
+    public class HeadWaiterTest
+    {
+
+        List<ITable> tables = new List<ITable>();
+
+
+        [TestMethod]
+        public void TestTakeOrder()
+        {
+            var client = ClientFactory.CreateClient("Client1");
+            IHeadWaiter headWaiter = RoomPersonnelFactory.CreateHeadWaiter(tables);
+
+            client.Dishes.Add(Dish.Riz_de_veau);
+
+            headWaiter.TakeOrder(client);
+
+            Assert.AreEqual(client.Dishes, headWaiter.Dishes);
+
+        }
+    }
+
+
 }

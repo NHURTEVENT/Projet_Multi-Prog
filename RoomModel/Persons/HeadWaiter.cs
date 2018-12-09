@@ -15,11 +15,14 @@ namespace Model {
 
         public List<IDisposable> Unsubscribers;
         public List<ITable> Tables;
-        public List<Dish> Dishes;
+        public List<Dish> Dishes { get; set; }
 
 
         public HeadWaiter(List<ITable> tables)
         {
+            this.Name = "Michel";
+            this.Type = "HeadWaiter";
+
             this.Tables = tables;
             Dishes = new List<Dish>();
             Unsubscribers = new List<IDisposable>();
@@ -47,7 +50,7 @@ namespace Model {
 
         public void TakeOrder(IClient client)
         {
-            throw new NotImplementedException();
+            this.Dishes = client.Dishes;
         }
 
         public void DressTable(ITable table)

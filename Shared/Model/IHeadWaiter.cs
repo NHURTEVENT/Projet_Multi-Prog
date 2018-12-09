@@ -8,5 +8,12 @@ namespace Shared
 {
     public interface IHeadWaiter : IPerson, IObserver<string>
     {
+
+        List<Dish> Dishes { get; set; }
+
+
+        void TakeOrder(IClient client);
+
+
     }
 }
