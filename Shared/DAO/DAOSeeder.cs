@@ -1,4 +1,5 @@
 ﻿using Model;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -36,6 +37,20 @@ namespace Shared
             };
             ItemDBEntries.ForEach(i => context.Items.Add(i));
             context.SaveChanges();*/
+            /*
+            var PersonnelDBEntries = new List<PersonnelDBEntry>{
+                new PersonnelDBEntry(PersonnelType.WAITER,4),
+                new PersonnelDBEntry(PersonnelType.BUTLER,1),
+                new PersonnelDBEntry(PersonnelType.ROOMCLERK,1),
+                new PersonnelDBEntry(PersonnelType.HEADWAITER,2),
+                new PersonnelDBEntry(PersonnelType.KITCHENCHEF,1),
+                new PersonnelDBEntry(PersonnelType.KITCHENPARTYCHEF,2),
+                new PersonnelDBEntry(PersonnelType.KITCHENCLERK,2),
+                new PersonnelDBEntry(PersonnelType.DISHCLEANER,1)
+            };
+            PersonnelDBEntries.ForEach(e => context.PersonnelDBEntries.Add(e));
+            context.SaveChanges();
+            */
         }
     }
 }

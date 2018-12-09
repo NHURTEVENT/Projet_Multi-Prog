@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201812091905542_AddItems.Designer.cs">
       <DependentUpon>201812091905542_AddItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812092048308_AddPersonnel.cs" />
+    <Compile Include="Migrations\201812092048308_AddPersonnel.Designer.cs">
+      <DependentUpon>201812092048308_AddPersonnel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\IClient.cs" />
@@ -119,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812091905542_AddItems.resx">
       <DependentUpon>201812091905542_AddItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812092048308_AddPersonnel.resx">
+      <DependentUpon>201812092048308_AddPersonnel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

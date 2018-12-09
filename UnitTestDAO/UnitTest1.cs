@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using Shared;
+using Shared.Model;
 
 namespace UnitTestDAO
 {
@@ -122,6 +123,22 @@ namespace UnitTestDAO
                             select b;
                 var type = query.FirstOrDefault().Quantity;
                 Assert.AreEqual(query.FirstOrDefault().Quantity, 30);
+            }
+        }
+
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesPersonnel()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //Assert.IsNotNull(DAOSeeder.getConnectionString());
+                var query = from b in context.PersonnelDBEntries
+                            where (b.PersonnelType == PersonnelType.WAITER)
+                            select b;
+                var type = query.FirstOrDefault().Quantity;
+                Assert.AreEqual(query.FirstOrDefault().Quantity, 4);
             }
         }
     }
