@@ -12,12 +12,16 @@ namespace Model{
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
 
+        private ITable myTable;
+        private IDisposable unsubscriber;
+
 
         public Client(IAction CurrentAction, string Name = "Lucien")
         {
             this.Name = Name;
             this.Type = "Client";
-            ChangeAction(CurrentAction);
+            this.CurrentAction = CurrentAction;
+            RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
         }
 
@@ -67,27 +71,77 @@ namespace Model{
             {
                 switch (CurrentAction.Name)
                 {
+                    case "MoveToTable":
+                        ChangeAction(ActionFactory.CreateAction_("Eat"));
+                        break;
+
                     case "Eat":
                         ChangeAction(ActionFactory.CreateAction_("Diggest"));
                         break;
+
                     case "Diggest":
-                        ChangeAction(ActionFactory.CreateAction_("Wait"));
+                        ChangeAction(ActionFactory.CreateAction_("Leave"));
                         break;
+
+                    case "Leave":
+                        LeaveTable();
+                        ChangeAction(ActionFactory.CreateAction_("Leaved"));
+                        break;
+
                     case "Wait":
                         Console.WriteLine(Name + " is waiting");
                         RemainingTicks++;
                         break;
+
                     default:
                         break;
                 }
+            }
+            else
+            {
+                Console.WriteLine(this.Name + " " + this.CurrentAction.Name);
             }
         }
 
         public void GetTable(ITable table)
         {
-            //Observer
+            unsubscriber = table.Subscribe(this);
+            myTable = table;
+            Console.WriteLine("Le client s'est abonné à la table");
+            ChangeAction(ActionFactory.CreateAction_("MoveToTable"));
         }
 
+        public void LeaveTable()
+        {
+            myTable.IsNowFree();
+            unsubscriber.Dispose();
+        }
+        
+
+        public void OnNext(string changes)
+        {
+            switch (changes)
+            {
+                case "dishServed":
+                    ChangeAction(ActionFactory.CreateAction_("Eat"));
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCompleted()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

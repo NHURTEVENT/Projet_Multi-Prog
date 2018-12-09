@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IClient : IPerson
+    public interface IClient : IPerson, IObserver<string>
     {
 
         void Book();
         void ConsumeWaterAndBread();
         void Pay();
         List<Dish> GetOrder();
-        void GetTable(ITable table);
+        void GetTable(ITable provider);
     }
 }

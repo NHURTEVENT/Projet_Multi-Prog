@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Shared
 {
-    public interface ITable
+    public interface ITable : IObservable<string>
     {
 
         string squareNumber { get; set; }
@@ -14,7 +14,8 @@ namespace Shared
         int size { get; set; }
         bool available { get; set; }
 
-        void IsOccuped();
+        void IsNowOccuped();
+        void IsNowFree();
 
     }
 }
