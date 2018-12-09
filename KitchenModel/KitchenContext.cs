@@ -13,7 +13,7 @@ namespace Model
         {
         }
 
-        public DbSet<UtensilEntry> Ustensils { get; set; }
+        public DbSet<Drawer> Ustensils { get; set; }
         public DbSet<MachineDBEntry> Machines { get; set; }
         public DbSet<RecipeStep> Recipes { get; set; }
 

@@ -28,18 +28,19 @@ namespace Model
         }
 
         protected override void Seed(KitchenContext context)
-        {/*
-            var ustensils = new List<UtensilEntry>
+        {
+            /*
+            var ustensils = new List<Drawer>
             {
-                new UtensilEntry(UtensilType.FORK,10),
-                new UtensilEntry(UtensilType.SPORK,20),
-                new UtensilEntry(UtensilType.KNIFE,30),
-                new UtensilEntry(UtensilType.PAN,10)
+                new Drawer(UtensilType.FORK,10),
+                new Drawer(UtensilType.SPORK,20),
+                new Drawer(UtensilType.KNIFE,30),
+                new Drawer(UtensilType.PAN,10)
             };
             ustensils.ForEach(u => context.Ustensils.Add(u));
 
             context.SaveChanges();
-
+            
             var machines = new List<MachineDBEntry>
             {
                 new MachineDBEntry("washing",10,1,30,1,3),

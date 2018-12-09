@@ -47,6 +47,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,12 +68,24 @@
     <Compile Include="Controller\IRoomClerkController.cs" />
     <Compile Include="Controller\IRoomController.cs" />
     <Compile Include="Controller\IWaiterController.cs" />
+    <Compile Include="DAO\DAOSeeder.cs" />
+    <Compile Include="DAO\ItemEntry.cs" />
+    <Compile Include="DAO\PersonnelDBEntry.cs" />
+    <Compile Include="DAO\RoomConfiguration.cs" />
     <Compile Include="DAO\Configuration.cs" />
+    <Compile Include="DAO\ConfigurationContext.cs" />
     <Compile Include="DAO\DAO.cs" />
     <Compile Include="DAO\Dish.cs" />
     <Compile Include="DAO\Ingredient.cs" />
+    <Compile Include="DAO\KitchenConfiguration.cs" />
     <Compile Include="DAO\Recipe.cs" />
     <Compile Include="DAO\Stock.cs" />
+    <Compile Include="DAO\TableDBEntry.cs" />
+    <Compile Include="Migrations\201812091844431_AddTables.cs" />
+    <Compile Include="Migrations\201812091844431_AddTables.Designer.cs">
+      <DependentUpon>201812091844431_AddTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IKitchen.cs" />
@@ -82,7 +96,9 @@
     <Compile Include="Model\IRestaurant.cs" />
     <Compile Include="Model\IRoom.cs" />
     <Compile Include="Model\ITable.cs" />
+    <Compile Include="Model\ItemType.cs" />
     <Compile Include="Model\IUtensil.cs" />
+    <Compile Include="Model\PersonnelType.cs" />
     <Compile Include="Model\UtensilType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -92,6 +108,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812091844431_AddTables.resx">
+      <DependentUpon>201812091844431_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -9,6 +9,8 @@ namespace UnitTestDAO
     [TestClass]
     public class UnitTest1
     {
+    
+       
         [TestMethod]
         public void GivenConfigurationFileReturnsConnectionString()
         {
@@ -17,7 +19,7 @@ namespace UnitTestDAO
                 ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
                 Assert.IsNotNull(modelDAOInitializer.getConnectionString());
             }
-            
+
         }
 
         [TestMethod]
@@ -42,10 +44,12 @@ namespace UnitTestDAO
                             orderby b.UtensilType
                             select b;
                 var name = query.FirstOrDefault().UtensilType;
-                Assert.IsTrue(String.Equals(UtensilType.FORK,query.FirstOrDefault().UtensilType));
+                Assert.IsTrue(String.Equals(UtensilType.FORK, query.FirstOrDefault().UtensilType));
             }
         }
 
+        
+        //
         [TestMethod]
         public void GivenDatabaseRetrievesUtensils()
         {
@@ -90,6 +94,20 @@ namespace UnitTestDAO
                 Assert.IsTrue(String.Equals(query.FirstOrDefault().Name, "cut the popatoes"));
             }
         }
-        
+       
+        [TestMethod]
+        public void GivenDatabaseRetrievesTables()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //Assert.IsNotNull(DAOSeeder.getConnectionString());
+                var query = from b in context.Tables
+                            where (b.Square == 1) && (b.Row == 1) && (b.Column == 1)
+                            select b;
+                var type = query.FirstOrDefault().Size;
+                Assert.AreEqual(query.FirstOrDefault().Size, 2);
+            }
+        }
     }
 }

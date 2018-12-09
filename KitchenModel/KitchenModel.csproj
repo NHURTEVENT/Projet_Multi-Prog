@@ -89,6 +89,14 @@
     <Compile Include="Migrations\201812091415038_updatedStructure.Designer.cs">
       <DependentUpon>201812091415038_updatedStructure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812091608381_renamedUtensilEntry.cs" />
+    <Compile Include="Migrations\201812091608381_renamedUtensilEntry.Designer.cs">
+      <DependentUpon>201812091608381_renamedUtensilEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091836361_AddTables.cs" />
+    <Compile Include="Migrations\201812091836361_AddTables.Designer.cs">
+      <DependentUpon>201812091836361_AddTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelDAOInitializer.cs" />
     <Compile Include="Persons\DishCleaner.cs" />
@@ -120,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812091415038_updatedStructure.resx">
       <DependentUpon>201812091415038_updatedStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091608381_renamedUtensilEntry.resx">
+      <DependentUpon>201812091608381_renamedUtensilEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091836361_AddTables.resx">
+      <DependentUpon>201812091836361_AddTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

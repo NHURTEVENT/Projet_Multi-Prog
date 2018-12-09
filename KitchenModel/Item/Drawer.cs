@@ -1,21 +1,40 @@
 using Shared;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 
 namespace Model{
     public class Drawer
     {
-        public int Quantity { get; set; }
-
         [Key]
-        public Utensil Ustensil { get; set; }
+        public UtensilType UtensilType { get; set; }
+        public int Quantity {
+            get
+            {
+                return quantity;
+            }
+            set
+            {
+                quantity = value;
+                available = new Semaphore(0, value);
+            }
+        }
+        private int quantity { get; set; }
+        private Semaphore available;
 
-        /*public IUtensil GetUstensil(String nom)
+        public Drawer(UtensilType utensil, int quantity)
         {
-            throw new System.Exception("Not implemented");
-        }*/
+            UtensilType = utensil;
+            Quantity = quantity;
+        }
 
-       
+        public Drawer() { }
+
+        public Utensil getUtensil()
+        {
+            available.WaitOne();
+            return new Utensil(UtensilType);
+        }
 
 
     }
