@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="PersonControllers\ButlerController.cs" />
     <Compile Include="PersonControllers\ClientController.cs" />
     <Compile Include="PersonControllers\HeadWaiterController.cs" />

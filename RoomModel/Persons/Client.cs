@@ -11,6 +11,7 @@ namespace Model{
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
+        public List<Dish> Dishes { get; set; }
 
         private ITable myTable;
         private IDisposable unsubscriber;
@@ -36,7 +37,6 @@ namespace Model{
             throw new NotImplementedException();
         }
 
-
         public void Pay()
         {
             throw new NotImplementedException();
@@ -54,7 +54,7 @@ namespace Model{
 
         public List<Dish> Order()
         {
-            throw new NotImplementedException();
+            return this.Dishes;
         }
 
 

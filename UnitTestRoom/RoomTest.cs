@@ -23,14 +23,26 @@ namespace UnitTestRoom
     [TestClass]
     public class RoomPersonnelFactoryTest
     {
+
+        List<ITable> tables = new List<ITable>();
+
+
         [TestMethod]
         public void TestCreateButler()
         {
-            List<ITable> tables = new List<ITable>();
             var butler = new Butler(tables);
             Assert.AreEqual(butler.GetType(), RoomPersonnelFactory.CreateButler(tables).GetType());
 
         }
+
+        [TestMethod]
+        public void TestCreateHeadWaiter()
+        {
+            var headWaiter = new HeadWaiter(tables);
+            var headWaiter2 = RoomPersonnelFactory.CreateHeadWaiter(tables);
+            Assert.AreEqual(headWaiter.GetType(), headWaiter2.GetType());
+        }
+
     }
 
     [TestClass]

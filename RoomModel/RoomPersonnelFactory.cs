@@ -15,5 +15,9 @@ namespace Model
             return new Butler(tables);
         }
 
+        public static object CreateHeadWaiter(List<ITable> tables)
+        {
+            return new HeadWaiter(tables);
+        }
     }
 }

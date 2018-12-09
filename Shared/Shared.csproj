@@ -64,6 +64,7 @@
     <Compile Include="DAO\Stock.cs" />
     <Compile Include="Model\IButler.cs" />
     <Compile Include="Model\IClient.cs" />
+    <Compile Include="Model\IHeadWaiter.cs" />
     <Compile Include="Model\IKitchen.cs" />
     <Compile Include="Model\IMachine.cs" />
     <Compile Include="Model\IManager.cs" />

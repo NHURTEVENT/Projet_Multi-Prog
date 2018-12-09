@@ -1,5 +1,6 @@
 using Shared;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Model {
@@ -11,6 +12,27 @@ namespace Model {
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
+
+        public List<IDisposable> Unsubscribers;
+        public List<ITable> Tables;
+        public List<Dish> Dishes;
+
+
+        public HeadWaiter(List<ITable> tables)
+        {
+            this.Tables = tables;
+            Dishes = new List<Dish>();
+            Unsubscribers = new List<IDisposable>();
+
+            foreach (var table in Tables)
+            {
+                Unsubscribers.Add(table.Subscribe(this));
+                Console.WriteLine(Name + " s'est abonné à la table");
+            }
+
+            ChangeAction(ActionFactory.CreateAction_());
+
+        }
 
 
         public Point GetPosition()
@@ -40,7 +62,9 @@ namespace Model {
 
         public void ChangeAction(IAction Action)
         {
-            throw new NotImplementedException();
+            this.CurrentAction = Action;
+            RemainingTicks = Action.Duration;
+            Console.WriteLine(Name + " starts to " + CurrentAction.Name);
         }
 
         public void OnNext(string value)

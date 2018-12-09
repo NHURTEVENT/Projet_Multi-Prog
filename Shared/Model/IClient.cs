@@ -8,6 +8,8 @@ namespace Shared
 {
     public interface IClient : IPerson, IObserver<string>
     {
+        List<Dish> Dishes { get; set; }
+
 
         void Book();
         void ConsumeWaterAndBread();
