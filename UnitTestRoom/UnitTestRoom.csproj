@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RoomController\RoomController.csproj">
+      <Project>{d21e3287-3698-4b22-b4d0-85f8af5134e2}</Project>
+      <Name>RoomController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RoomModel\RoomModel.csproj">
       <Project>{F3C227B1-1F64-4C56-9025-277444292D24}</Project>
       <Name>RoomModel</Name>

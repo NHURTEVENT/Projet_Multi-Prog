@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using Controller;
 using Shared;
 using System.Collections.Generic;
 
@@ -14,7 +15,7 @@ namespace UnitTestRoom
         {
 
             var client = new Client(ActionFactory.CreateAction_());
-            Assert.AreEqual(client.GetType(), ClientFactory.CreateClient().GetType());
+            Assert.AreEqual(client.GetType(), ClientFactory.CreateClient("client1").GetType());
 
         }
     }
@@ -49,12 +50,35 @@ namespace UnitTestRoom
 
 
     [TestClass]
+    public class RoomManagerTest
+    {
+        [TestMethod]
+        public void TestclearClients()
+        {
+            RoomManager roomManager = new RoomManager();
+            List<IClient> newClientList = new List<IClient>();
+            var client = ClientFactory.CreateClient("runningAwayClient");
+            client.ChangeAction(ActionFactory.CreateAction_("Leaved"));
+            newClientList.Add(client);
+
+            roomManager.newClients(newClientList);
+            roomManager.clientsLeaving.Add(client);
+
+            roomManager.clearClients();
+
+            Assert.AreEqual(0, roomManager.clients.Count);
+
+        }
+    }
+
+
+    [TestClass]
     public class ClientTest
     {
         [TestMethod]
         public void TestChangeAction()
         {
-            var client = ClientFactory.CreateClient();
+            var client = ClientFactory.CreateClient("eatingClient1");
             var action = new Action_("Eat", 3);
             client.ChangeAction(ActionFactory.CreateAction_("Eat"));
 
