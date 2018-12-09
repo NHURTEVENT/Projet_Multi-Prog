@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    enum ItemType
+    public enum ItemType
     {
         FLAT_PLATES,
         SOUP_PLATES,

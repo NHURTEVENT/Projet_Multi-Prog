@@ -109,5 +109,20 @@ namespace UnitTestDAO
                 Assert.AreEqual(query.FirstOrDefault().Size, 2);
             }
         }
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesItems()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //Assert.IsNotNull(DAOSeeder.getConnectionString());
+                var query = from b in context.Items
+                            where (b.ItemType == ItemType.FLAT_PLATES)
+                            select b;
+                var type = query.FirstOrDefault().Quantity;
+                Assert.AreEqual(query.FirstOrDefault().Quantity, 30);
+            }
+        }
     }
 }

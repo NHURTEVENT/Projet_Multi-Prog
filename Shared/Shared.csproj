@@ -69,7 +69,7 @@
     <Compile Include="Controller\IRoomController.cs" />
     <Compile Include="Controller\IWaiterController.cs" />
     <Compile Include="DAO\DAOSeeder.cs" />
-    <Compile Include="DAO\ItemEntry.cs" />
+    <Compile Include="DAO\ItemDBEntry.cs" />
     <Compile Include="DAO\PersonnelDBEntry.cs" />
     <Compile Include="DAO\RoomConfiguration.cs" />
     <Compile Include="DAO\Configuration.cs" />
@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201812091844431_AddTables.cs" />
     <Compile Include="Migrations\201812091844431_AddTables.Designer.cs">
       <DependentUpon>201812091844431_AddTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091905542_AddItems.cs" />
+    <Compile Include="Migrations\201812091905542_AddItems.Designer.cs">
+      <DependentUpon>201812091905542_AddItems.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\IAction.cs" />
@@ -112,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812091844431_AddTables.resx">
       <DependentUpon>201812091844431_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091905542_AddItems.resx">
+      <DependentUpon>201812091905542_AddItems.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

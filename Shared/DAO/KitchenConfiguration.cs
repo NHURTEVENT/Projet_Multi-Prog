@@ -9,6 +9,6 @@ namespace Shared
     class KitchenConfiguration
     {
         List<PersonnelDBEntry> PersonnelDBEntries;
-        List<ItemEntry> Items;
+        List<ItemDBEntry> Items;
     }
 }
