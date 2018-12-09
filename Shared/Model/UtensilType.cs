@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Shared
 {
-    class UtensilFactory
+    public enum UtensilType
     {
+        FORK,KNIFE,SPORK,PAN
     }
 }

@@ -8,7 +8,7 @@ namespace Shared
 {
     public interface IUtensil
     {
-        String Name { get; set; }
+        UtensilType UtensilType { get; set; }
         Dish Dish { get; set; }
     }
 }

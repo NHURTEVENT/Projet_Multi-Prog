@@ -63,6 +63,7 @@
     <Compile Include="Item\RecipeStep.cs" />
     <Compile Include="Item\UtensilEntry.cs" />
     <Compile Include="Item\UtensilFactory.cs" />
+    <Compile Include="Item\UtensilQuantityEntry.cs" />
     <Compile Include="KitchenContext.cs" />
     <Compile Include="KitchenPersonnelFactory.cs" />
     <Compile Include="Item\Counter.cs" />
@@ -72,6 +73,23 @@
     <Compile Include="Item\Machine.cs" />
     <Compile Include="Item\Utensil.cs" />
     <Compile Include="Item\WashingMachine.cs" />
+    <Compile Include="Migrations\201812082118360_InitialCreate.cs" />
+    <Compile Include="Migrations\201812082118360_InitialCreate.Designer.cs">
+      <DependentUpon>201812082118360_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812082250509_ChangedUtensilStructure.cs" />
+    <Compile Include="Migrations\201812082250509_ChangedUtensilStructure.Designer.cs">
+      <DependentUpon>201812082250509_ChangedUtensilStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091225455_AddFirstRecipe.cs" />
+    <Compile Include="Migrations\201812091225455_AddFirstRecipe.Designer.cs">
+      <DependentUpon>201812091225455_AddFirstRecipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091415038_updatedStructure.cs" />
+    <Compile Include="Migrations\201812091415038_updatedStructure.Designer.cs">
+      <DependentUpon>201812091415038_updatedStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelDAOInitializer.cs" />
     <Compile Include="Persons\DishCleaner.cs" />
     <Compile Include="Persons\KitchenChef.cs" />
@@ -89,6 +107,20 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812082118360_InitialCreate.resx">
+      <DependentUpon>201812082118360_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812082250509_ChangedUtensilStructure.resx">
+      <DependentUpon>201812082250509_ChangedUtensilStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091225455_AddFirstRecipe.resx">
+      <DependentUpon>201812091225455_AddFirstRecipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091415038_updatedStructure.resx">
+      <DependentUpon>201812091415038_updatedStructure.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

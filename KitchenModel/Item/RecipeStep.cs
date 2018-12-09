@@ -11,12 +11,28 @@ namespace Model
 {
     public class RecipeStep
     {
-        [Key]
+        [Key, Column(Order = 0)]
         public Dish Dish { get; set; }
-        [Key]
+        [Key, Column(Order = 1)]
         public int Step { get; set; }
+        public String Name { get; set; }
+        public UtensilType Utensil { get; set; }
         [ForeignKey("Utensil")]
-        public UtensilEntry Utensil { get; set; }
+        public UtensilEntry UtensilRef { get; set; }
+
         public int Duration { get; set; }
+
+        public RecipeStep()
+        {
+        }
+
+        public RecipeStep(Dish dish, int step, String name, UtensilType utensil, int duration)
+        {
+            Dish = dish;
+            Step = step;
+            Name = name;
+            Utensil = utensil;
+            Duration = duration;
+        }
     }
 }

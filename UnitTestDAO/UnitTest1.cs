@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using KitchenModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using Shared;
 
 namespace UnitTestDAO
 {
@@ -39,10 +39,10 @@ namespace UnitTestDAO
                 ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
                 //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
                 var query = from b in context.Ustensils
-                            orderby b.Utensil
+                            orderby b.UtensilType
                             select b;
-                var name = query.FirstOrDefault().Utensil;
-                Assert.IsTrue(String.Equals("fork",query.FirstOrDefault().Utensil));
+                var name = query.FirstOrDefault().UtensilType;
+                Assert.IsTrue(String.Equals(UtensilType.FORK,query.FirstOrDefault().UtensilType));
             }
         }
 
@@ -54,7 +54,7 @@ namespace UnitTestDAO
                 ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
                 //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
                 var query = from b in context.Ustensils
-                            where b.Utensil == "fork"
+                            where b.UtensilType == UtensilType.FORK
                             select b;
 
                 Assert.AreEqual(query.FirstOrDefault().Quantity,10);
@@ -73,6 +73,21 @@ namespace UnitTestDAO
                             select b;
                 var type = query.FirstOrDefault().MachineType;
                 Assert.IsTrue(String.Equals(query.FirstOrDefault().MachineType, "washing"));
+            }
+        }
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesRecipe()
+        {
+            using (var context = new KitchenContext())
+            {
+                ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
+                var query = from b in context.Recipes
+                            where (b.Dish == Dish.FRENCHFRIES) &&( b.Step == 1 ) 
+                            select b;
+                var type = query.FirstOrDefault().Name;
+                Assert.IsTrue(String.Equals(query.FirstOrDefault().Name, "cut the popatoes"));
             }
         }
         

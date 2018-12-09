@@ -7,12 +7,12 @@ namespace Model
     public class Utensil : IUtensil
     {
         [Key]
-        public string Name { get; set; }
+        public UtensilType UtensilType {get;set;}
         public Dish Dish { get; set; }
 
-        public Utensil(String name)
+        public Utensil(UtensilType type)
         {
-            Name = name;
+            UtensilType = type;
             Dish = Dish.NONE;
         }
         /*

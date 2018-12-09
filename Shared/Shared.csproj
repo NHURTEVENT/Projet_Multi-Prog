@@ -83,6 +83,7 @@
     <Compile Include="Model\IRoom.cs" />
     <Compile Include="Model\ITable.cs" />
     <Compile Include="Model\IUtensil.cs" />
+    <Compile Include="Model\UtensilType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
