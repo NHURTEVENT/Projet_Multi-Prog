@@ -36,10 +36,6 @@ namespace Model{
             throw new NotImplementedException();
         }
 
-        public List<Dish> GetOrder()
-        {
-            throw new NotImplementedException();
-        }
 
         public void Pay()
         {
@@ -54,6 +50,11 @@ namespace Model{
         public void Move(Point position)
         {
             this.Position = position;
+        }
+
+        public List<Dish> Order()
+        {
+            throw new NotImplementedException();
         }
 
 

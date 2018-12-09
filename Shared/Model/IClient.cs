@@ -12,7 +12,8 @@ namespace Shared
         void Book();
         void ConsumeWaterAndBread();
         void Pay();
-        List<Dish> GetOrder();
+        List<Dish> Order();
         void GetTable(ITable provider);
+
     }
 }
