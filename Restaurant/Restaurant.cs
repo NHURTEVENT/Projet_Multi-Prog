@@ -12,8 +12,7 @@ namespace Restaurant {
         private IRoom room;
         private DAO dao;
         private RoomManager RoomManager;
-
-        private List<IClient> ClientList;
+        
 
 
 
@@ -22,19 +21,16 @@ namespace Restaurant {
 
         public Restaurant()
         {
-
-            ClientList = new List<IClient>();
-            ClientList.Add(ClientFactory.CreateEatingClient("Michel"));
-            ClientList.Add(ClientFactory.CreateClient());
+            
 
 
-            RoomManager = new RoomManager(ClientList);
+            RoomManager = new RoomManager();
 
             myTimer.Tick += new EventHandler(RoomManager.onTick);
 
 
-            // Sets the timer interval to 1 seconds.
-            myTimer.Interval = 1000;
+            // Sets the timer interval to 2 seconds.
+            myTimer.Interval = 2000;
             myTimer.Start();
 
             // Runs the timer, and raises the event.

@@ -10,21 +10,30 @@ namespace Controller
 {
     public class RoomManager : IManager
     {
+        ClientGenerator clientGenerator;
         IButler butler;
-        List<IClient> clients = new List<IClient>();
-        List<IPerson> personnel = new List<IPerson>();
-        List<ITable> tables = new List<ITable>();
+        public List<IClient> clients { get; set; }
+        public List<IClient> clientsLeaving { get; set; }
+        public List<IPerson> personnel { get; set; }
+        public List<ITable> tables { get; set; }
 
-        public RoomManager(List<IClient> clients/*, Configuration config*/)
+
+        public RoomManager(/*, Configuration config*/)
         {
-            this.clients = clients;
+            clients = new List<IClient>();
+            clientsLeaving = new List<IClient>();
+            personnel = new List<IPerson>();
+            tables = new List<ITable>();
+
             tables.Add(new Table());
-            IButler butler = RoomPersonnelFactory.CreateButler(tables);
+            butler = RoomPersonnelFactory.CreateButler(tables);
+            clientGenerator = new ClientGenerator();
 
         }
 
         public void onTick(Object myObject, EventArgs myEventArgs)
         {
+            newClients(clientGenerator.onTick());
 
             butler.onTick();
 
@@ -35,15 +44,36 @@ namespace Controller
             }
             foreach (IClient client in clients)
             {
-                client.onTick();
+                if (client.CurrentAction.Name == "Leaved")
+                    clientsLeaving.Add(client);
+                else
+                    client.onTick();
 
+            }
+
+            clearClients();
+
+        }
+
+        public void clearClients()
+        {
+            if (clientsLeaving.Count != 0)
+            {
+                foreach (var client in clientsLeaving)
+                {
+                    clients.Remove(client);
+                }
+                clientsLeaving.Clear();
             }
         }
 
-        public void onNewClient(List<IClient> newClientList)
+        public void newClients(List<IClient> newClientList)
         {
-
-            butler.NewClient(newClientList);
+            if (newClientList.Count > 0)
+            {
+                this.clients.AddRange(newClientList);
+                butler.NewClient(newClientList);
+            }
 
         }
 

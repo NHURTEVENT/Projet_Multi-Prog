@@ -15,9 +15,9 @@ namespace Model
             return new Client(ActionFactory.CreateAction_("Eat"), Name);
         }
 
-        public static IClient CreateClient()
+        public static IClient CreateClient(string Name)
         {
-            return new Client(ActionFactory.CreateAction_());
+            return new Client(ActionFactory.CreateAction_(), Name);
         }
 
     }

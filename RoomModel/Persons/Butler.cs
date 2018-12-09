@@ -58,7 +58,7 @@ namespace Model
             switch (CurrentAction.Name)
             {
                 case "Wait":
-                    if (newClientList.Contains(null))
+                    if (newClientList.Count != 0)
                         FindTable(newClientList[0]);
                     else
                     {
@@ -73,7 +73,12 @@ namespace Model
 
         public void NewClient(List<IClient> newClients)
         {
-            newClientList.AddRange(newClients);
+            if (newClients.Count != 0) {
+                newClientList.AddRange(newClients);
+                Console.WriteLine("Un nouveau client est arrivé");
+
+            } else
+                Console.WriteLine("Aucun nouveau client");
         }
 
         public void FindTable(IClient currentClient)
@@ -82,9 +87,16 @@ namespace Model
             {
                 if (table.available)
                 {
-                    table.IsOccuped();
+                    Console.WriteLine("Table trouvée pour le client");
+                    table.IsNowOccuped();
                     currentClient.GetTable(table);
+                    newClientList.Remove(currentClient);
+                    ChangeAction(ActionFactory.CreateAction_());
                     break;
+                }
+                else
+                {
+                    RemainingTicks++;
                 }
             }
         }
