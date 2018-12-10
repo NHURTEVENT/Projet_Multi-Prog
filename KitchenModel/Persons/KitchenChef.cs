@@ -1,8 +1,10 @@
 using Shared;
 using System;
-using System.Net.Sockets;
 using System.Text;
 using System.Drawing;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace Model
 {
@@ -46,6 +48,8 @@ namespace Model
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0, 0);
+
+        }
 
         }
 

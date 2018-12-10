@@ -7,6 +7,9 @@ namespace Shared {
 		void FreeUstensil(IUstensil ustensil);
 		void ManageClerk();
 
+        void takeOrder(IHeadKitchenChefController headKitchenChef);
+        void giveOrder(IKitchenClerkController kitchenClerk);
+
 	}
 
 }

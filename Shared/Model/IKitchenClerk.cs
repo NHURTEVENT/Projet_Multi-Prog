@@ -6,5 +6,7 @@ namespace Shared
 {
     public interface IKitchenClerk
     {
+        void redirect(IDish dish);
+        void NewDish(List<IDish> newdish);
     }
 }

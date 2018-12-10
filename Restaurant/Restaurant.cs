@@ -1,5 +1,6 @@
 using Controller;
 using Shared;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace Restaurant {
         private IKitchen kitchen;
         private IRoom room;
 		private DAO dao;
+        private KitchenManage 
 
 
 

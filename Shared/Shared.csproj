@@ -46,6 +46,7 @@
     <Compile Include="Controller\IClientController.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\IDishCleanerController.cs" />
+    <Compile Include="Controller\IHeadKitchenChef.cs" />
     <Compile Include="Controller\IHeadWaiterController.cs" />
     <Compile Include="Controller\IKitchenChefController.cs" />
     <Compile Include="Controller\IKitchenClerkController.cs" />
@@ -61,9 +62,10 @@
     <Compile Include="DAO\Stock.cs" />
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\IClient.cs" />
+    <Compile Include="Model\IDish.cs" />
     <Compile Include="Model\IDishCleaner.cs" />
     <Compile Include="Model\IKitchen.cs" />
-    <Compile Include="Model\IKitchenAction.cs" />
+    <Compile Include="Model\IKitchenActionFactory.cs" />
     <Compile Include="Model\IkitchenChef.cs" />
     <Compile Include="Model\IKitchenClerk.cs" />
     <Compile Include="Model\IKitchenPartyChef.cs" />

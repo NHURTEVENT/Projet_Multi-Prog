@@ -6,5 +6,8 @@ namespace Shared
 {
     public interface IDishCleaner
     {
+        void CleanUstensil(IUstensil ustensil);
+        void CleanDish(IDish dish);
+
     }
 }
