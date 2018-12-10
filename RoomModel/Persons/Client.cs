@@ -12,6 +12,7 @@ namespace Model{
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
         public List<Dish> Order { get; set; }
+        public List<IAction> ActionQueue { get; set; }
 
         private ITable myTable;
         private IDisposable unsubscriber;
@@ -26,6 +27,7 @@ namespace Model{
             Position = new Point(0,0);
 
             Order = new List<Dish>();
+            ActionQueue = new List<IAction>();
         }
 
 
@@ -65,11 +67,29 @@ namespace Model{
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+            if (ActionQueue.Contains(Action))
+            {
+                ActionQueue.Remove(Action);
+            }
         }
 
         public void onTick()
         {
             RemainingTicks--;
+            if (RemainingTicks == 0)
+            {
+
+                if (ActionQueue.Count == 0)
+                {
+                    ChangeAction(ActionFactory.CreateAction_());
+                }
+                else
+                {
+                    ChangeAction(ActionQueue[0]);
+                }
+
+            }
+
             if (RemainingTicks == 0)
             {
                 switch (CurrentAction.Name)
@@ -79,7 +99,7 @@ namespace Model{
                         break;
 
                     case "MoveToTable":
-                        ChangeAction(ActionFactory.CreateAction_("Eat"));
+                        ChangeAction(ActionFactory.CreateAction_("Wait"));
                         break;
 
                     case "Eat":

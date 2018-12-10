@@ -10,6 +10,7 @@ namespace Shared
     {
 
         List<Dish> ClientOrder { get; set; }
+        List<IAction> ActionQueue { get; set; }
 
         void takeClientInCharge(IClient client, ITable table);
         void TakeOrder(IClient client);

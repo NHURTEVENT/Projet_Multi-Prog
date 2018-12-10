@@ -9,7 +9,7 @@ namespace Shared
     public interface IClient : IPerson, IObserver<string>
     {
         List<Dish> Order { get; set; }
-
+        List<IAction> ActionQueue { get; set; }
 
         void Book();
         void ConsumeWaterAndBread();

@@ -18,7 +18,7 @@ namespace Model {
         public IClient ClientInCharge;
         public ITable ClientTable;
         public List<Dish> ClientOrder { get; set; }
-
+        public List<IAction> ActionQueue { get; set; }
 
         public HeadWaiter(List<ITable> tables)
         {
@@ -28,6 +28,7 @@ namespace Model {
             this.Tables = tables;
             ClientOrder = new List<Dish>();
             Unsubscribers = new List<IDisposable>();
+            ActionQueue = new List<IAction>();
 
             foreach (var table in Tables)
             {
@@ -47,7 +48,7 @@ namespace Model {
 
         public void Move(Point position)
         {
-            throw new NotImplementedException();
+            this.Position = position;
         }
 
 
@@ -56,6 +57,12 @@ namespace Model {
 
             this.ClientInCharge = client;
             this.ClientTable = table;
+
+            ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient"));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu"));
+            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder"));
+            ActionQueue.Add(ActionFactory.CreateAction_("GiveOrder"));
+
 
         }
 
@@ -73,29 +80,43 @@ namespace Model {
         {
             RemainingTicks--;
 
-            switch (CurrentAction.Name)
+            if (RemainingTicks == 0)
             {
-                case "Wait":
-                    RemainingTicks++;
-                    Console.WriteLine(Name + " the " + this.Type + " is waiting");
-                    break;
 
-                case "TakeClientInCharge":
-                    ChangeAction(ActionFactory.CreateAction_("MoveWithClient"));
-                    ClientInCharge.ChangeAction(ActionFactory.CreateAction_("MoveToTable"));
-                    break;
+                switch (CurrentAction.Name)
+                {
+                    case "TakeClientInCharge":
+                        ClientInCharge.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable"));
+                        break;
 
-                case "MoveWithClient":
-                    ClientInCharge.GetTable(ClientTable);
-                    ChangeAction(ActionFactory.CreateAction_("TakeOrder"));
-                    break;
+                    case "MoveWithClient":
+                        ClientInCharge.GetTable(ClientTable);
+                        ChangeAction(ActionFactory.CreateAction_("BringMenu"));
+                        break;
 
-                case "TakeOrder":
-                    ChangeAction(ActionFactory.CreateAction_("GiveOrder"));
-                    break;
+                    case "BringMenu":
+                        TakeOrder(ClientInCharge);
+                        ChangeAction(ActionFactory.CreateAction_("TakeOrder"));
+                        break;
 
-                default:
-                    break;
+                    case "TakeOrder":
+                        ClientInCharge.
+                        ChangeAction(ActionFactory.CreateAction_("GiveOrder"));
+                        break;
+
+                    default:
+                        break;
+                }
+
+                if (ActionQueue.Count == 0)
+                {
+                    ChangeAction(ActionFactory.CreateAction_());
+                }
+                else
+                {
+                    ChangeAction(ActionQueue[0]);
+                }
+
             }
         }
 
@@ -104,6 +125,10 @@ namespace Model {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+            if (ActionQueue.Contains(Action))
+            {
+                ActionQueue.Remove(Action);
+            }
         }
 
         public void OnNext(string value)
