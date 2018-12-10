@@ -62,6 +62,9 @@
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IKitchen.cs" />
+    <Compile Include="Model\IKitchenAction.cs" />
+    <Compile Include="Model\IkitchenChef.cs" />
+    <Compile Include="Model\IKitchenPartyChef.cs" />
     <Compile Include="Model\IMachine.cs" />
     <Compile Include="Model\IManager.cs" />
     <Compile Include="Model\IPerson.cs" />
@@ -70,6 +73,7 @@
     <Compile Include="Model\IRoom.cs" />
     <Compile Include="Model\ITable.cs" />
     <Compile Include="Model\IUstensil.cs" />
+    <Compile Include="Model\KitchenAction_.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
