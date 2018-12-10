@@ -61,6 +61,7 @@
     <Compile Include="DAO\Stock.cs" />
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\IClient.cs" />
+    <Compile Include="Model\IDishCleaner.cs" />
     <Compile Include="Model\IKitchen.cs" />
     <Compile Include="Model\IKitchenAction.cs" />
     <Compile Include="Model\IkitchenChef.cs" />
