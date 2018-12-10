@@ -3,13 +3,14 @@ using System;
 using System.Net.Sockets;
 using System.Text
 
-namespace Model{
+namespace Model
+{
 
     public class Counter
     {
         private String size;
         private int maxCapacity;
-        private int dishCounter = 17;
+        private int dishCounter;
 
         public int getMaxCapacity()
         {
@@ -53,7 +54,7 @@ namespace Model{
                 throw new System.Exception("Not implemented");
 
             }
-
+        }
         private Dish dish;
 
 

@@ -1,12 +1,21 @@
-using System;
-using System.Drawing;
 using Shared;
+using System;
+using System.Net.Sockets;
+using System.Text;
+using System.Drawing;
 
 namespace Model
 {
 
-    public class KitchenChef : KitchenPersonnel
+    public class KitchenChef : IKitchenChef
     {
+
+        public string Type { get; set; }
+        public String Name { get; set; }
+        public IAction CurrentAction { get; set; }
+        public int RemainingTicks { get; set; }
+        public Point Position { get; set; }
+
         public Point GetPosition()
         {
             throw new System.Exception("Not implemented");
@@ -28,6 +37,16 @@ namespace Model
         public IAction GetAction()
         {
             throw new NotImplementedException();
+        }
+
+        public KitchenChef(IAction CurrentAction, string Name = "ToOrder")
+        {
+            this.Name = Name;
+            this.Type = "KitchenChef";
+            this.CurrentAction = CurrentAction;
+            RemainingTicks = CurrentAction.Duration;
+            Position = new Point(0, 0);
+
         }
 
         private PartyChef[] partyChefs;

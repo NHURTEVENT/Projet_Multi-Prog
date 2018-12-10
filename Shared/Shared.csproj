@@ -65,6 +65,7 @@
     <Compile Include="Model\IKitchen.cs" />
     <Compile Include="Model\IKitchenAction.cs" />
     <Compile Include="Model\IkitchenChef.cs" />
+    <Compile Include="Model\IKitchenClerk.cs" />
     <Compile Include="Model\IKitchenPartyChef.cs" />
     <Compile Include="Model\IMachine.cs" />
     <Compile Include="Model\IManager.cs" />

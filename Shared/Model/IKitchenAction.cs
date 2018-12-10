@@ -22,6 +22,15 @@ namespace Shared
                 case "BigWash":
                     return new KitchenAction_("BigWash", 2);
 
+                case "ToOder":
+                    return new KitchenAction_("ToOrder", 1);
+
+                case "Bring":
+                    return new KitchenAction_("Bring", 1);
+
+                case "DishWasher":
+                    return new KitchenAction_("DishWasher", 10);
+
 
             }
         }
