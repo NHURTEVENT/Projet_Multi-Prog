@@ -5,7 +5,8 @@ namespace Shared
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class ConfigurationContext : DbContext
+
+    public class ConfigurationContext : DbContext
     {
         public ConfigurationContext()
             : base("name=ConfigurationContext")
@@ -15,6 +16,9 @@ namespace Shared
         public DbSet<TableDBEntry> Tables { get; set; }
         public DbSet<PersonnelDBEntry> PersonnelDBEntries { get; set; }
         public DbSet<ItemDBEntry> Items { get; set; }
+        public DbSet<Drawer> Ustensils { get; set; }
+        public DbSet<MachineDBEntry> Machines { get; set; }
+        public DbSet<RecipeStep> Recipes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

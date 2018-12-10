@@ -11,7 +11,7 @@ namespace UnitTestDAO
     public class UnitTest1
     {
     
-       
+       //Generic
         [TestMethod]
         public void GivenConfigurationFileReturnsConnectionString()
         {
@@ -37,26 +37,28 @@ namespace UnitTestDAO
         [TestMethod]
         public void GivenDatabaseRetrievesData()
         {
-            using (var context = new KitchenContext())
+            using (var context = new ConfigurationContext())
             {
-                ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
                 //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
                 var query = from b in context.Ustensils
                             orderby b.UtensilType
+                            where b.UtensilType == UtensilType.FORK
                             select b;
                 var name = query.FirstOrDefault().UtensilType;
-                Assert.IsTrue(String.Equals(UtensilType.FORK, query.FirstOrDefault().UtensilType));
+                Assert.AreEqual(query.FirstOrDefault().Quantity,10);
             }
         }
 
         
-        //
+        //Kitchen
         [TestMethod]
         public void GivenDatabaseRetrievesUtensils()
         {
-            using (var context = new KitchenContext())
+            using (var context = new ConfigurationContext())
             {
-                ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
                 //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
                 var query = from b in context.Ustensils
                             where b.UtensilType == UtensilType.FORK
@@ -69,9 +71,9 @@ namespace UnitTestDAO
         [TestMethod]
         public void GivenDatabaseRetrievesMachines()
         {
-            using (var context = new KitchenContext())
+            using (var context = new ConfigurationContext())
             {
-                ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
                 //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
                 var query = from b in context.Machines
                             where b.MachineId == 1
@@ -84,24 +86,27 @@ namespace UnitTestDAO
         [TestMethod]
         public void GivenDatabaseRetrievesRecipe()
         {
-            using (var context = new KitchenContext())
+            using (var context = new ConfigurationContext())
             {
-                ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
                 //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
+                DAOSeeder DAOSeeder = new DAOSeeder(context);
                 var query = from b in context.Recipes
                             where (b.Dish == Dish.FRENCHFRIES) &&( b.Step == 1 ) 
                             select b;
                 var type = query.FirstOrDefault().Name;
-                Assert.IsTrue(String.Equals(query.FirstOrDefault().Name, "cut the popatoes"));
+                Assert.IsTrue(String.Equals(query.FirstOrDefault().Name, "cut potatoes"));
             }
         }
        
+
+        //Room
         [TestMethod]
         public void GivenDatabaseRetrievesTables()
         {
             using (var context = new ConfigurationContext())
             {
-                DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
                 //Assert.IsNotNull(DAOSeeder.getConnectionString());
                 var query = from b in context.Tables
                             where (b.Square == 1) && (b.Row == 1) && (b.Column == 1)
@@ -116,7 +121,7 @@ namespace UnitTestDAO
         {
             using (var context = new ConfigurationContext())
             {
-                DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
                 //Assert.IsNotNull(DAOSeeder.getConnectionString());
                 var query = from b in context.Items
                             where (b.ItemType == ItemType.FLAT_PLATES)
@@ -132,7 +137,7 @@ namespace UnitTestDAO
         {
             using (var context = new ConfigurationContext())
             {
-                DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
                 //Assert.IsNotNull(DAOSeeder.getConnectionString());
                 var query = from b in context.PersonnelDBEntries
                             where (b.PersonnelType == PersonnelType.WAITER)
@@ -140,6 +145,12 @@ namespace UnitTestDAO
                 var type = query.FirstOrDefault().Quantity;
                 Assert.AreEqual(query.FirstOrDefault().Quantity, 4);
             }
+        }
+
+        [TestMethod]
+        public void GivenDatabaseRetievesConfiguration()
+        {
+            Assert.IsNotNull(DAO.Instance.getConfig());
         }
     }
 }

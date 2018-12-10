@@ -6,8 +6,42 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class Configuration
+    public sealed class Configuration
     {
+        /*
+        public static Configuration INSTANCE;
+            
+        private Configuration()
+        {
+
+        }
+
+        public static Configuration Instance
+        {
+            get
+            {
+                if(INSTANCE == null)
+                {
+                    INSTANCE = DAO.Instance.getConfig();
+                }
+                return INSTANCE;
+            }
+        }*/
+
+        public RoomConfiguration RoomConfig { get; set; }
+        public KitchenConfiguration KitchenConfig { get; set; }
+
+        public Configuration(RoomConfiguration roomConfig, KitchenConfiguration kitchenConfig)
+        {
+            RoomConfig = roomConfig;
+            KitchenConfig = kitchenConfig;
+        }
+
+
+
+
+
+
 
         //for each item in RoomConfig.tableEntries call factory to create the tables
         /*

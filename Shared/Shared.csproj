@@ -70,7 +70,9 @@
     <Compile Include="Controller\IWaiterController.cs" />
     <Compile Include="DAO\DAOSeeder.cs" />
     <Compile Include="DAO\ItemDBEntry.cs" />
+    <Compile Include="DAO\MachineDBEntry.cs" />
     <Compile Include="DAO\PersonnelDBEntry.cs" />
+    <Compile Include="DAO\RecipeStep.cs" />
     <Compile Include="DAO\RoomConfiguration.cs" />
     <Compile Include="DAO\Configuration.cs" />
     <Compile Include="DAO\ConfigurationContext.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="DAO\Recipe.cs" />
     <Compile Include="DAO\Stock.cs" />
     <Compile Include="DAO\TableDBEntry.cs" />
+    <Compile Include="DAO\UtensilEntry.cs" />
     <Compile Include="Migrations\201812091844431_AddTables.cs" />
     <Compile Include="Migrations\201812091844431_AddTables.Designer.cs">
       <DependentUpon>201812091844431_AddTables.cs</DependentUpon>
@@ -93,7 +96,20 @@
     <Compile Include="Migrations\201812092048308_AddPersonnel.Designer.cs">
       <DependentUpon>201812092048308_AddPersonnel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812092147166_FuseContexts.cs" />
+    <Compile Include="Migrations\201812092147166_FuseContexts.Designer.cs">
+      <DependentUpon>201812092147166_FuseContexts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812092246392_FixedFuseContexts.cs" />
+    <Compile Include="Migrations\201812092246392_FixedFuseContexts.Designer.cs">
+      <DependentUpon>201812092246392_FixedFuseContexts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812092312205_FixedFuseContexts2.cs" />
+    <Compile Include="Migrations\201812092312205_FixedFuseContexts2.Designer.cs">
+      <DependentUpon>201812092312205_FixedFuseContexts2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="DAO\Drawer.cs" />
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IKitchen.cs" />
@@ -126,6 +142,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812092048308_AddPersonnel.resx">
       <DependentUpon>201812092048308_AddPersonnel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812092147166_FuseContexts.resx">
+      <DependentUpon>201812092147166_FuseContexts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812092246392_FixedFuseContexts.resx">
+      <DependentUpon>201812092246392_FixedFuseContexts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812092312205_FixedFuseContexts2.resx">
+      <DependentUpon>201812092312205_FixedFuseContexts2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,7 +8,15 @@ namespace Shared
 {
     public class RoomConfiguration
     {
-        List<PersonnelDBEntry> personnelDBEntries;
-        List<TableDBEntry> tableDBEntries;
+        public List<PersonnelDBEntry> PersonnelDBEntries { get; set; }
+        public List<ItemDBEntry> Items { get; set; }
+        public List<TableDBEntry> TableDBEntries { get; set; }
+
+        public RoomConfiguration(List<PersonnelDBEntry> personnelDBEntries, List<ItemDBEntry> items,List<TableDBEntry> tableDBEntries)
+        {
+            PersonnelDBEntries = personnelDBEntries;
+            TableDBEntries = tableDBEntries;
+            Items = items;
+        }
     }
 }
