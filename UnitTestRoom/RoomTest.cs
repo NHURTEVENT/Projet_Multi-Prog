@@ -25,13 +25,14 @@ namespace UnitTestRoom
     {
 
         List<ITable> tables = new List<ITable>();
+        List<IHeadWaiter> headWaiters = new List<IHeadWaiter>();
 
 
         [TestMethod]
         public void TestCreateButler()
         {
-            var butler = new Butler(tables);
-            Assert.AreEqual(butler.GetType(), RoomPersonnelFactory.CreateButler(tables).GetType());
+            var butler = new Butler(tables, headWaiters);
+            Assert.AreEqual(butler.GetType(), RoomPersonnelFactory.CreateButler(tables, headWaiters).GetType());
 
         }
 
@@ -114,11 +115,11 @@ namespace UnitTestRoom
             var client = ClientFactory.CreateClient("Client1");
             IHeadWaiter headWaiter = RoomPersonnelFactory.CreateHeadWaiter(tables);
 
-            client.Dishes.Add(Dish.Riz_de_veau);
+            client.Order.Add(Dish.Riz_de_veau);
 
             headWaiter.TakeOrder(client);
 
-            Assert.AreEqual(client.Dishes, headWaiter.Dishes);
+            Assert.AreEqual(client.Order, headWaiter.ClientOrder);
 
         }
     }

@@ -10,38 +10,49 @@ namespace Controller
 {
     public class RoomManager : IManager
     {
+        public int ticks;
         ClientGenerator clientGenerator;
         IButler butler;
         public List<IClient> clients { get; set; }
         public List<IClient> clientsLeaving { get; set; }
-        public List<IPerson> personnel { get; set; }
+        public List<IHeadWaiter> headWaiters { get; set; }
+        public List<IWaiter> waiters { get; set; }
+        public List<IClerk> clerks { get; set; }
         public List<ITable> tables { get; set; }
 
 
         public RoomManager(/*, Configuration config*/)
         {
+            ticks = 1;
             clients = new List<IClient>();
             clientsLeaving = new List<IClient>();
-            personnel = new List<IPerson>();
+            headWaiters = new List<IHeadWaiter>();
+            waiters = new List<IWaiter>();
+            clerks = new List<IClerk>();
             tables = new List<ITable>();
 
             tables.Add(new Table());
-            butler = RoomPersonnelFactory.CreateButler(tables);
+            butler = RoomPersonnelFactory.CreateButler(tables, headWaiters);
+            headWaiters.Add(RoomPersonnelFactory.CreateHeadWaiter(tables));
             clientGenerator = new ClientGenerator();
 
         }
 
         public void onTick(Object myObject, EventArgs myEventArgs)
         {
+            Console.WriteLine("");
+            Console.WriteLine(ticks);
+
             newClients(clientGenerator.onTick());
 
             butler.onTick();
 
-            foreach (IPerson member in personnel)
+            foreach (IHeadWaiter headWaiter in headWaiters)
             {
-                member.onTick();
+                headWaiter.onTick();
 
             }
+
             foreach (IClient client in clients)
             {
                 if (client.CurrentAction.Name == "Leaved")
@@ -52,7 +63,7 @@ namespace Controller
             }
 
             clearClients();
-
+            ticks++;
         }
 
         public void clearClients()

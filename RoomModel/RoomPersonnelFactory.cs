@@ -10,9 +10,9 @@ namespace Model
     public static class RoomPersonnelFactory
     {
 
-        public static IButler CreateButler(List<ITable> tables)
+        public static IButler CreateButler(List<ITable> tables, List<IHeadWaiter> headWaiters)
         {
-            return new Butler(tables);
+            return new Butler(tables, headWaiters);
         }
 
         public static IHeadWaiter CreateHeadWaiter(List<ITable> tables)

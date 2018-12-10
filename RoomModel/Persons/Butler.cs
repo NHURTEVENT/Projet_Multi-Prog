@@ -15,15 +15,18 @@ namespace Model
 
         private List<ITable> tables;
         private List<IClient> newClientList;
+        private List<IHeadWaiter> headWaiters;
 
 
-        public Butler(List<ITable> tables)
+
+        public Butler(List<ITable> tables, List<IHeadWaiter> headWaiters)
         {
             this.Name = "Alfred";
             this.Type = "Butler";
             this.tables = tables;
             ChangeAction(ActionFactory.CreateAction_());
             newClientList = new List<IClient>();
+            this.headWaiters = headWaiters;
 
         }
 
@@ -59,13 +62,18 @@ namespace Model
             {
                 case "Wait":
                     if (newClientList.Count != 0)
-                        FindTable(newClientList[0]);
+                        ChangeAction(ActionFactory.CreateAction_("LooksForTable"));
                     else
                     {
                         RemainingTicks++;
                         Console.WriteLine(Name + " the " + this.Type + " is waiting");
                     }
                     break;
+
+                case "LooksForTable":
+                    FindTable(newClientList[0]);
+                    break;
+
                 default:
                     break;
             }
@@ -89,7 +97,7 @@ namespace Model
                 {
                     Console.WriteLine("Table trouvée pour le client");
                     table.IsNowOccuped();
-                    currentClient.GetTable(table);
+                    headWaiters[0].takeClientInCharge(currentClient, table);
                     newClientList.Remove(currentClient);
                     ChangeAction(ActionFactory.CreateAction_());
                     break;

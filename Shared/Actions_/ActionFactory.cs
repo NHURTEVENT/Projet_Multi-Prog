@@ -25,8 +25,17 @@ namespace Shared
                 case "Eat":
                     return new Action_("Eat", 3);
 
+                case "LooksForTable":
+                    return new Action_("LooksForTable", 1);
+
                 case "MoveToTable":
                     return new Action_("MoveToTable", 2);
+
+                case "MoveWithClient":
+                    return new Action_("MoveWithClient", 1);
+
+                case "TakeOrder":
+                    return new Action_("TakeOrder", 1);
 
                 case "Diggest":
                     return new Action_("Diggest", 3);

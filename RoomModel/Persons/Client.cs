@@ -11,7 +11,7 @@ namespace Model{
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
-        public List<Dish> Dishes { get; set; }
+        public List<Dish> Order { get; set; }
 
         private ITable myTable;
         private IDisposable unsubscriber;
@@ -25,7 +25,7 @@ namespace Model{
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
 
-            Dishes = new List<Dish>();
+            Order = new List<Dish>();
         }
 
 
@@ -54,9 +54,9 @@ namespace Model{
             this.Position = position;
         }
 
-        public List<Dish> Order()
+        public List<Dish> GiveOrder()
         {
-            return this.Dishes;
+            return this.Order;
         }
 
 
@@ -74,6 +74,10 @@ namespace Model{
             {
                 switch (CurrentAction.Name)
                 {
+                    case "TableFound":
+                        ChangeAction(ActionFactory.CreateAction_("MoveToTable"));
+                        break;
+
                     case "MoveToTable":
                         ChangeAction(ActionFactory.CreateAction_("Eat"));
                         break;
@@ -111,7 +115,7 @@ namespace Model{
             unsubscriber = table.Subscribe(this);
             myTable = table;
             Console.WriteLine("Le client s'est abonné à la table");
-            ChangeAction(ActionFactory.CreateAction_("MoveToTable"));
+            CurrentAction.Name = "TableFound";
         }
 
         public void LeaveTable()

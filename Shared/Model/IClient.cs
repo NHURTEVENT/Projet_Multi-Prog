@@ -8,13 +8,13 @@ namespace Shared
 {
     public interface IClient : IPerson, IObserver<string>
     {
-        List<Dish> Dishes { get; set; }
+        List<Dish> Order { get; set; }
 
 
         void Book();
         void ConsumeWaterAndBread();
         void Pay();
-        List<Dish> Order();
+        List<Dish> GiveOrder();
         void GetTable(ITable provider);
 
     }

@@ -9,9 +9,9 @@ namespace Shared
     public interface IHeadWaiter : IPerson, IObserver<string>
     {
 
-        List<Dish> Dishes { get; set; }
+        List<Dish> ClientOrder { get; set; }
 
-
+        void takeClientInCharge(IClient client, ITable table);
         void TakeOrder(IClient client);
 
 
