@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IClient
+    public interface IClient : IPerson, IObserver<string>
     {
+        List<Dish> Order { get; set; }
+        List<IAction> ActionQueue { get; set; }
+
         void Book();
         void ConsumeWaterAndBread();
-        List<Dish> GetOrder();
         void Pay();
+        List<Dish> GiveOrder();
+        void GetTable(ITable provider);
+
     }
 }

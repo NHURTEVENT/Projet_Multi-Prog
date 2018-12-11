@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿using Model;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,47 +10,83 @@ namespace Controller
 {
     public class RoomManager : IManager
     {
-        List<IPerson> persons = new List<IPerson>();
+        public int ticks;
+        ClientGenerator clientGenerator;
+        IButler butler;
+        public List<IClient> clients { get; set; }
+        public List<IClient> clientsLeaving { get; set; }
+        public List<IHeadWaiter> headWaiters { get; set; }
+        public List<IWaiter> waiters { get; set; }
+        public List<IClerk> clerks { get; set; }
+        public List<ITable> tables { get; set; }
 
-        public RoomManager(List<IPerson> persons/*, Configuration config*/)
+
+        public RoomManager(/*, Configuration config*/)
         {
-            this.persons = persons;
+            ticks = 1;
+            clients = new List<IClient>();
+            clientsLeaving = new List<IClient>();
+            headWaiters = new List<IHeadWaiter>();
+            waiters = new List<IWaiter>();
+            clerks = new List<IClerk>();
+            tables = new List<ITable>();
+
+            tables.Add(new Table());
+            butler = RoomPersonnelFactory.CreateButler(tables, headWaiters);
+            headWaiters.Add(RoomPersonnelFactory.CreateHeadWaiter(tables));
+            clientGenerator = new ClientGenerator();
+
         }
 
         public void onTick(Object myObject, EventArgs myEventArgs)
         {
-            //Console.WriteLine("DING DING");
+            Console.WriteLine("");
+            Console.WriteLine(ticks);
 
-            foreach (IPerson person in persons)
+            newClients(clientGenerator.onTick());
+
+            butler.onTick();
+
+            foreach (IHeadWaiter headWaiter in headWaiters)
             {
-                person.remainingTicks--;
+                headWaiter.onTick();
 
-                if (person.remainingTicks == 0)
+            }
+
+            foreach (IClient client in clients)
+            {
+                if (client.CurrentAction.Name == "Leaved")
+                    clientsLeaving.Add(client);
+                else
+                    client.onTick();
+
+            }
+
+            clearClients();
+            ticks++;
+        }
+
+        public void clearClients()
+        {
+            if (clientsLeaving.Count != 0)
+            {
+                foreach (var client in clientsLeaving)
                 {
-                    //person.getCurrentAction().release();
-                    //TODO : trier la liste des actions
-                    //TODO : si il y a une action dansla liste, la faire
-                    //TODO : choisir une nouvelle tâche en fonction de plein de trucs et la acquire()
-                    switch (person.currentAction)
-                    {
-                        case "waiting":
-                            person.setTask("eating");
-                            break;
-                        case "eating":
-                            person.setTask("digest");
-                            break;
-                        case "digest":
-                            person.setTask("waiting");
-                            break;
-                            /*case PersonsTypes.HeadWaiter:
-                                break;
-                            case PersonsTypes.Waiter:
-                                break;
-                            case PersonsTypes.RoomCommis:
-                                break;*/
-                    }
+                    clients.Remove(client);
                 }
+                clientsLeaving.Clear();
             }
         }
+
+        public void newClients(List<IClient> newClientList)
+        {
+            if (newClientList.Count > 0)
+            {
+                this.clients.AddRange(newClientList);
+                butler.NewClient(newClientList);
+            }
+
+        }
+
     }
 }

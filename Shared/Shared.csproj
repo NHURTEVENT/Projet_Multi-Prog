@@ -57,6 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions_\ActionFactory.cs" />
+    <Compile Include="Actions_\Action_.cs" />
+    <Compile Include="Actions_\IAction.cs" />
     <Compile Include="Controller\IButlerController.cs" />
     <Compile Include="Controller\IClientController.cs" />
     <Compile Include="Controller\IController.cs" />
@@ -115,7 +118,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAO\Drawer.cs" />
     <Compile Include="Model\IAction.cs" />
+    <Compile Include="DAO\Stock.cs" />
+    <Compile Include="Model\IButler.cs" />
+    <Compile Include="Model\IClerk.cs" />
     <Compile Include="Model\IClient.cs" />
+    <Compile Include="Model\IHeadWaiter.cs" />
     <Compile Include="Model\IKitchen.cs" />
     <Compile Include="Model\IMachine.cs" />
     <Compile Include="Model\IManager.cs" />
@@ -124,6 +131,7 @@
     <Compile Include="Model\IRestaurant.cs" />
     <Compile Include="Model\IRoom.cs" />
     <Compile Include="Model\ITable.cs" />
+    <Compile Include="Model\IWaiter.cs" />
     <Compile Include="Model\ItemType.cs" />
     <Compile Include="Model\IUtensil.cs" />
     <Compile Include="Model\PersonnelType.cs" />

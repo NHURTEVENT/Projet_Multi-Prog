@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientGenerator.cs" />
     <Compile Include="RoomPersonnelFactory.cs" />
     <Compile Include="ClientFactory.cs" />
     <Compile Include="Items\Counter.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Persons\RoomClerk.cs" />
     <Compile Include="Persons\Waiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableUnsubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj">

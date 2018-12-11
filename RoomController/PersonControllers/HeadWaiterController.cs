@@ -2,7 +2,7 @@ using Shared;
 using System;
 
 namespace Controller {
-	public class HeadWaiter : IHeadWaiter {
+	public class HeadWaiterController {
 
         public void TakeOrder(IClient client)
         {
