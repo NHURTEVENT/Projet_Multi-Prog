@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomView", "RoomView\RoomVi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestDAO", "UnitTestDAO\UnitTestDAO.csproj", "{894BCF57-6F68-48B7-8984-DF5671EC3C90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestRoom", "UnitTestRoom\UnitTestRoom.csproj", "{39D0A45C-B634-4435-8647-58A45D8F2D14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{894BCF57-6F68-48B7-8984-DF5671EC3C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{894BCF57-6F68-48B7-8984-DF5671EC3C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{894BCF57-6F68-48B7-8984-DF5671EC3C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39D0A45C-B634-4435-8647-58A45D8F2D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D0A45C-B634-4435-8647-58A45D8F2D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D0A45C-B634-4435-8647-58A45D8F2D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D0A45C-B634-4435-8647-58A45D8F2D14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

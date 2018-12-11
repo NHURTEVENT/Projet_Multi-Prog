@@ -117,7 +117,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAO\Drawer.cs" />
-    <Compile Include="Model\IAction.cs" />
     <Compile Include="DAO\Stock.cs" />
     <Compile Include="Model\IButler.cs" />
     <Compile Include="Model\IClerk.cs" />

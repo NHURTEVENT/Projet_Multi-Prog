@@ -12,7 +12,7 @@ namespace Shared
         int ID { get; set; }
         string Name { get; set; }
         int Duration { get; set; }
-        IUstensil Ustensil { get; set; }
+        IUtensil Ustensil { get; set; }
 
     }
 }

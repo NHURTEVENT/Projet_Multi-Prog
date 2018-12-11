@@ -115,7 +115,7 @@ namespace UnitTestRoom
             var client = ClientFactory.CreateClient("Client1");
             IHeadWaiter headWaiter = RoomPersonnelFactory.CreateHeadWaiter(tables);
 
-            client.Order.Add(Dish.Riz_de_veau);
+            client.Order.Add(Dish.CHICKEN);
 
             headWaiter.TakeOrder(client);
 
