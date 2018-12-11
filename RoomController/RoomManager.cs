@@ -1,5 +1,6 @@
 ﻿using Model;
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,11 @@ namespace Controller
         public List<IWaiter> waiters { get; set; }
         public List<IClerk> clerks { get; set; }
         public List<ITable> tables { get; set; }
+        public List<IButler> butlers { get; set; }
+        public List<IPerson> Peoples { get; set; }
 
 
-        public RoomManager(/*, Configuration config*/)
+        public RoomManager( Configuration config)
         {
             ticks = 1;
             clients = new List<IClient>();
@@ -30,12 +33,45 @@ namespace Controller
             waiters = new List<IWaiter>();
             clerks = new List<IClerk>();
             tables = new List<ITable>();
-
-            tables.Add(new Table());
+            //these are unique for now but we make it a list for latter evolutivity
+            butlers = new List<IButler>();
+            headWaiters = new List<IHeadWaiter>();
+            Peoples = new List<IPerson>();
+            //recup les values de la config
+            setUpPersonnel(config);
+            //use la factory
+/*          tables.Add(new Table());
             butler = RoomPersonnelFactory.CreateButler(tables, headWaiters);
             headWaiters.Add(RoomPersonnelFactory.CreateHeadWaiter(tables));
-            clientGenerator = new ClientGenerator();
+*/          clientGenerator = new ClientGenerator();
+            butler = butlers.ElementAt(0);
 
+        }
+
+        public void setUpPersonnel(Configuration config)
+        {
+            //create tables
+            tables = RoomPersonnelFactory.createTables(config.RoomConfig.TableDBEntries);
+            //create personnel
+            List<PersonnelDBEntry> perso = config.RoomConfig.PersonnelDBEntries;
+            perso = perso.OrderBy(p => p.PersonnelType).ToList();
+            perso = perso.Where(p => (p.PersonnelType == PersonnelType.BUTLER) ||(p.PersonnelType == PersonnelType.HEADWAITER) || (p.PersonnelType == PersonnelType.WAITER)).ToList();
+
+            foreach(PersonnelDBEntry entry in perso)
+            {
+                for(int i=0; i< entry.Quantity; i++)
+                {
+                    Peoples.Add(RoomPersonnelFactory.createPerson(entry.PersonnelType));
+                }
+            }
+
+            butlers = Peoples.Where(p => (p.Type == PersonnelType.BUTLER)).ToList().Cast<IButler>().ToList();
+
+
+            //perso.ForEach(p => Peoples.Add(RoomPersonnelFactory.createPerson(p.PersonnelType)));
+
+            //list avec des ipersonnel
+            //sort la list en plusieurs listes de chaque type
         }
 
         public void onTick(Object myObject, EventArgs myEventArgs)

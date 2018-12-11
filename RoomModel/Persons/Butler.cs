@@ -1,4 +1,5 @@
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +9,7 @@ namespace Model
 	public class Butler : IButler
     {
         public string Name { get; set; }
-        public string Type { get; set; }
+        public PersonnelType Type { get; set; }
         public IAction CurrentAction { get; set; }
         public int RemainingTicks { get; set; }
         public Point Position { get; set; }
@@ -22,7 +23,7 @@ namespace Model
         public Butler(List<ITable> tables, List<IHeadWaiter> headWaiters)
         {
             this.Name = "Alfred";
-            this.Type = "Butler";
+            this.Type = PersonnelType.BUTLER;
             this.tables = tables;
             ChangeAction(ActionFactory.CreateAction_());
             newClientList = new List<IClient>();

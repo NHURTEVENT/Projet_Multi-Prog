@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{549D5D44-C603-4821-9879-47FAF44A7FF9}</ProjectGuid>
+    <ProjectGuid>{AF3AC714-B325-41AC-91B6-003C1C84E1C8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>KitchenView</RootNamespace>
     <AssemblyName>KitchenView</AssemblyName>

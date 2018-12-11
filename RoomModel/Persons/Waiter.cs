@@ -1,4 +1,5 @@
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +12,7 @@ namespace Model {
         public IAction CurrentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public int RemainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public PersonnelType Type { get; set; }
 
         void CleanTable()
         {

@@ -1,4 +1,5 @@
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +8,7 @@ namespace Model{
     public class Client : IClient
     {
         public string Name { get; set; }
-        public string Type { get; set; }
+        public PersonnelType Type { get; set; }
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
@@ -21,7 +22,7 @@ namespace Model{
         public Client(IAction CurrentAction, string Name = "Lucien")
         {
             this.Name = Name;
-            this.Type = "Client";
+            this.Type = PersonnelType.CLIENT;
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
@@ -76,19 +77,19 @@ namespace Model{
         public void onTick()
         {
             RemainingTicks--;
-            if (RemainingTicks == 0)
-            {
+            //if (RemainingTicks == 0)
+            //{
 
-                if (ActionQueue.Count == 0)
-                {
-                    ChangeAction(ActionFactory.CreateAction_());
-                }
-                else
-                {
-                    ChangeAction(ActionQueue[0]);
-                }
+            //    if (ActionQueue.Count == 0)
+            //    {
+            //        ChangeAction(ActionFactory.CreateAction_());
+            //    }
+            //    else
+            //    {
+            //        ChangeAction(ActionQueue[0]);
+            //    }
 
-            }
+            //}
 
             if (RemainingTicks == 0)
             {
@@ -99,7 +100,7 @@ namespace Model{
                         break;
 
                     case "MoveToTable":
-                        ChangeAction(ActionFactory.CreateAction_("Wait"));
+                        ChangeAction(ActionFactory.CreateAction_("Eat"));
                         break;
 
                     case "Eat":

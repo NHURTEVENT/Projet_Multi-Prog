@@ -68,7 +68,8 @@ namespace UnitTestRoom
         [TestMethod]
         public void TestclearClients()
         {
-            RoomManager roomManager = new RoomManager();
+            var conf = DAO.Instance.getConfig();
+            RoomManager roomManager = new RoomManager(conf);
             List<IClient> newClientList = new List<IClient>();
             var client = ClientFactory.CreateClient("runningAwayClient");
             client.ChangeAction(ActionFactory.CreateAction_("Leaved"));
