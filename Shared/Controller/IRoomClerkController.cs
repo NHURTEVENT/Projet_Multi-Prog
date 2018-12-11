@@ -1,7 +1,8 @@
 using System;
 
 namespace Shared {
-	public interface IRoomClerk {
+	public interface IRoomClerkController
+    {
 		void RefillWater(ITable table);
 		void RefillBread(ITable table);
 

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IClerk
+    public interface IClerk : IPerson
     {
+
+
+
     }
 }

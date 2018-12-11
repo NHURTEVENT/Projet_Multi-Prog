@@ -9,7 +9,7 @@ namespace Shared
         
         void Redirect(IClient client);
         void NewClient(List<IClient> newClient);
-        void FindTable(IClient currentClient);
+        bool FindTable(IClient currentClient);
 
 
     }

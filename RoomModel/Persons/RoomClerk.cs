@@ -1,16 +1,19 @@
 using Shared;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Model {
-	public class RoomClerk : IPerson {
-        public int remainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string currentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IAction CurrentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int RemainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+	public class RoomClerk : IClerk {
+
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int RemainingTicks { get; set; }
+        public IAction CurrentAction { get; set; }
+        public Point Position { get; set; }
+
+        public List<IAction> ActionQueue { get; set; }
+
 
         public void RefillWater(ITable table)
         {
