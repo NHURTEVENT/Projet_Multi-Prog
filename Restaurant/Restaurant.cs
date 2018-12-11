@@ -14,9 +14,9 @@ namespace Restaurant {
 
         private IKitchen kitchen;
         private IRoom room;
-		private DAO dao;
-
-
+		//private DAO dao;
+    
+        
 
         static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
         static bool exitFlag = false;

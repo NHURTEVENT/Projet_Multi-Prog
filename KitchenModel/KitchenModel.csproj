@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +34,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,14 +58,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Item\MachineDBEntry.cs" />
+    <Compile Include="Item\Recipe.cs" />
+    <Compile Include="Item\RecipeStep.cs" />
+    <Compile Include="Item\UtensilEntry.cs" />
+    <Compile Include="Item\UtensilFactory.cs" />
+    <Compile Include="Item\UtensilQuantityEntry.cs" />
+    <Compile Include="KitchenContext.cs" />
     <Compile Include="KitchenPersonnelFactory.cs" />
     <Compile Include="Item\Counter.cs" />
     <Compile Include="Item\Cupboard.cs" />
     <Compile Include="Item\Dishwasher.cs" />
     <Compile Include="Item\Drawer.cs" />
     <Compile Include="Item\Machine.cs" />
-    <Compile Include="Item\Ustensil.cs" />
+    <Compile Include="Item\Utensil.cs" />
     <Compile Include="Item\WashingMachine.cs" />
+    <Compile Include="Migrations\201812082118360_InitialCreate.cs" />
+    <Compile Include="Migrations\201812082118360_InitialCreate.Designer.cs">
+      <DependentUpon>201812082118360_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812082250509_ChangedUtensilStructure.cs" />
+    <Compile Include="Migrations\201812082250509_ChangedUtensilStructure.Designer.cs">
+      <DependentUpon>201812082250509_ChangedUtensilStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091225455_AddFirstRecipe.cs" />
+    <Compile Include="Migrations\201812091225455_AddFirstRecipe.Designer.cs">
+      <DependentUpon>201812091225455_AddFirstRecipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091415038_updatedStructure.cs" />
+    <Compile Include="Migrations\201812091415038_updatedStructure.Designer.cs">
+      <DependentUpon>201812091415038_updatedStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091608381_renamedUtensilEntry.cs" />
+    <Compile Include="Migrations\201812091608381_renamedUtensilEntry.Designer.cs">
+      <DependentUpon>201812091608381_renamedUtensilEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812091836361_AddTables.cs" />
+    <Compile Include="Migrations\201812091836361_AddTables.Designer.cs">
+      <DependentUpon>201812091836361_AddTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelDAOInitializer.cs" />
     <Compile Include="Persons\DishCleaner.cs" />
     <Compile Include="Persons\KitchenChef.cs" />
     <Compile Include="Persons\KitchenClerk.cs" />
@@ -63,5 +112,35 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812082118360_InitialCreate.resx">
+      <DependentUpon>201812082118360_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812082250509_ChangedUtensilStructure.resx">
+      <DependentUpon>201812082250509_ChangedUtensilStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091225455_AddFirstRecipe.resx">
+      <DependentUpon>201812091225455_AddFirstRecipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091415038_updatedStructure.resx">
+      <DependentUpon>201812091415038_updatedStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091608381_renamedUtensilEntry.resx">
+      <DependentUpon>201812091608381_renamedUtensilEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812091836361_AddTables.resx">
+      <DependentUpon>201812091836361_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
+  </Target>
 </Project>

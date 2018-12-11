@@ -5,7 +5,7 @@ namespace Model{
 
     public class Cupboard
     {
-        public IUstensil GetUstensil(String nom)
+        public IUtensil GetUstensil(String nom)
         {
             throw new System.Exception("Not implemented");
         }

@@ -10,12 +10,12 @@ namespace Controller {
             throw new NotImplementedException();
         }
 
-        public void RequestUstensil(IUstensil ustensil)
+        public void RequestUstensil(IUtensil ustensil)
         {
             throw new NotImplementedException();
         }
 
-        public void FreeUstensil(IUstensil ustensil)
+        public void FreeUstensil(IUtensil ustensil)
         {
             throw new NotImplementedException();
         }

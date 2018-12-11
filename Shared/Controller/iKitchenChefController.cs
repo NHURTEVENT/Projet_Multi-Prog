@@ -3,8 +3,8 @@ namespace Shared {
 
 	public interface IKitchenChefController {
 		void Cook(Dish dish);
-		void RequestUstensil(IUstensil ustensil);
-		void FreeUstensil(IUstensil ustensil);
+		void RequestUstensil(IUtensil ustensil);
+		void FreeUstensil(IUtensil ustensil);
 		void ManageClerk();
 
 	}
