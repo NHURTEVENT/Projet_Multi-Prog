@@ -78,6 +78,16 @@ namespace Shared
             };
             recipes.ForEach(r => context.Recipes.Add(r));
             context.SaveChanges();*/
+
+            var stocks = new List<StockEntry>
+            {
+                new StockEntry(IngredientType.CHICKEN,20, DateTime.Now),
+                new StockEntry(IngredientType.FISH, 15, DateTime.Now),
+                new StockEntry(IngredientType.PORK, 30, DateTime.Now),
+                new StockEntry(IngredientType.POTATO,100, DateTime.Now.AddDays(-1))
+            };
+            stocks.ForEach(s => context.StockEntries.Add(s));
+            context.SaveChanges();
         }
     }
 }

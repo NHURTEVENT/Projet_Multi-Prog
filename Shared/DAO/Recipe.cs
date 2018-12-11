@@ -4,9 +4,11 @@ namespace Shared
 {
     public class Recipe
     {
-        private Action[] action;
-        private Ingredient[] ingredient;
-        private Dish[] dish;
+        private RecipeStep[] Steps;
 
+        public Recipe(RecipeStep[] steps)
+        {
+            Steps = steps;
+        }
     }
 }

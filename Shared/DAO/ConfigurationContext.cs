@@ -19,6 +19,7 @@ namespace Shared
         public DbSet<Drawer> Ustensils { get; set; }
         public DbSet<MachineDBEntry> Machines { get; set; }
         public DbSet<RecipeStep> Recipes { get; set; }
+        public DbSet<StockEntry> StockEntries { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -69,7 +69,8 @@ namespace Shared {
                 var Personnel = getPersonnelConfiguration(context);
                 var Drawers = getUtensilsConfiguration(context);
                 var Recipes = getRecipesConfiguration(context);
-                return new KitchenConfiguration(Personnel, Drawers, Machines, Recipes);
+                var Stocks = getStocksConfiguration(context);
+                return new KitchenConfiguration(Personnel, Drawers, Machines, Recipes, Stocks);
             }
         }
 
@@ -111,6 +112,13 @@ namespace Shared {
         private List<MachineDBEntry> getMachinesConfiguration(ConfigurationContext context)
         {
             var query = from b in context.Machines
+                        select b;
+            return query.ToList();
+        }
+
+        private List<StockEntry> getStocksConfiguration(ConfigurationContext context)
+        {
+            var query = from b in context.StockEntries
                         select b;
             return query.ToList();
         }

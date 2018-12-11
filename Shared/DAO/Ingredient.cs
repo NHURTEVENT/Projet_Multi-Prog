@@ -2,7 +2,8 @@ using System;
 
 namespace Shared
 {
-    public enum Ingredient
+    public enum IngredientType
     {
+        CHICKEN, POTATO, CARROT, RICE, PASTA, PORK, FISH
     }
 }

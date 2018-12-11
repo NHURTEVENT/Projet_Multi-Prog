@@ -152,5 +152,20 @@ namespace UnitTestDAO
         {
             Assert.IsNotNull(DAO.Instance.getConfig());
         }
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesStock()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //Assert.IsNotNull(DAOSeeder.getConnectionString());
+                var query = from b in context.StockEntries
+                            where (b.Ingredient == IngredientType.POTATO)
+                            select b;
+                var type = query.FirstOrDefault().Quantity;
+                Assert.AreEqual(query.FirstOrDefault().Quantity, 100);
+            }
+        }
     }
 }
