@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Shared {
@@ -11,9 +12,11 @@ namespace Shared {
         int RemainingTicks { get; set; }
         Point Position { get; set; }
 
+        List<IAction> ActionQueue { get; set; }
 
         void onTick();
         void ChangeAction(IAction Action);
+
 
 
         Point GetPosition();

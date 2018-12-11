@@ -11,38 +11,40 @@ namespace Model
         public string row { get; set; }
         public string position { get; set; }
         public int size { get; set; }
-        public bool available { get; set; }
-        public bool dishServed { get; set; }
-        public bool dishFinished { get; set; }
-        public bool breadFinished { get; set; }
-
-        List<IObserver<string>> observers;
+        public string state { get; set; }
+        List<IObserver<ITable>> observers;
 
         public Table()
         {
-            this.available = true;
+            this.state = "available";
             this.size = 4;
-
-            dishFinished = false;
-            dishServed = false;
-            breadFinished = false;
-
-            observers = new List<IObserver<string>>();
+            
+            observers = new List<IObserver<ITable>>();
 
         }
 
 
         public void IsNowOccuped()
         {
-            this.available = false;
+            this.state = "occuped";
+        }
+
+        public void IsNowAvailable()
+        {
+            this.state = "available";
+        }
+
+        public void IsNowServed()
+        {
+            OnChange("dishServed");
         }
 
         public void IsNowFree()
         {
-            this.available = true;
+            OnChange("dishFinished");
         }
 
-        public IDisposable Subscribe(IObserver<string> observer)
+        public IDisposable Subscribe(IObserver<ITable> observer)
         {
             if (! observers.Contains(observer))
                 observers.Add(observer) ;
@@ -50,33 +52,31 @@ namespace Model
             return new TableUnsubscriber(observers, observer);
         }
         
-
         public void OnChange(string changeType)
         {
             switch (changeType)
             {
                 case "dishServed":
-                    this.dishServed = true;
+                    this.state = "served";
                     foreach (var observer in observers)
                     {
-                        observer.OnNext(changeType);
+                        observer.OnNext(this);
                     }
                     break;
 
                 case "dishFinished":
-                    this.dishFinished = true;
-                    this.dishServed = false;
+                    this.state = "toClean";
                     foreach (var observer in observers)
                     {
-                        observer.OnNext(changeType);
+                        observer.OnNext(this);
                     }
                     break;
 
                 case "breadFinished":
-                    this.breadFinished = true;
+                    this.state = "toRefill";
                     foreach (var observer in observers)
                     {
-                        observer.OnNext(changeType);
+                        observer.OnNext(this);
                     }
                     break;
                     

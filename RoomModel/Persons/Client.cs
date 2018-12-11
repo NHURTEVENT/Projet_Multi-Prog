@@ -13,6 +13,7 @@ namespace Model{
         public Point Position { get; set; }
         public List<Dish> Order { get; set; }
         public List<IAction> ActionQueue { get; set; }
+        public IButler Butler { get; set; }
 
         private ITable myTable;
         private IDisposable unsubscriber;
@@ -79,6 +80,37 @@ namespace Model{
             if (RemainingTicks == 0)
             {
 
+
+
+            }
+
+            if (RemainingTicks == 0)
+            {
+                switch (CurrentAction.Name)
+                {
+                    case "MoveToTable":
+                        //Move to the Table code
+                        // Move();
+                        break;
+
+                    case "Eat":
+                        ChangeAction(ActionFactory.CreateAction_("Diggest"));
+                        break;
+
+                    case "LeaveTable":
+                        LeaveTable();
+                        ChangeAction(ActionFactory.CreateAction_("Leaved"));
+                        break;
+
+                    case "LeaveRestaurant":
+                        Console.WriteLine(Name + " is waiting");
+                        RemainingTicks++;
+                        break;
+
+                    default:
+                        break;
+                }
+
                 if (ActionQueue.Count == 0)
                 {
                     ChangeAction(ActionFactory.CreateAction_());
@@ -88,41 +120,6 @@ namespace Model{
                     ChangeAction(ActionQueue[0]);
                 }
 
-            }
-
-            if (RemainingTicks == 0)
-            {
-                switch (CurrentAction.Name)
-                {
-                    case "TableFound":
-                        ChangeAction(ActionFactory.CreateAction_("MoveToTable"));
-                        break;
-
-                    case "MoveToTable":
-                        ChangeAction(ActionFactory.CreateAction_("Wait"));
-                        break;
-
-                    case "Eat":
-                        ChangeAction(ActionFactory.CreateAction_("Diggest"));
-                        break;
-
-                    case "Diggest":
-                        ChangeAction(ActionFactory.CreateAction_("Leave"));
-                        break;
-
-                    case "Leave":
-                        LeaveTable();
-                        ChangeAction(ActionFactory.CreateAction_("Leaved"));
-                        break;
-
-                    case "Wait":
-                        Console.WriteLine(Name + " is waiting");
-                        RemainingTicks++;
-                        break;
-
-                    default:
-                        break;
-                }
             }
             else
             {
@@ -135,29 +132,25 @@ namespace Model{
             unsubscriber = table.Subscribe(this);
             myTable = table;
             Console.WriteLine("Le client s'est abonné à la table");
-            CurrentAction.Name = "TableFound";
         }
 
         public void LeaveTable()
         {
             myTable.IsNowFree();
             unsubscriber.Dispose();
+
+            this.Butler.ActionQueue.Add(ActionFactory.CreateAction_("CheckIn", this));
         }
         
 
-        public void OnNext(string changes)
+        public void OnNext(ITable changes)
         {
-            switch (changes)
+            if (changes.state == "served")
             {
-                case "dishServed":
-                    ChangeAction(ActionFactory.CreateAction_("Eat"));
-                    break;
-
-                default:
-                    break;
+                ActionQueue.Add(ActionFactory.CreateAction_("Eat"));
+                ActionQueue.Add(ActionFactory.CreateAction_("LeaveTable"));
             }
         }
-
 
 
         public void OnError(Exception error)

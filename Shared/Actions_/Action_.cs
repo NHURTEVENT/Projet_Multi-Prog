@@ -8,17 +8,20 @@ namespace Shared
 {
     public class Action_ : IAction
     {
-
+        public int ID { get; set; }
         public string Name { get; set; }
         public int Duration { get; set; }
-        public int ID { get; set; }
+        public IClient ClientConcerned { get; set; }
+        public ITable TableConcerned { get; set; }
         public IUstensil Ustensil { get; set; }
 
-        public Action_(string Name, int Duration, IUstensil Ustensil = null)
+        public Action_(string Name, int Duration, IUstensil Ustensil = null, IClient ClientConcerned = null, ITable TableConcerned = null)
         {
             this.Name = Name;
             this.Duration = Duration;
             this.Ustensil = Ustensil;
+            this.ClientConcerned = ClientConcerned;
+            this.TableConcerned = TableConcerned;
         }
 
     }

@@ -55,8 +55,8 @@ namespace Controller
 
             foreach (IClient client in clients)
             {
-                if (client.CurrentAction.Name == "Leaved")
-                    clientsLeaving.Add(client);
+                if (client.CurrentAction.Name == "LeaveRestaurant")
+                    clients.Remove(client);
                 else
                     client.onTick();
 
@@ -84,6 +84,7 @@ namespace Controller
             {
                 this.clients.AddRange(newClientList);
                 butler.NewClient(newClientList);
+                butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable"));
             }
 
         }

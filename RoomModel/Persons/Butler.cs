@@ -13,33 +13,40 @@ namespace Model
         public int RemainingTicks { get; set; }
         public Point Position { get; set; }
 
-        private List<ITable> tables;
-        private List<IClient> newClientList;
-        private List<IHeadWaiter> headWaiters;
+        private bool tableFound = true;
 
+        public List<IAction> ActionQueue { get; set; }
+
+        private List<ITable> tables;
+        private List<IClient> newClients;
+        private List<IClient> checkInClients;
+        private List<IHeadWaiter> headWaiters;
 
 
         public Butler(List<ITable> tables, List<IHeadWaiter> headWaiters)
         {
             this.Name = "Alfred";
             this.Type = "Butler";
+
+            ActionQueue = new List<IAction>();
+
             this.tables = tables;
             ChangeAction(ActionFactory.CreateAction_());
-            newClientList = new List<IClient>();
+            newClients = new List<IClient>();
+            checkInClients = new List<IClient>();
             this.headWaiters = headWaiters;
 
         }
 
         public Point GetPosition()
         {
-            throw new NotImplementedException();
+            return this.Position;
         }
 
         public void Move(Point position)
         {
-            Position = position;
+            this.Position = position;
         }
-
 
 
         public void ChangeAction(IAction Action)
@@ -47,6 +54,14 @@ namespace Model
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+        }
+
+        private void CheckActionQueue()
+        {
+            if (ActionQueue.Count == 0)
+                ChangeAction(ActionFactory.CreateAction_());
+            else
+                ChangeAction(ActionQueue[0]);
         }
 
         public void Redirect(IClient client)
@@ -58,56 +73,70 @@ namespace Model
         {
             RemainingTicks--;
 
-            switch (CurrentAction.Name)
+            if (RemainingTicks == 0)
             {
-                case "Wait":
-                    if (newClientList.Count != 0)
-                        ChangeAction(ActionFactory.CreateAction_("LooksForTable"));
-                    else
-                    {
-                        RemainingTicks++;
-                        Console.WriteLine(Name + " the " + this.Type + " is waiting");
-                    }
-                    break;
+                switch (CurrentAction.Name)
+                {
+                    case "LookForTable":
+                        tableFound = FindTable(newClients[0]);
+                        if (tableFound)
+                        {
+                            CheckActionQueue();
+                            tableFound = false;
+                        }
+                        else
+                            RemainingTicks++;
+                        break;
 
-                case "LooksForTable":
-                    FindTable(newClientList[0]);
-                    break;
+                    case "CheckIn":
+                        CheckIn(CurrentAction.ClientConcerned);
+                        CheckActionQueue();
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
+                
             }
+
         }
 
         public void NewClient(List<IClient> newClients)
         {
             if (newClients.Count != 0) {
-                newClientList.AddRange(newClients);
+                newClients.AddRange(newClients);
                 Console.WriteLine("Un nouveau client est arrivé");
 
             } else
                 Console.WriteLine("Aucun nouveau client");
         }
 
-        public void FindTable(IClient currentClient)
+        public bool FindTable(IClient currentClient)
         {
+            bool tableFound = false;
             foreach (ITable table in tables)
             {
-                if (table.available)
+                if (table.state == "available")
                 {
-                    Console.WriteLine("Table trouvée pour le client");
+                    Console.WriteLine("Table trouvée");
+                    tableFound = true;
                     table.IsNowOccuped();
-                    headWaiters[0].takeClientInCharge(currentClient, table);
-                    newClientList.Remove(currentClient);
-                    ChangeAction(ActionFactory.CreateAction_());
+                    headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", currentClient, table));
+                    headWaiters[0].TakeClientInCharge(currentClient, table);
+                    currentClient.Butler = this;
+                    newClients.Remove(currentClient);
                     break;
                 }
-                else
-                {
-                    RemainingTicks++;
-                }
             }
+            return tableFound;
         }
-    }
 
+        public void CheckIn(IClient checkingInClient)
+        {
+
+            checkingInClient.ActionQueue.Add(ActionFactory.CreateAction_("LeaveRestaurant"));
+
+        }
+
+    }
 }

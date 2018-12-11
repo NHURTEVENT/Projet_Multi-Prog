@@ -10,10 +10,10 @@ namespace Model
     class TableUnsubscriber : IDisposable
     {
 
-        private List<IObserver<string>> _observers;
-        private IObserver<string> _observer;
+        private List<IObserver<ITable>> _observers;
+        private IObserver<ITable> _observer;
 
-        public TableUnsubscriber(List<IObserver<string>> observers, IObserver<string> observer)
+        public TableUnsubscriber(List<IObserver<ITable>> observers, IObserver<ITable> observer)
         {
             this._observers = observers;
             this._observer = observer;
