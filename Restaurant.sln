@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenController", "Kitche
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenModel", "KitchenModel\KitchenModel.csproj", "{D6ECEA93-281C-443D-8100-96C3DBE468C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenView", "KitchenView\KitchenView.csproj", "{AF3AC714-B325-41AC-91B6-003C1C84E1C8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomModel", "RoomModel\RoomModel.csproj", "{F3C227B1-1F64-4C56-9025-277444292D24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomController", "RoomController\RoomController.csproj", "{D21E3287-3698-4B22-B4D0-85F8AF5134E2}"
@@ -22,6 +20,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestDAO", "UnitTestDAO\UnitTestDAO.csproj", "{894BCF57-6F68-48B7-8984-DF5671EC3C90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestRoom", "UnitTestRoom\UnitTestRoom.csproj", "{39D0A45C-B634-4435-8647-58A45D8F2D14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomView", "WindowsFormsApp\RoomView.csproj", "{0FEBE76B-C124-42D5-AF5A-277E30D1C2B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsAppTests", "WindowsFormsAppTests\WindowsFormsAppTests.csproj", "{934BD980-CFF4-486C-AE8D-8FD21B1359AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D10F777F-1191-4404-B05F-5942C354BDD0}"
+	ProjectSection(SolutionItems) = preProject
+		FormView.cs = FormView.cs
+		FormView.Designer.cs = FormView.Designer.cs
+		FormView.resx = FormView.resx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +49,6 @@ Global
 		{D6ECEA93-281C-443D-8100-96C3DBE468C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6ECEA93-281C-443D-8100-96C3DBE468C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6ECEA93-281C-443D-8100-96C3DBE468C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF3AC714-B325-41AC-91B6-003C1C84E1C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF3AC714-B325-41AC-91B6-003C1C84E1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF3AC714-B325-41AC-91B6-003C1C84E1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF3AC714-B325-41AC-91B6-003C1C84E1C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3C227B1-1F64-4C56-9025-277444292D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3C227B1-1F64-4C56-9025-277444292D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3C227B1-1F64-4C56-9025-277444292D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,6 +69,14 @@ Global
 		{894BCF57-6F68-48B7-8984-DF5671EC3C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{894BCF57-6F68-48B7-8984-DF5671EC3C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{894BCF57-6F68-48B7-8984-DF5671EC3C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FEBE76B-C124-42D5-AF5A-277E30D1C2B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FEBE76B-C124-42D5-AF5A-277E30D1C2B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FEBE76B-C124-42D5-AF5A-277E30D1C2B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FEBE76B-C124-42D5-AF5A-277E30D1C2B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{934BD980-CFF4-486C-AE8D-8FD21B1359AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{934BD980-CFF4-486C-AE8D-8FD21B1359AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{934BD980-CFF4-486C-AE8D-8FD21B1359AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{934BD980-CFF4-486C-AE8D-8FD21B1359AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39D0A45C-B634-4435-8647-58A45D8F2D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39D0A45C-B634-4435-8647-58A45D8F2D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D0A45C-B634-4435-8647-58A45D8F2D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
