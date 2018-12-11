@@ -77,7 +77,7 @@ namespace Shared
                 new RecipeStep(Dish.FRENCHFRIES,2,"fry the potatos", UtensilType.PAN,360)
             };
             recipes.ForEach(r => context.Recipes.Add(r));
-            context.SaveChanges();*/
+            context.SaveChanges();
 
             var stocks = new List<StockEntry>
             {
@@ -87,7 +87,7 @@ namespace Shared
                 new StockEntry(IngredientType.POTATO,100, DateTime.Now.AddDays(-1))
             };
             stocks.ForEach(s => context.StockEntries.Add(s));
-            context.SaveChanges();
+            context.SaveChanges();*/
         }
     }
 }

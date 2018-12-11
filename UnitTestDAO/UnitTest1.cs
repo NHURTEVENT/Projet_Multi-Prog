@@ -167,5 +167,34 @@ namespace UnitTestDAO
                 Assert.AreEqual(query.FirstOrDefault().Quantity, 100);
             }
         }
+
+        [TestMethod]
+        public void GivenStockUpdatesStock()
+        {
+            //var entry = new StockEntry(IngredientType.CARROT, 2, DateTime.Now.AddDays(-7));
+            /*using (var context = new ConfigurationContext())
+            {
+                
+                context.StockEntries.Add(entry);
+                context.SaveChanges();
+
+                Assert.IsNotNull(context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate));
+            }*/
+                DAO.Instance.consumeIngredient(IngredientType.CARROT, 1);
+            
+            /*using (var context = new ConfigurationContext())
+            {
+                //var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate);
+                var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate).Quantity;
+                //Assert.IsNull(result);
+                Assert.AreEqual(result, 1);
+
+            }*/
+
+            /*var query = from i in context.StockEntries
+                        select i;*/
+
+
+        }
     }
 }
