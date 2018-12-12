@@ -63,6 +63,14 @@ namespace Model{
         }
 
 
+        private void CheckActionQueue()
+        {
+            if (ActionQueue.Count == 0)
+                ChangeAction(ActionFactory.CreateAction_());
+            else
+                ChangeAction(ActionQueue[0]);
+        }
+
         public void ChangeAction(IAction Action)
         {
             this.CurrentAction = Action;
@@ -76,54 +84,31 @@ namespace Model{
 
         public void onTick()
         {
-            RemainingTicks--;
-            if (RemainingTicks == 0)
-            {
-
-
-
-            }
 
             if (RemainingTicks == 0)
             {
                 switch (CurrentAction.Name)
                 {
                     case "MoveToTable":
-                        //Move to the Table code
-                        // Move();
+                        CheckActionQueue();
                         break;
 
                     case "Eat":
-                        ChangeAction(ActionFactory.CreateAction_("Diggest"));
+                        CheckActionQueue();
                         break;
 
                     case "LeaveTable":
                         LeaveTable();
-                        ChangeAction(ActionFactory.CreateAction_("Leaved"));
+                        CheckActionQueue();
                         break;
 
                     case "LeaveRestaurant":
-                        Console.WriteLine(Name + " is waiting");
                         RemainingTicks++;
                         break;
 
                     default:
                         break;
                 }
-
-                if (ActionQueue.Count == 0)
-                {
-                    ChangeAction(ActionFactory.CreateAction_());
-                }
-                else
-                {
-                    ChangeAction(ActionQueue[0]);
-                }
-
-            }
-            else
-            {
-                Console.WriteLine(this.Name + " " + this.CurrentAction.Name);
             }
         }
 

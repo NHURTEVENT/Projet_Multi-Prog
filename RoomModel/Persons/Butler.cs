@@ -53,13 +53,20 @@ namespace Model
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
-            Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+            Console.WriteLine(Name + " " + CurrentAction.Name);
+            if (ActionQueue.Contains(Action))
+            {
+                ActionQueue.Remove(Action);
+            }
         }
 
         private void CheckActionQueue()
         {
             if (ActionQueue.Count == 0)
+            {
                 ChangeAction(ActionFactory.CreateAction_());
+                Console.WriteLine("butler has nothing to do");
+            }
             else
                 ChangeAction(ActionQueue[0]);
         }
@@ -78,7 +85,7 @@ namespace Model
                 switch (CurrentAction.Name)
                 {
                     case "LookForTable":
-                        tableFound = FindTable(newClients[0]);
+                        tableFound = FindTable(CurrentAction.ClientConcerned);
                         if (tableFound)
                         {
                             CheckActionQueue();
@@ -94,21 +101,12 @@ namespace Model
                         break;
 
                     default:
+                        CheckActionQueue();
                         break;
                 }
                 
             }
 
-        }
-
-        public void NewClient(List<IClient> newClients)
-        {
-            if (newClients.Count != 0) {
-                newClients.AddRange(newClients);
-                Console.WriteLine("Un nouveau client est arrivé");
-
-            } else
-                Console.WriteLine("Aucun nouveau client");
         }
 
         public bool FindTable(IClient currentClient)

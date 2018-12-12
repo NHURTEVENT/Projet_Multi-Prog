@@ -43,7 +43,7 @@ namespace Controller
             Console.WriteLine("");
             Console.WriteLine(ticks);
 
-            newClients(clientGenerator.onTick());
+            newClient(clientGenerator.onTick());
 
             butler.onTick();
 
@@ -78,13 +78,12 @@ namespace Controller
             }
         }
 
-        public void newClients(List<IClient> newClientList)
+        public void newClient(IClient newClient)
         {
-            if (newClientList.Count > 0)
+            if (newClient != null)
             {
-                this.clients.AddRange(newClientList);
-                butler.NewClient(newClientList);
-                butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable"));
+                this.clients.Add(newClient);
+                butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable", newClient));
             }
 
         }

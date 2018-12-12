@@ -15,7 +15,10 @@ namespace Shared
         string state { get; set; }
 
         void IsNowOccuped();
+        void IsNowAvailable();
+        void IsNowServed();
         void IsNowFree();
+        void IsNowClean();
 
     }
 }

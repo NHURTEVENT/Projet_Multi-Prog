@@ -44,6 +44,11 @@ namespace Model
             OnChange("dishFinished");
         }
 
+        public void IsNowClean()
+        {
+            OnChange("deserved");
+        }
+
         public IDisposable Subscribe(IObserver<ITable> observer)
         {
             if (! observers.Contains(observer))
@@ -79,7 +84,15 @@ namespace Model
                         observer.OnNext(this);
                     }
                     break;
-                    
+
+                case "deserved":
+                    this.state = "toDress";
+                    foreach (var observer in observers)
+                    {
+                        observer.OnNext(this);
+                    }
+                    break;
+
                 default:
                     break;
             }

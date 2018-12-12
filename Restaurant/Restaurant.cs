@@ -50,7 +50,7 @@ namespace Restaurant {
         private static void TimerEventProcessor2(Object myObject, EventArgs myEventArgs)
         {
             Console.WriteLine("Test2");
-
+            Tuple<string, int> toto = new Tuple<string, int>("a", 1);
         }
     }
 

@@ -58,6 +58,9 @@ namespace Model {
             ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", currentClient, clientTable));
             ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", null, clientTable));
 
+            // Test HeadWaiter serve the dishes
+            ActionQueue.Add(ActionFactory.CreateAction_("BringDishes", null, clientTable));
+
         }
 
         public void TakeOrder(IClient client)
@@ -67,7 +70,7 @@ namespace Model {
 
         public void DressTable(ITable table)
         {
-            table.IsNowFree();
+            table.IsNowAvailable();
         }
 
 
@@ -117,7 +120,14 @@ namespace Model {
                         CheckActionQueue();
                         break;
 
+                    // Test HeadWaiter serve the dishes
+                    case "BringDishes":
+                        CurrentAction.TableConcerned.IsNowServed();
+                        CheckActionQueue();
+                        break;
+
                     default:
+                        CheckActionQueue();
                         break;
                 }
             }
@@ -146,6 +156,12 @@ namespace Model {
             if (concernedTable.state == "toDress")
             {
                 ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", null, concernedTable));
+            }
+
+
+            if (concernedTable.state == "toClean")
+            {
+                concernedTable.IsNowClean();
             }
 
         }

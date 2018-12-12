@@ -23,6 +23,5 @@ namespace Shared
             this.ClientConcerned = ClientConcerned;
             this.TableConcerned = TableConcerned;
         }
-
     }
 }
