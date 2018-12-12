@@ -8,10 +8,8 @@ namespace Shared
     {
         List<Dish> DishOrder { get; set; }
         List<IAction> KActionQueue { get; set; }
-        
-        List<IRecipe> RecipeOrder { get; set; }
 
         void cook(IDish dish);
-
+        List<Dish> GiveDishOrder();
     }
 }

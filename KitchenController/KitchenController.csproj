@@ -41,8 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="KitchenManage.cs" />
+    <Compile Include="KitchenManager.cs" />
     <Compile Include="PersonControllers\DishCleanerController.cs" />
     <Compile Include="PersonControllers\KitchenChefController.cs" />
     <Compile Include="PersonControllers\KitchenClerkController.cs" />

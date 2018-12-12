@@ -29,7 +29,7 @@ namespace Controller {
             throw new NotImplementedException();
         }
 
-        private static Thread _thEcoute;
+        public static Thread _thEcoute;
 
         private static void Main(string[] args)
         {
@@ -38,7 +38,7 @@ namespace Controller {
             _thEcoute.Start();
         }
 
-        private static void Ecouter()
+        public static void Ecouter()
         {
             Console.WriteLine("Attente commande . . .");
 

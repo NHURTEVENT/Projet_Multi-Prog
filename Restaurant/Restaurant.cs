@@ -16,7 +16,8 @@ namespace Restaurant {
         private IKitchen kitchen;
         private IRoom room;
 		private DAO dao;
-        private KitchenManage 
+        private KitchenManager KitchenManager;
+
 
 
 

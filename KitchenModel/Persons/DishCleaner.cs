@@ -34,6 +34,16 @@ namespace Model
             throw new NotImplementedException();
         }
 
+        public void CleanUstensil(IUstensil ustensil)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CleanDish(IDish dish)
+        {
+            throw new NotImplementedException();
+        }
+
         public DishCleaner(IAction CurrentAction, string Name = "Wash")
         {
             this.Name = Name;
