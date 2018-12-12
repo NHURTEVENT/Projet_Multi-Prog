@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
@@ -169,32 +171,83 @@ namespace UnitTestDAO
         }
 
         [TestMethod]
+        public void GivenIngredientAndQuantityDecrementsStock()
+        {
+           
+            using (var context = new ConfigurationContext())
+            {
+                //create a new entry in case there's none
+                var dt = DateTime.Now;
+                var entry = new StockEntry(IngredientType.PASTA, 25, new DateTime(dt.AddDays(-7).Ticks - dt.AddDays(-7).Ticks % TimeSpan.TicksPerSecond));
+
+                //add it to the database
+                context.StockEntries.Add(entry);
+                context.SaveChanges();
+
+                //get entries and sort by arrival date
+                var query = from b in context.StockEntries
+                            where b.Ingredient == IngredientType.PASTA
+                            orderby b.ArrivalDate
+                            select b;
+                //get oldest entry
+                entry = query.FirstOrDefault();
+                //show the entry is there
+                Assert.IsNotNull(entry);
+                //get the value before we decrement it
+                int beforeDecrement = entry.Quantity;
+                DAO.Instance.consumeIngredient(IngredientType.PASTA, 1);
+                var Objcontext = ((IObjectContextAdapter)context).ObjectContext;
+                Objcontext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, context.StockEntries);
+                var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate).Quantity;
+                Assert.AreEqual(beforeDecrement - 1, result);
+            }
+           
+        }
+
+        [TestMethod]
         public void GivenStockUpdatesStock()
         {
-            //var entry = new StockEntry(IngredientType.CARROT, 2, DateTime.Now.AddDays(-7));
-            /*using (var context = new ConfigurationContext())
+            
+           /* using (var db = new ConfigurationContext())
             {
+                var result = db.StockEntries.FirstOrDefault(b => b.Ingredient == IngredientType.PASTA);
                 
+                result.Quantity = 0;
+                if (result != null)
+                {
+                    //result.Quantity = 1;
+                    //db.SaveChanges();
+                    db.StockEntries.AddOrUpdate(result);
+                    db.SaveChanges();
+                }
+            }*/
+/*
+            var dt = DateTime.Now;
+            var entry = new StockEntry(IngredientType.PASTA, 2, new DateTime(dt.AddDays(-7).Ticks - dt.AddDays(-7).Ticks % TimeSpan.TicksPerSecond));
+            using (var context = new ConfigurationContext())
+            {
+
                 context.StockEntries.Add(entry);
                 context.SaveChanges();
 
                 Assert.IsNotNull(context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate));
-            }*/
-                DAO.Instance.consumeIngredient(IngredientType.CARROT, 1);
+
+                DAO.Instance.consumeIngredient(IngredientType.PASTA, 2);
+
+            }
+            using (var context = new ConfigurationContext()) { 
+
+                var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate);
+                Assert.IsNull(result);
+            }
             
-            /*using (var context = new ConfigurationContext())
-            {
-                //var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate);
-                var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate).Quantity;
-                //Assert.IsNull(result);
-                Assert.AreEqual(result, 1);
-
-            }*/
-
+*/
             /*var query = from i in context.StockEntries
                         select i;*/
 
 
         }
+
+       
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace Shared {
@@ -50,13 +51,82 @@ namespace Shared {
 
         public void consumeIngredient(IngredientType ingredient, int quantity)
         {
-            using(var context = new ConfigurationContext())
+
+            using (var context = new ConfigurationContext())
+            {
+                //var result = context.StockEntries.FirstOrDefault(b => b.Ingredient == ingredient);
+
+                var query = from b in context.StockEntries
+                            where b.Ingredient == ingredient
+                            orderby b.ArrivalDate
+                            select b;
+
+                var result = query.FirstOrDefault();
+
+                int DBquantity = result.Quantity;
+                if (result != null)
+                {
+                    if (DBquantity - quantity < 0)
+                    {
+                        throw new InvalidOperationException("not enough " + ingredient.ToString() + ", tyring to substract " + quantity + "from " + DBquantity);
+                    }
+                    else
+                    {
+                        if (DBquantity - quantity == 0)
+                        {
+                            //remove
+                        }
+                        else
+                        {
+                            result.Quantity -= quantity;
+                            context.StockEntries.AddOrUpdate(result);
+                        }
+                    }
+                               //result.Quantity = 1;
+                              //db.SaveChanges();
+
+                context.SaveChanges();
+            }
+         }
+/*
+            using (var context = new ConfigurationContext())
             {
                 var entry = context.StockEntries.FirstOrDefault(e => e.Ingredient == ingredient);
-                int DBquantity = entry.Quantity;
-                entry.Quantity = 1;
-                context.SaveChanges();
-                if (DBquantity -quantity < 0)
+                //context.Entry(entry).State = EntityState.Deleted;
+                //context.DeleteOnSubmit();
+                /*var adapter = (IObjectContextAdapter)context;
+                var objContext = adapter.ObjectContext;
+                objContext.DeleteObject(entry);
+                objContext.SaveChanges();*/
+
+                
+/*                int DBquantity = entry.Quantity;
+                
+                
+                //context.Entry(entry).State = EntityState.Deleted;
+                //context.StockEntries.Remove(otherEntry);
+                /*
+                bool saveFailed;
+                do
+                {
+                    saveFailed = false;
+
+                    try
+                    {
+                        //context.Entry(entry).State = EntityState.Deleted;
+                        context.SaveChanges();
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        saveFailed = true;
+
+                        // Update the values of the entity that failed to save from the store
+                        ex.Entries.Single().Reload();
+                    }
+
+                } while (saveFailed);
+                */
+ /*               if (DBquantity - quantity < 0)
                 {
                     throw new InvalidOperationException("not enough " + ingredient.ToString()+", tyring to substract "+quantity+"from "+DBquantity);
                 }
@@ -64,9 +134,10 @@ namespace Shared {
                 {
                     if(DBquantity-quantity == 0)
                     {
+                        context.StockEntries.Remove(entry);
                         //context.Entry(entry).State = EntityState.Deleted;
                         //context.SaveChanges();
-                        
+
                         //context.StockEntries.Attach(entry);
                         //context.
                         /*context.StockEntries.Remove(entry);
@@ -88,11 +159,13 @@ namespace Shared {
                             }
 
                         } while (saveFailed);*/
-                    }
+/*                    }
                     else
                     {
-                        entry.Quantity = 1;
-                        context.SaveChanges();
+                        entry.Quantity = 0;
+                        context.StockEntries.AddOrUpdate(entry);
+                        //entry.Quantity = 1;
+                        //context.SaveChanges();
                         /*bool saveFailed;
                         do
                         {
@@ -112,9 +185,9 @@ namespace Shared {
 
                         } while (saveFailed);*/
 
-                    }                     
+  /*                  }                     
                 }
-            };
+            };*/
         }
         
 
