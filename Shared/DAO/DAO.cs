@@ -74,6 +74,7 @@ namespace Shared {
                     {
                         if (DBquantity - quantity == 0)
                         {
+                            context.StockEntries.Remove(result);
                             //remove
                         }
                         else
@@ -82,12 +83,12 @@ namespace Shared {
                             context.StockEntries.AddOrUpdate(result);
                         }
                     }
-                               //result.Quantity = 1;
-                              //db.SaveChanges();
-
-                context.SaveChanges();
+                    //result.Quantity = 1;
+                    //db.SaveChanges();
+                    var newResult = context.Entry(result);
+                    context.SaveChanges();
+                }
             }
-         }
 /*
             using (var context = new ConfigurationContext())
             {
