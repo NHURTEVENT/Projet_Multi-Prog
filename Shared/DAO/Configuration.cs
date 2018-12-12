@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
+
+    /**
+     * Contains all the all relevant information about the restaurant fetched in the database
+     **/
     public sealed class Configuration
     {
         /*
@@ -31,17 +35,14 @@ namespace Shared
         public RoomConfiguration RoomConfig { get; set; }
         public KitchenConfiguration KitchenConfig { get; set; }
 
+        /**Create the global configuration with the RoomConfiguration and the KitchenConfiguration**/
         public Configuration(RoomConfiguration roomConfig, KitchenConfiguration kitchenConfig)
         {
             RoomConfig = roomConfig;
             KitchenConfig = kitchenConfig;
         }
 
-
-
-
-
-
+        //Information to be found in this config class
 
         //for each item in RoomConfig.tableEntries call factory to create the tables
         /*
@@ -92,6 +93,7 @@ namespace Shared
         int nb_Sinks;
         */
 
+        //Kitchen personnel
         /*
         int nb_KitchenClerks;
         int nb_KitchenPartyChefs;
@@ -99,9 +101,12 @@ namespace Shared
         int nb_DishCleaners;
         */
 
+        //machines
         /*
         int nb_lave_vaisselle;
         int nb_lave_linge;
         */
+
+        //recipe's step
     }
 }

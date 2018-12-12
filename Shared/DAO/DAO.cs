@@ -1,9 +1,11 @@
 using Shared.Model;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace Shared {
@@ -32,6 +34,25 @@ namespace Shared {
             }
         }
 
+        public string getConnectionString()
+        {
+            return ConfigurationManager.ConnectionStrings["KitchenContext"].ConnectionString.ToString();
+        }
+
+        public Boolean connect()
+        {
+             var conn = new SqlConnection();
+            conn.ConnectionString = getConnectionString();
+            try
+            {
+                conn.Open();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
 
         public Configuration getConfig()
         {

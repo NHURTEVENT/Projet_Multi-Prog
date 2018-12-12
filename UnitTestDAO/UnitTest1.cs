@@ -9,129 +9,40 @@ using Shared.Model;
 
 namespace UnitTestDAO
 {
-    [TestClass]
-    public class UnitTest1
-    {
     
-       //Generic
+
+    [TestClass]
+    public class DatabaseConnectionTests
+    {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            using (ConfigurationContext context = new ConfigurationContext())
+            {
+                    //Seeds the database with test entries
+                    //DAOSeeder.Instance.Seed(context);
+            }
+        }
+
+        /**Tests if the connection string is present in the appConfig so EF can use it **/
         [TestMethod]
         public void GivenConfigurationFileReturnsConnectionString()
         {
-            using (var context = new KitchenContext())
-            {
-                ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                Assert.IsNotNull(modelDAOInitializer.getConnectionString());
-            }
-
+            Assert.IsNotNull(DAO.Instance.getConnectionString());
         }
 
+        /** Tests if we can connect to the database**/
         [TestMethod]
         public void GivenDatabaseConnects()
         {
-            using (var context = new KitchenContext())
-            {
-                ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                Assert.IsNotNull(modelDAOInitializer.getConnectionString());
-            }
+            Assert.IsTrue(DAO.Instance.connect());
         }
 
+    }
 
-        [TestMethod]
-        public void GivenDatabaseRetrievesData()
-        {
-            using (var context = new ConfigurationContext())
-            {
-                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
-                //DAOSeeder DAOSeeder = new DAOSeeder(context);
-                var query = from b in context.Ustensils
-                            orderby b.UtensilType
-                            where b.UtensilType == UtensilType.FORK
-                            select b;
-                var name = query.FirstOrDefault().UtensilType;
-                Assert.AreEqual(query.FirstOrDefault().Quantity,10);
-            }
-        }
-
-        
-        //Kitchen
-        [TestMethod]
-        public void GivenDatabaseRetrievesUtensils()
-        {
-            using (var context = new ConfigurationContext())
-            {
-                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
-                var query = from b in context.Ustensils
-                            where b.UtensilType == UtensilType.FORK
-                            select b;
-
-                Assert.AreEqual(query.FirstOrDefault().Quantity,10);
-            }
-        }
-
-        [TestMethod]
-        public void GivenDatabaseRetrievesMachines()
-        {
-            using (var context = new ConfigurationContext())
-            {
-                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
-                var query = from b in context.Machines
-                            where b.MachineId == 1
-                            select b;
-                var type = query.FirstOrDefault().MachineType;
-                Assert.IsTrue(String.Equals(query.FirstOrDefault().MachineType, "washing"));
-            }
-        }
-
-        [TestMethod]
-        public void GivenDatabaseRetrievesRecipe()
-        {
-            using (var context = new ConfigurationContext())
-            {
-                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
-                DAOSeeder DAOSeeder = new DAOSeeder(context);
-                var query = from b in context.Recipes
-                            where (b.Dish == Dish.FRENCHFRIES) &&( b.Step == 1 ) 
-                            select b;
-                var type = query.FirstOrDefault().Name;
-                Assert.IsTrue(String.Equals(query.FirstOrDefault().Name, "cut potatoes"));
-            }
-        }
-       
-
-        //Room
-        [TestMethod]
-        public void GivenDatabaseRetrievesTables()
-        {
-            using (var context = new ConfigurationContext())
-            {
-                //DAOSeeder DAOSeeder = new DAOSeeder(context);
-                //Assert.IsNotNull(DAOSeeder.getConnectionString());
-                var query = from b in context.Tables
-                            where (b.Square == 1) && (b.Row == 1) && (b.Column == 1)
-                            select b;
-                var type = query.FirstOrDefault().Size;
-                Assert.AreEqual(query.FirstOrDefault().Size, 2);
-            }
-        }
-
-        [TestMethod]
-        public void GivenDatabaseRetrievesItems()
-        {
-            using (var context = new ConfigurationContext())
-            {
-                //DAOSeeder DAOSeeder = new DAOSeeder(context);
-                //Assert.IsNotNull(DAOSeeder.getConnectionString());
-                var query = from b in context.Items
-                            where (b.ItemType == ItemType.FLAT_PLATES)
-                            select b;
-                var type = query.FirstOrDefault().Quantity;
-                Assert.AreEqual(query.FirstOrDefault().Quantity, 30);
-            }
-        }
+    [TestClass]
+    public class CommonTests
+    {
 
 
         [TestMethod]
@@ -155,18 +66,26 @@ namespace UnitTestDAO
             Assert.IsNotNull(DAO.Instance.getConfig());
         }
 
+    }
+
+    [TestClass]
+    public class CRUDTests
+    {
+
         [TestMethod]
-        public void GivenDatabaseRetrievesStock()
+        public void GivenDatabaseRetrievesData()
         {
             using (var context = new ConfigurationContext())
             {
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
                 //DAOSeeder DAOSeeder = new DAOSeeder(context);
-                //Assert.IsNotNull(DAOSeeder.getConnectionString());
-                var query = from b in context.StockEntries
-                            where (b.Ingredient == IngredientType.POTATO)
+                var query = from b in context.Ustensils
+                            orderby b.UtensilType
+                            where b.UtensilType == UtensilType.FORK
                             select b;
-                var type = query.FirstOrDefault().Quantity;
-                Assert.AreEqual(query.FirstOrDefault().Quantity, 100);
+                var name = query.FirstOrDefault().UtensilType;
+                Assert.AreEqual(query.FirstOrDefault().Quantity, 10);
             }
         }
 
@@ -181,7 +100,7 @@ namespace UnitTestDAO
             int beforeDecrement;
             using (var context = new ConfigurationContext())
             {
-                
+
 
                 //add it to the database
                 context.StockEntries.Add(entry);
@@ -205,11 +124,11 @@ namespace UnitTestDAO
                 Objcontext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, context.StockEntries);
             }
             using (var context = new ConfigurationContext())
-            { 
+            {
                 //get the updated entry
                 var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate);
 
-                while(result == null)
+                while (result == null)
                 {
                     var query2 = from b in context.StockEntries
                                  where b.Ingredient == IngredientType.PASTA
@@ -223,9 +142,9 @@ namespace UnitTestDAO
                     var Objcontext = ((IObjectContextAdapter)context).ObjectContext;
                     Objcontext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, context.StockEntries);
                     query2 = from b in context.StockEntries
-                                 where b.Ingredient == IngredientType.PASTA
-                                 orderby b.ArrivalDate
-                                 select b;
+                             where b.Ingredient == IngredientType.PASTA
+                             orderby b.ArrivalDate
+                             select b;
                     //get oldest entry
                     result = query2.FirstOrDefault();
                 }
@@ -235,12 +154,12 @@ namespace UnitTestDAO
                             select b;
                 //get oldest entry
                 result = query.FirstOrDefault();
-                
+
 
                 //check if it's been decremented
                 Assert.AreEqual(beforeDecrement - 1, result.Quantity);
             }
-           
+
         }
 
         [TestMethod]
@@ -282,10 +201,113 @@ namespace UnitTestDAO
                 //check if it's been decremented
                 Assert.IsNull(result);
             }
-            }
-
         }
 
-       
     }
+
+    [TestClass]
+    public class RoomConfigTests
+    {
+        //Room
+        [TestMethod]
+        public void GivenDatabaseRetrievesTables()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //Assert.IsNotNull(DAOSeeder.getConnectionString());
+                var query = from b in context.Tables
+                            where (b.Square == 1) && (b.Row == 1) && (b.Column == 1)
+                            select b;
+                var type = query.FirstOrDefault().Size;
+                Assert.AreEqual(query.FirstOrDefault().Size, 2);
+            }
+        }
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesItems()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //Assert.IsNotNull(DAOSeeder.getConnectionString());
+                var query = from b in context.Items
+                            where (b.ItemType == ItemType.FLAT_PLATES)
+                            select b;
+                var type = query.FirstOrDefault().Quantity;
+                Assert.AreEqual(query.FirstOrDefault().Quantity, 30);
+            }
+        }
+
+    }
+
+    [TestClass]
+    public class KitchenConfigClass
+    {
+        //Kitchen
+        [TestMethod]
+        public void GivenDatabaseRetrievesUtensils()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
+                var query = from b in context.Ustensils
+                            where b.UtensilType == UtensilType.FORK
+                            select b;
+
+                Assert.AreEqual(query.FirstOrDefault().Quantity, 10);
+            }
+        }
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesMachines()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
+                var query = from b in context.Machines
+                            where b.MachineId == 1
+                            select b;
+                var type = query.FirstOrDefault().MachineType;
+                Assert.IsTrue(String.Equals(query.FirstOrDefault().MachineType, "washing"));
+            }
+        }
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesRecipe()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
+                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
+                var query = from b in context.Recipes
+                            where (b.Dish == Dish.FRENCHFRIES) && (b.Step == 1)
+                            select b;
+                var type = query.FirstOrDefault().Name;
+                Assert.IsTrue(String.Equals(query.FirstOrDefault().Name, "cut the potatoes"));
+            }
+        }
+
+        [TestMethod]
+        public void GivenDatabaseRetrievesStock()
+        {
+            using (var context = new ConfigurationContext())
+            {
+                //DAOSeeder DAOSeeder = new DAOSeeder(context);
+                //Assert.IsNotNull(DAOSeeder.getConnectionString());
+                var query = from b in context.StockEntries
+                            where (b.Ingredient == IngredientType.POTATO)
+                            select b;
+                var type = query.FirstOrDefault().Quantity;
+                Assert.AreEqual(query.FirstOrDefault().Quantity, 100);
+            }
+        }
+
+
+    }
+
+}
 
