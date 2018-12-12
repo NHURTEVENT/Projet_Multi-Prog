@@ -75,7 +75,7 @@ namespace Model{
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
-            Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+            Console.WriteLine(Name + " " + CurrentAction.Name);
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);
@@ -84,12 +84,14 @@ namespace Model{
 
         public void onTick()
         {
+            RemainingTicks--;
 
             if (RemainingTicks == 0)
             {
                 switch (CurrentAction.Name)
                 {
                     case "MoveToTable":
+                        GetTable(CurrentAction.TableConcerned);
                         CheckActionQueue();
                         break;
 
@@ -107,6 +109,7 @@ namespace Model{
                         break;
 
                     default:
+                        CheckActionQueue();
                         break;
                 }
             }

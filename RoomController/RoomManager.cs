@@ -56,32 +56,27 @@ namespace Controller
             foreach (IClient client in clients)
             {
                 if (client.CurrentAction.Name == "LeaveRestaurant")
-                    clients.Remove(client);
+                    clientsLeaving.Add(client);
                 else
                     client.onTick();
 
             }
-
-            clearClients();
-            ticks++;
-        }
-
-        public void clearClients()
-        {
-            if (clientsLeaving.Count != 0)
-            {
+            
+            if(clientsLeaving.Count > 0)
                 foreach (var client in clientsLeaving)
                 {
                     clients.Remove(client);
                 }
-                clientsLeaving.Clear();
-            }
+            clientsLeaving.Clear();
+
+            ticks++;
         }
 
         public void newClient(IClient newClient)
         {
             if (newClient != null)
             {
+                Console.WriteLine("New Client");
                 this.clients.Add(newClient);
                 butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable", newClient));
             }

@@ -29,8 +29,8 @@ namespace Restaurant {
             myTimer.Tick += new EventHandler(RoomManager.onTick);
 
 
-            // Sets the timer interval to 2 seconds.
-            myTimer.Interval = 2000;
+            // Sets the timer interval to 5 seconds.
+            myTimer.Interval = 5000;
             myTimer.Start();
 
             // Runs the timer, and raises the event.

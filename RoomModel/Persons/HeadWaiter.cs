@@ -137,7 +137,7 @@ namespace Model {
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
-            Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+            Console.WriteLine(Name + " " + CurrentAction.Name);
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);

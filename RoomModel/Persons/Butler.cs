@@ -65,7 +65,6 @@ namespace Model
             if (ActionQueue.Count == 0)
             {
                 ChangeAction(ActionFactory.CreateAction_());
-                Console.WriteLine("butler has nothing to do");
             }
             else
                 ChangeAction(ActionQueue[0]);
@@ -120,7 +119,6 @@ namespace Model
                     tableFound = true;
                     table.IsNowOccuped();
                     headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", currentClient, table));
-                    headWaiters[0].TakeClientInCharge(currentClient, table);
                     currentClient.Butler = this;
                     newClients.Remove(currentClient);
                     break;

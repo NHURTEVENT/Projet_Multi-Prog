@@ -31,7 +31,7 @@ namespace Model
             {
                 newClient = ClientFactory.CreateClient(ClientName + ClientNumber);
                 ClientNumber++;
-                RemainingTicks = 10;
+                RemainingTicks = 15;
             }
 
             return newClient;
