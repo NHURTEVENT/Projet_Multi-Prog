@@ -41,26 +41,46 @@ namespace Shared {
 
         public Boolean connect()
         {
-             var conn = new SqlConnection();
-            conn.ConnectionString = getConnectionString();
-            try
+            //create a new connection
+            using (var conn = new SqlConnection())
             {
-                conn.Open();
-                return true;
-            }
-            catch(Exception e)
-            {
-                return false;
+                //use the connection string in AppConfig
+                conn.ConnectionString = getConnectionString();
+                try
+                {
+                    //try to open the connection to the database
+                    conn.Open();
+                    //connection is a success
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    //connection failed
+                    return false;
+                }
+                finally
+                {
+                    //the using does it but just in case
+                    conn.Close();
+                }
             }
         }
 
+        public ConfigurationContext getContext()
+        {
+            return ConfigurationContext.Instance;
+        }
+
+        /** 
+         * Return the Configuration and stores is as singleton as to not query the database each time
+        **/
         public Configuration getConfig()
         {
             if (CONFIGURATION != null)
                 return CONFIGURATION;
             else
             { 
-                using (var context = new ConfigurationContext())
+                using (var context = getContext())
                 {
                     var roomConfig = getRoomConfiguration(context);
                     var kitchenConfig = getKitchenConfiguration(context);
@@ -73,7 +93,7 @@ namespace Shared {
         public void consumeIngredient(IngredientType ingredient, int quantity)
         {
 
-            using (var context = new ConfigurationContext())
+            using (var context = getContext())
             {
                 //var result = context.StockEntries.FirstOrDefault(b => b.Ingredient == ingredient);
 
@@ -110,106 +130,7 @@ namespace Shared {
                     context.SaveChanges();
                 }
             }
-/*
-            using (var context = new ConfigurationContext())
-            {
-                var entry = context.StockEntries.FirstOrDefault(e => e.Ingredient == ingredient);
-                //context.Entry(entry).State = EntityState.Deleted;
-                //context.DeleteOnSubmit();
-                /*var adapter = (IObjectContextAdapter)context;
-                var objContext = adapter.ObjectContext;
-                objContext.DeleteObject(entry);
-                objContext.SaveChanges();*/
 
-                
-/*                int DBquantity = entry.Quantity;
-                
-                
-                //context.Entry(entry).State = EntityState.Deleted;
-                //context.StockEntries.Remove(otherEntry);
-                /*
-                bool saveFailed;
-                do
-                {
-                    saveFailed = false;
-
-                    try
-                    {
-                        //context.Entry(entry).State = EntityState.Deleted;
-                        context.SaveChanges();
-                    }
-                    catch (DbUpdateConcurrencyException ex)
-                    {
-                        saveFailed = true;
-
-                        // Update the values of the entity that failed to save from the store
-                        ex.Entries.Single().Reload();
-                    }
-
-                } while (saveFailed);
-                */
- /*               if (DBquantity - quantity < 0)
-                {
-                    throw new InvalidOperationException("not enough " + ingredient.ToString()+", tyring to substract "+quantity+"from "+DBquantity);
-                }
-                else
-                {
-                    if(DBquantity-quantity == 0)
-                    {
-                        context.StockEntries.Remove(entry);
-                        //context.Entry(entry).State = EntityState.Deleted;
-                        //context.SaveChanges();
-
-                        //context.StockEntries.Attach(entry);
-                        //context.
-                        /*context.StockEntries.Remove(entry);
-                        bool saveFailed;
-                        do
-                        {
-                            saveFailed = false;
-
-                            try
-                            {
-                                context.SaveChanges();
-                            }
-                            catch (DbUpdateConcurrencyException ex)
-                            {
-                                saveFailed = true;
-
-                                // Update the values of the entity that failed to save from the store
-                                ex.Entries.Single().Reload();
-                            }
-
-                        } while (saveFailed);*/
-/*                    }
-                    else
-                    {
-                        entry.Quantity = 0;
-                        context.StockEntries.AddOrUpdate(entry);
-                        //entry.Quantity = 1;
-                        //context.SaveChanges();
-                        /*bool saveFailed;
-                        do
-                        {
-                            saveFailed = false;
-
-                            try
-                            {
-                                context.SaveChanges();
-                            }
-                            catch (DbUpdateConcurrencyException ex)
-                            {
-                                saveFailed = true;
-
-                                // Update the values of the entity that failed to save from the store
-                                ex.Entries.Single().Reload();
-                            }
-
-                        } while (saveFailed);*/
-
-  /*                  }                     
-                }
-            };*/
         }
         
 

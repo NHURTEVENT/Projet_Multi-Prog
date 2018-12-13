@@ -7,13 +7,29 @@ namespace Shared
 
     /**
      * Contains all the all relevant information about the restaurant stored in the database
+     * Wanted it to be Singleton but lazy loading prevents it. Still keeping the structure
      **/
-    public class ConfigurationContext : DbContext
+    public sealed class ConfigurationContext : DbContext
     {
-        public ConfigurationContext()
+        private static ConfigurationContext INSTANCE = null;
+
+        private ConfigurationContext()
             : base("name=ConfigurationContext")
         {
         }
+
+
+        public static ConfigurationContext Instance
+        {
+            get
+            {
+                //if (INSTANCE == null)
+                    INSTANCE = new ConfigurationContext();
+                return INSTANCE;
+            }
+        }
+
+
         //Entries of all relevant information about the restaurant stored in the database
         //They will be used to generate their corresponding objects with factories
         public DbSet<TableDBEntry> Tables { get; set; }

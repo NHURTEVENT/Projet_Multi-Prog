@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class DAOSeeder : DropCreateDatabaseIfModelChanges<ConfigurationContext>
+    public sealed class DAOSeeder : DropCreateDatabaseIfModelChanges<ConfigurationContext>
     {
 
         private static DAOSeeder INSTANCE;
@@ -25,13 +25,13 @@ namespace Shared
                 return INSTANCE;
             }
         }
-
+        
         private DAOSeeder()
         {
 
         }
 
-        public DAOSeeder(ConfigurationContext context)
+        private DAOSeeder(ConfigurationContext context)
         {
             Seed(context);
         }
@@ -128,7 +128,7 @@ namespace Shared
             context.SaveChanges();
         }
 
-        private void SeedStock(ConfigurationContext context)
+        public void SeedStock(ConfigurationContext context)
         {
             var dt = DateTime.Now;
             var stocks = new List<StockEntry>
@@ -143,12 +143,17 @@ namespace Shared
             context.SaveChanges();
         }
 
-        public void Seed(ConfigurationContext context)
+        private void Seed(ConfigurationContext context)
         {
-            //SeedPersonnel(context);
+            SeedPersonnel(context);
             SeedRoom(context);
             SeedKitchen(context);
           
+        }
+
+        public void Seed()
+        {
+            Seed(DAO.Instance.getContext());
         }
 
     }
