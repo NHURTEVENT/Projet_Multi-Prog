@@ -14,8 +14,10 @@ namespace Shared
         public IClient ClientConcerned { get; set; }
         public ITable TableConcerned { get; set; }
         public IUstensil Ustensil { get; set; }
+        public IOrder OrderConcerned { get; set; }
 
-        public Action_(string Name, int Duration, IUstensil Ustensil = null, IClient ClientConcerned = null, ITable TableConcerned = null)
+
+        public Action_(string Name, int Duration, IUstensil Ustensil = null, IClient ClientConcerned = null, ITable TableConcerned = null, IOrder OrderConcerned = null)
         {
             this.Name = Name;
             this.Duration = Duration;

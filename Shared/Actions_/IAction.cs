@@ -15,6 +15,8 @@ namespace Shared
         IClient ClientConcerned { get; set; }
         ITable TableConcerned { get; set; }
         IUstensil Ustensil { get; set; }
+        IOrder OrderConcerned { get; set; }
+
 
     }
 }

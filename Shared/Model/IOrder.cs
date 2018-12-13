@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IClerk : IPerson, IObserver<ITable>
+    public interface IOrder : IObservable<IOrder>
     {
 
-
+        int OrderNum { get; set; }
+        List<Dish> Dishes { get; set; }
+        ITable Table { get; set; }
 
     }
 }

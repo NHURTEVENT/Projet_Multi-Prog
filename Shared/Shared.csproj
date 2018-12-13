@@ -65,10 +65,12 @@
     <Compile Include="Model\IButler.cs" />
     <Compile Include="Model\IClerk.cs" />
     <Compile Include="Model\IClient.cs" />
+    <Compile Include="Model\ICounter.cs" />
     <Compile Include="Model\IHeadWaiter.cs" />
     <Compile Include="Model\IKitchen.cs" />
     <Compile Include="Model\IMachine.cs" />
     <Compile Include="Model\IManager.cs" />
+    <Compile Include="Model\IOrder.cs" />
     <Compile Include="Model\IPerson.cs" />
     <Compile Include="Model\IRecipe.cs" />
     <Compile Include="Model\IRestaurant.cs" />

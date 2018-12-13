@@ -9,7 +9,7 @@ namespace Shared
     public static class ActionFactory
     {
 
-        public static IAction CreateAction_(string Name = "Wait", IClient ClientConcerned = null, ITable TableConcerned = null)
+        public static IAction CreateAction_(string Name = "Wait", IClient ClientConcerned = null, ITable TableConcerned = null, IOrder OrderConcerned = null)
         {
             switch (Name)
             {
@@ -26,7 +26,7 @@ namespace Shared
                     return new Action_("LeaveRestaurant", 1, null, ClientConcerned, TableConcerned);
 
                 case "LookForTable":
-                    return new Action_("LookForTable", 1, null, ClientConcerned);
+                    return new Action_("LookForTable", 1, null, ClientConcerned, TableConcerned);
 
                 case "CheckIn":
                     return new Action_("CheckIn", 1, null, ClientConcerned, TableConcerned);
@@ -49,11 +49,11 @@ namespace Shared
                 case "DressTheTable":
                     return new Action_("DressTheTable", 1, null, ClientConcerned, TableConcerned);
 
-                case "TakeDishes":
-                    return new Action_("TakeDishes", 1, null, ClientConcerned, TableConcerned);
+                case "FetchOrder":
+                    return new Action_("FetchOrder", 1, null, ClientConcerned, TableConcerned, OrderConcerned);
 
-                case "BringDishes":
-                    return new Action_("BringDishes", 2, null, ClientConcerned, TableConcerned);
+                case "BringOrder":
+                    return new Action_("BringOrder", 2, null, ClientConcerned, TableConcerned);
 
                 case "ClearTheTable":
                     return new Action_("ClearTheTable", 1, null, ClientConcerned, TableConcerned);

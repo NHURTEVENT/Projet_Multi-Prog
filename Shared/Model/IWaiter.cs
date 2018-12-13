@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IWaiter : IPerson
+    public interface IWaiter : IPerson, IObserver<ITable>, IObserver<IOrder>
     {
 
 
