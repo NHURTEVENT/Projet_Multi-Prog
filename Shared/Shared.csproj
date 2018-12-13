@@ -72,6 +72,7 @@
     <Compile Include="DAO\DAOSeeder.cs" />
     <Compile Include="DAO\ItemDBEntry.cs" />
     <Compile Include="DAO\MachineDBEntry.cs" />
+    <Compile Include="DAO\MachineType.cs" />
     <Compile Include="DAO\PersonnelDBEntry.cs" />
     <Compile Include="DAO\RecipeStep.cs" />
     <Compile Include="DAO\RoomConfiguration.cs" />
@@ -112,6 +113,10 @@
     <Compile Include="Migrations\201812110822096_AddedStock.cs" />
     <Compile Include="Migrations\201812110822096_AddedStock.Designer.cs">
       <DependentUpon>201812110822096_AddedStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812131935259_ChangeMachineType.cs" />
+    <Compile Include="Migrations\201812131935259_ChangeMachineType.Designer.cs">
+      <DependentUpon>201812131935259_ChangeMachineType.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAO\Drawer.cs" />
@@ -159,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812110822096_AddedStock.resx">
       <DependentUpon>201812110822096_AddedStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812131935259_ChangeMachineType.resx">
+      <DependentUpon>201812131935259_ChangeMachineType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

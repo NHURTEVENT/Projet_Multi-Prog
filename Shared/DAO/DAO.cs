@@ -71,9 +71,10 @@ namespace Shared {
             return ConfigurationContext.Instance;
         }
 
-        /** 
-         * Return the Configuration and stores is as singleton as to not query the database each time
-        **/
+        /// <summary>
+        /// Return the Configuration and stores is as singleton as to not query the database each time
+        /// </summary>
+        /// <returns>The configuration containing all the information in the database needed for the simulation</returns>
         public Configuration getConfig()
         {
             if (CONFIGURATION != null)
@@ -90,6 +91,11 @@ namespace Shared {
             }
         }
 
+        /// <summary>
+        /// Decrement the ingredients from the database entries and delete if the quantity reaches 0
+        /// </summary>
+        /// <param name="ingredient">The ingredient used in the recipe to be decremented</param>
+        /// <param name="quantity">The quantity to use</param>
         public void consumeIngredient(IngredientType ingredient, int quantity)
         {
 
@@ -132,8 +138,12 @@ namespace Shared {
             }
 
         }
-        
 
+        /// <summary>
+        /// Create the configuration of the room or return it if it already exists
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>The configuration with all information needed to create the room</returns>
         private RoomConfiguration getRoomConfiguration(ConfigurationContext context)
         {
             if (CONFIGURATION != null)
@@ -147,6 +157,11 @@ namespace Shared {
             }
         }
 
+        /// <summary>
+        /// Create the configuration of the kitchen or return it if it already exists
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>The configuration with all information needed to create the kitchen</returns>
         private KitchenConfiguration getKitchenConfiguration(ConfigurationContext context)
         {
             if (CONFIGURATION != null)
@@ -162,6 +177,11 @@ namespace Shared {
             }
         }
 
+        /// <summary>
+        /// Retrieve the personnel's entries from the database
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>A list of all the personnel in the database</returns>
         private List<PersonnelDBEntry> getPersonnelConfiguration(ConfigurationContext context)
         {
             var query = from b in context.PersonnelDBEntries
@@ -169,6 +189,11 @@ namespace Shared {
             return query.ToList();
         }
 
+        /// <summary>
+        /// Retrieve the items' entries from the database
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>A list of all the items' entries in the database</returns>
         private List<ItemDBEntry> getItemsConfiguration(ConfigurationContext context)
         {
             var query = from b in context.Items
@@ -176,6 +201,11 @@ namespace Shared {
             return query.ToList();
         }
 
+        /// <summary>
+        /// Retrieve the tables entries from the database
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>A list of all the entries in the database</returns>
         private List<TableDBEntry> getTablesConfiguration(ConfigurationContext context)
         {
             var query = from b in context.Tables
@@ -183,6 +213,11 @@ namespace Shared {
             return query.ToList();
         }
 
+        /// <summary>
+        /// Retrieve the utensils' entries from the database
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>A list of all the utensil's entries in the database</returns>
         private List<Drawer> getUtensilsConfiguration(ConfigurationContext context)
         {
             var query = from b in context.Ustensils
@@ -190,6 +225,11 @@ namespace Shared {
             return query.ToList();
         }
 
+        /// <summary>
+        /// Retrieve the recipes' steps from the database
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>A list of all the steps in the database</returns>
         private List<RecipeStep> getRecipesConfiguration(ConfigurationContext context)
         {
             var query = from b in context.Recipes
@@ -197,6 +237,11 @@ namespace Shared {
             return query.ToList();
         }
 
+        /// <summary>
+        /// Retrieve the machines' entries from the database
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>A list of all the machines in the database</returns>
         private List<MachineDBEntry> getMachinesConfiguration(ConfigurationContext context)
         {
             var query = from b in context.Machines
@@ -204,6 +249,11 @@ namespace Shared {
             return query.ToList();
         }
 
+        /// <summary>
+        /// Retrieve the stock's entries from the database
+        /// </summary>
+        /// <param name="context">the updated DBContext</param>
+        /// <returns>A list of all the entries in the database</returns>
         private List<StockEntry> getStocksConfiguration(ConfigurationContext context)
         {
             var query = from b in context.StockEntries

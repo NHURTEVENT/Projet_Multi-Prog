@@ -5,10 +5,10 @@ namespace Shared
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    /**
-     * Contains all the all relevant information about the restaurant stored in the database
-     * Wanted it to be Singleton but lazy loading prevents it. Still keeping the structure
-     **/
+    /// <summary>
+    /// Contains all the all relevant information about the restaurant stored in the database
+    /// Wanted it to be Singleton but lazy loading prevents it. Still keeping the structure
+    /// </summary>
     public sealed class ConfigurationContext : DbContext
     {
         private static ConfigurationContext INSTANCE = null;
@@ -23,6 +23,7 @@ namespace Shared
         {
             get
             {
+                //can't be made into a singleton
                 //if (INSTANCE == null)
                     INSTANCE = new ConfigurationContext();
                 return INSTANCE;

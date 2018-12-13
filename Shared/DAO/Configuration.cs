@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Shared
 {
 
-    /**
-     * Contains all the all relevant information about the restaurant fetched in the database
-     **/
+    /// <summary>
+    /// Contains all the all relevant information about the restaurant fetched in the database
+    /// </summary>
     public sealed class Configuration
     {
         /*

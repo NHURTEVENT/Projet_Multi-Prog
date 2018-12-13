@@ -78,8 +78,9 @@ namespace UnitTestDAO
         }
 
     }
+    
     /// <summary>
-    /// Test general CRUD to the database
+    /// Tests of general CRUD to the database
     /// </summary>
     [TestClass]
     public class CRUDTests
@@ -97,6 +98,7 @@ namespace UnitTestDAO
                             where b.UtensilType == UtensilType.FORK
                             select b;
                 var name = query.FirstOrDefault().UtensilType;
+                //We know these values from our test dataset
                 Assert.AreEqual(query.FirstOrDefault().Quantity, 10);
             }
         }
@@ -107,7 +109,6 @@ namespace UnitTestDAO
         [TestMethod]
         public void GivenIngredientAndQuantityDecrementsStock()
         {
-            //DAOSeeder.Instance.SeedStock(DAO.Instance.getContext());
             //create a new entry in case there's none
             var dt = DateTime.Now;
             var entry = new StockEntry(IngredientType.PASTA, 2, new DateTime(dt.AddDays(-7).Ticks - dt.AddDays(-7).Ticks % TimeSpan.TicksPerMinute));
@@ -137,10 +138,12 @@ namespace UnitTestDAO
                 Objcontext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, context.StockEntries);
             }
             //Update of the context odly doesn't work here so we have to close the connection and reopen it
+            //due to this issue the test has to be repetitive instead of just beeing the code seen below
             using (var context = DAO.Instance.getContext())
             {
                 //get the updated entry
                 var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate);
+                
                 /** if the ingredient only had one left on the oldest entry ot's been deleted
                 * we won't be able to test if the value was decremented
                 * so we try again until we find one with more than one left.
@@ -159,23 +162,15 @@ namespace UnitTestDAO
                     //consume the ingredient
                     DAO.Instance.consumeIngredient(IngredientType.PASTA, 1);
                     //update the context
+                    /** due to some issue the context doesn't update everytime after an insertion 
+                    so we can't just use the code of this second using as our test although it's a duplicate of the foirst usign
+                    the only difference being we don't add an entry, just update it
+                    */
                     var Objcontext = ((IObjectContextAdapter)context).ObjectContext;
                     Objcontext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, context.StockEntries);
-                    //result = context.StockEntries.Find(result.Ingredient, result.ArrivalDate);
-                    query2 = from b in context.StockEntries
-                             where b.Ingredient == IngredientType.PASTA
-                             orderby b.ArrivalDate
-                             select b;
                     //get oldest entry
-                    result = query2.FirstOrDefault();
+                    result = context.StockEntries.Find(result.Ingredient, result.ArrivalDate);
                 }
-                var query = from b in context.StockEntries
-                            where b.Ingredient == IngredientType.PASTA
-                            orderby b.ArrivalDate
-                            select b;
-                //get oldest entry
-                result = query.FirstOrDefault();
-
 
                 //check if it's been decremented
                 Assert.AreEqual(beforeDecrement - 1, result.Quantity);
@@ -183,17 +178,18 @@ namespace UnitTestDAO
 
         }
 
+        /// <summary>
+        /// Test if a stock entry is deleted when the quantity reaches 0
+        /// </summary>
         [TestMethod]
-        public void GivenStockUpdatesStock()
+        public void GivenStockDeleteEmptyStockEntry()
         {
+            //create a new entry that we will delete
             var dt = DateTime.Now;
             var entry = new StockEntry(IngredientType.CARROT, 1, new DateTime(dt.AddDays(-7).Ticks - dt.AddDays(-7).Ticks % TimeSpan.TicksPerSecond));
-            //var entry = new StockEntry(IngredientType.PASTA, 1, dt);
 
             using (var context = DAO.Instance.getContext())
             {
-                //create a new entry in case there's none
-
                 //add it to the database
                 context.StockEntries.Add(entry);
                 context.SaveChanges();
@@ -207,17 +203,20 @@ namespace UnitTestDAO
                 entry = query.FirstOrDefault();
                 //show the entry is there
                 Assert.IsNotNull(entry);
-                //get the value before we decrement it
+                //get the value before we decrement it, since the quantity is 1 it will be deleted
                 int beforeDecrement = entry.Quantity;
                 //consume the ingredient
                 DAO.Instance.consumeIngredient(IngredientType.CARROT, 1);
                 //update the context
                 var Objcontext = ((IObjectContextAdapter)context).ObjectContext;
                 Objcontext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.StoreWins, context.StockEntries);
-                //get the updated entry
             }
+            /**
+            * Same issue as with the update test, the context doesn't always update 
+            */
             using (var context = DAO.Instance.getContext())
             {
+                //get the updated entry
                 var result = context.StockEntries.Find(entry.Ingredient, entry.ArrivalDate);
                 //check if it's been decremented
                 Assert.IsNull(result);
@@ -226,17 +225,20 @@ namespace UnitTestDAO
 
     }
 
+    /// <summary>
+    /// Tests specific to the creation of the room's configuration information
+    /// </summary>
     [TestClass]
     public class RoomConfigTests
     {
-        //Room
+        /// <summary>
+        /// Test if the tables are properly retrived from the database
+        /// </summary>
         [TestMethod]
         public void GivenDatabaseRetrievesTables()
         {
             using (var context = DAO.Instance.getContext())
             {
-                //DAOSeeder DAOSeeder = new DAOSeeder(context);
-                //Assert.IsNotNull(DAOSeeder.getConnectionString());
                 var query = from b in context.Tables
                             where (b.Square == 1) && (b.Row == 1) && (b.Column == 1)
                             select b;
@@ -245,90 +247,92 @@ namespace UnitTestDAO
             }
         }
 
+        /// <summary>
+        /// Test if the items (napkins, cups, cutlery, etc) are properly retrieved from the database 
+        /// </summary>
         [TestMethod]
         public void GivenDatabaseRetrievesItems()
         {
             using (var context = DAO.Instance.getContext())
             {
-                //DAOSeeder DAOSeeder = new DAOSeeder(context);
-                //Assert.IsNotNull(DAOSeeder.getConnectionString());
                 var query = from b in context.Items
                             where (b.ItemType == ItemType.FLAT_PLATES)
                             select b;
-                var type = query.FirstOrDefault().Quantity;
-                Assert.AreEqual(query.FirstOrDefault().Quantity, 30);
+                var quantity = query.FirstOrDefault().Quantity;
+                Assert.AreEqual(quantity, 30);
             }
         }
 
     }
 
+    /// <summary>
+    /// Tests specific to the creation of the kitchen's configuration information
+    /// </summary>
     [TestClass]
     public class KitchenConfigClass
     {
-        //Kitchen
+        /// <summary>
+        /// Test if the utensils are properly retrived from the database
+        /// </summary>
         [TestMethod]
         public void GivenDatabaseRetrievesUtensils()
         {
             using (var context = DAO.Instance.getContext())
             {
-                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
                 var query = from b in context.Ustensils
                             where b.UtensilType == UtensilType.FORK
                             select b;
-
                 Assert.AreEqual(query.FirstOrDefault().Quantity, 10);
             }
         }
 
+        /// <summary>
+        /// Test if the machines are properly retrived from the database
+        /// </summary>
         [TestMethod]
         public void GivenDatabaseRetrievesMachines()
         {
             using (var context = DAO.Instance.getContext())
             {
-                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
                 var query = from b in context.Machines
                             where b.MachineId == 1
                             select b;
                 var type = query.FirstOrDefault().MachineType;
-                Assert.IsTrue(String.Equals(query.FirstOrDefault().MachineType, "washing"));
+                Assert.AreEqual(MachineType.WASHING, type);
             }
         }
 
+        /// <summary>
+        /// Test if the recipes are properly retrived from the database
+        /// </summary>
         [TestMethod]
         public void GivenDatabaseRetrievesRecipe()
         {
             using (var context = DAO.Instance.getContext())
             {
-                //ModelDAOInitializer modelDAOInitializer = new ModelDAOInitializer(context);
-                //Assert.IsNotNull(modelDAOInitializer.getConnectionString());
-                //DAOSeeder DAOSeeder = new DAOSeeder(context);
                 var query = from b in context.Recipes
                             where (b.Dish == Dish.FRENCHFRIES) && (b.Step == 1)
                             select b;
-                var type = query.FirstOrDefault().Name;
-                Assert.IsTrue(String.Equals(query.FirstOrDefault().Name, "cut the potatoes"));
+                var name = query.FirstOrDefault().Name;
+                Assert.IsTrue(String.Equals(name, "cut the potatoes"));
             }
         }
 
+        /// <summary>
+        /// Test if the stock is properly retrived from the database
+        /// </summary>
         [TestMethod]
         public void GivenDatabaseRetrievesStock()
         {
             using (var context = DAO.Instance.getContext())
             {
-                //DAOSeeder DAOSeeder = new DAOSeeder(context);
-                //Assert.IsNotNull(DAOSeeder.getConnectionString());
                 var query = from b in context.StockEntries
                             where (b.Ingredient == IngredientType.POTATO)
                             select b;
-                var type = query.FirstOrDefault().Quantity;
-                Assert.AreEqual(query.FirstOrDefault().Quantity, 100);
+                var quantity = query.FirstOrDefault().Quantity;
+                Assert.AreEqual(quantity, 100);
             }
         }
-
-
     }
-
 }
 

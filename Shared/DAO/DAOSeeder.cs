@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
+    /// <summary>
+    /// Singleton used to seeds the database with all the information needed for the simulation
+    /// </summary>
     public sealed class DAOSeeder : DropCreateDatabaseIfModelChanges<ConfigurationContext>
     {
 
@@ -36,12 +39,39 @@ namespace Shared
             Seed(context);
         }
 
+        /// <summary>
+        /// Seeds the database with all the information needed for the simulation
+        /// </summary>
+        public void Seed()
+        {
+            Seed(DAO.Instance.getContext());
+        }
+
+        /// <summary>
+        /// Seeds the database with all the information needed for the simulation
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
+        private void Seed(ConfigurationContext context)
+        {
+            SeedPersonnel(context);
+            SeedRoom(context);
+            SeedKitchen(context);
+        }
+
+        /// <summary>
+        /// Seeds the database with all the information to create the Room
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         private void SeedRoom(ConfigurationContext context)
         {
             SeedItems(context);
             SeedTables(context);
         }
 
+        /// <summary>
+        /// Seeds the database with all the information to create the Kitchen
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         private void SeedKitchen(ConfigurationContext context)
         {
             SeedMachines(context);
@@ -51,6 +81,10 @@ namespace Shared
             
         }
 
+        /// <summary>
+        /// Seeds the database with all the information about the utensils
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         private void SeedUtensils(ConfigurationContext context)
         {
             var ustensils = new List<Drawer>
@@ -65,6 +99,10 @@ namespace Shared
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Seeds the database with all the information about the tables
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         private void SeedTables(ConfigurationContext context)
         {
             var tableDBEntries = new List<TableDBEntry>{
@@ -77,6 +115,10 @@ namespace Shared
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Seeds the database with all the information about the items
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         private void SeedItems(ConfigurationContext context)
         {
             var ItemDBEntries = new List<ItemDBEntry>
@@ -90,6 +132,10 @@ namespace Shared
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Seeds the database with all the information about the personnel
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         private void SeedPersonnel(ConfigurationContext context)
         {
             var PersonnelDBEntries = new List<PersonnelDBEntry>{
@@ -106,17 +152,25 @@ namespace Shared
             context.SaveChanges();
         }
 
-        private void SeedMachines(ConfigurationContext context)
+        /// <summary>
+        /// Seeds the database with all the information about the machines
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
+        public void SeedMachines(ConfigurationContext context)
         {
             var machines = new List<MachineDBEntry>
             {
-                new MachineDBEntry("washing",10,1,30,1,3),
-                new MachineDBEntry("washing",30,1,60,1,3)
+                new MachineDBEntry(MachineType.WASHING,10,1,30,1,3),
+                new MachineDBEntry(MachineType.DISHWASHER,30,1,60,1,3)
             };
             machines.ForEach(m => context.Machines.Add(m));
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Seeds the database with all the recipes' steps
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         private void SeedRecipes(ConfigurationContext context)
         {
             var recipes = new List<RecipeStep>
@@ -128,6 +182,10 @@ namespace Shared
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Seeds the database with all the stock entries
+        /// </summary>
+        /// <param name="context">The updated DBContext</param>
         public void SeedStock(ConfigurationContext context)
         {
             var dt = DateTime.Now;
@@ -143,18 +201,6 @@ namespace Shared
             context.SaveChanges();
         }
 
-        private void Seed(ConfigurationContext context)
-        {
-            SeedPersonnel(context);
-            SeedRoom(context);
-            SeedKitchen(context);
-          
-        }
-
-        public void Seed()
-        {
-            Seed(DAO.Instance.getContext());
-        }
-
+       
     }
 }
