@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 
 namespace Model {
-	public class Waiter : IPerson {
+	public class Waiter : IWaiter {
 
         public string Name { get; set; }
         public string Type { get; set; }
@@ -13,18 +13,34 @@ namespace Model {
         public Point Position { get; set; }
 
         public List<IAction> ActionQueue { get; set; }
+        List<ITable> Tables;
+
+        public Waiter(List<ITable> tables)
+        {
+            this.Name = "Lucien";
+            this.Type = "Waiter";
+            this.Tables = tables;
+            ActionQueue = new List<IAction>();
+        }
+
+
+        public void ChangeAction(IAction Action)
+        {
+            this.CurrentAction = Action;
+            RemainingTicks = Action.Duration;
+            Console.WriteLine(Name + " " + CurrentAction.Name);
+            if (ActionQueue.Contains(Action))
+            {
+                ActionQueue.Remove(Action);
+            }
+        }
 
 
         void CleanTable()
         {
-            throw new NotImplementedException();
+            CurrentAction.TableConcerned.IsNowClean();
         }
-
-        public void GiveOrder(ref object client_iClient)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void FetchOrder(ref List<Dish> order)
         {
             throw new NotImplementedException();
@@ -37,12 +53,12 @@ namespace Model {
 
         public Point GetPosition()
         {
-            throw new NotImplementedException();
+            return this.Position;
         }
 
         public void Move(Point position)
         {
-            throw new NotImplementedException();
+            this.Position = position;
         }
 
         public void setTask(string task)
@@ -55,10 +71,7 @@ namespace Model {
             throw new NotImplementedException();
         }
 
-        public void ChangeAction(IAction Action)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 
 }

@@ -61,30 +61,6 @@ namespace UnitTestRoom
     }
 
 
-
-    [TestClass]
-    public class RoomManagerTest
-    {
-        [TestMethod]
-        public void TestclearClients()
-        {
-            RoomManager roomManager = new RoomManager();
-            List<IClient> newClientList = new List<IClient>();
-            var client = ClientFactory.CreateClient("runningAwayClient");
-            client.ChangeAction(ActionFactory.CreateAction_("Leaved"));
-            newClientList.Add(client);
-
-            roomManager.newClients(newClientList);
-            roomManager.clientsLeaving.Add(client);
-
-            roomManager.clearClients();
-
-            Assert.AreEqual(0, roomManager.clients.Count);
-
-        }
-    }
-
-
     [TestClass]
     public class ClientTest
     {

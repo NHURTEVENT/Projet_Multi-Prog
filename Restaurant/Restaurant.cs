@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Restaurant {
+
 	public class Restaurant : IRestaurant  {
 
         private IKitchen kitchen;
