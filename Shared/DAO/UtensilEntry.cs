@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
+   
+    [Obsolete("Not used anymore, use Drawer instead", true)]
     public class UtensilEntry
     {
-        //public int UtensilEntryId { get; set; }
-        //[Index("IX_Utensil",IsUnique = true)]
+        
         [Key]
         public UtensilType UtensilType { get; set; }
         public int Quantity { get; set; }

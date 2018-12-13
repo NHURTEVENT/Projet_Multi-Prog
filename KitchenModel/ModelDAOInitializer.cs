@@ -10,36 +10,24 @@ using System.Data.SqlClient;
 
 namespace Model
 {
-    public class ModelDAOInitializer : DropCreateDatabaseIfModelChanges<KitchenContext>
+    public sealed class ModelDAOInitializer : DropCreateDatabaseIfModelChanges<KitchenContext>
     {
+        
+        
+
         public ModelDAOInitializer(KitchenContext context)
         {
             Seed(context);
         }
 
-        public string getConnectionString()
-        {
-            return System.Configuration.ConfigurationManager.ConnectionStrings["KitchenContext"].ConnectionString.ToString();
-        }
+        
 
-        public SqlConnection connect()
-        {
-            return new SqlConnection();
-        }
+       
 
         protected override void Seed(KitchenContext context)
         {
             /*
-            var ustensils = new List<Drawer>
-            {
-                new Drawer(UtensilType.FORK,10),
-                new Drawer(UtensilType.SPORK,20),
-                new Drawer(UtensilType.KNIFE,30),
-                new Drawer(UtensilType.PAN,10)
-            };
-            ustensils.ForEach(u => context.Ustensils.Add(u));
-
-            context.SaveChanges();
+            
             
             var machines = new List<MachineDBEntry>
             {
