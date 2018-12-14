@@ -15,6 +15,8 @@ namespace Model{
         public List<Dish> Order { get; set; }
         public List<IAction> ActionQueue { get; set; }
         public IButler Butler { get; set; }
+        public Brush Color { get; set; }
+
 
         private ITable myTable;
         private IDisposable unsubscriber;
@@ -24,6 +26,7 @@ namespace Model{
         {
             this.Name = Name;
             this.Type = PersonnelType.CLIENT;
+            Color = Brushes.Yellow;
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);

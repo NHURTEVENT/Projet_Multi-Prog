@@ -10,6 +10,7 @@ namespace Shared {
         string Name { get; set; }
         PersonnelType Type { get; set; }
         IAction CurrentAction { get; set; }
+        Brush Color { get; set; }
         int RemainingTicks { get; set; }
         Point Position { get; set; }
 

@@ -12,6 +12,8 @@ namespace Model {
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
+        public Brush Color { get; set; }
+
 
         public List<IAction> ActionQueue { get; set; }
 

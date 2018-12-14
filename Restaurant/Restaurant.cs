@@ -4,6 +4,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using RoomView;
 
 namespace Restaurant {
 
@@ -15,12 +16,11 @@ namespace Restaurant {
         private RoomManager RoomManager;
         
 
-        static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        static Timer myTimer = new Timer();
         static bool exitFlag = false;
 
         public Restaurant()
         {
-
 
             Configuration conf = DAO.Instance.getConfig();
             RoomManager = new RoomManager(conf);
@@ -31,6 +31,8 @@ namespace Restaurant {
             // Sets the timer interval to 5 seconds.
             myTimer.Interval = 5000;
             myTimer.Start();
+            Application.Run(new FormView(myTimer, RoomManager));
+            
 
             // Runs the timer, and raises the event.
             while (exitFlag == false)

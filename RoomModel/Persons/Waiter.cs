@@ -12,6 +12,8 @@ namespace Model {
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
+        public Brush Color { get; set; }
+
 
         public List<IAction> ActionQueue { get; set; }
         List<ITable> Tables;
@@ -25,6 +27,7 @@ namespace Model {
             this.Name = "Lucien";
             this.Type = PersonnelType.WAITER;
             this.Tables = tables;
+            Color = Brushes.Red;
             ActionQueue = new List<IAction>();
             TableUnsubscribers = new List<IDisposable>();
             OrderUnsubscriber = new List<IDisposable>();

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp
+﻿namespace RoomView
 {
     partial class FormView
     {
@@ -60,7 +60,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.BackgroundImage = global::WindowsFormsApp.Properties.Resources.map;
+            this.splitContainer1.Panel2.BackgroundImage = global::RoomView.Properties.Resources.map;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             // 
             // splitContainer2
@@ -108,7 +108,7 @@
             // 
             // Pause
             // 
-            this.Pause.Image = global::WindowsFormsApp.Properties.Resources.pauseSmall;
+            this.Pause.Image = global::RoomView.Properties.Resources.pauseSmall;
             resources.ApplyResources(this.Pause, "Pause");
             this.Pause.Name = "Pause";
             this.Pause.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             // 
             // Play
             // 
-            this.Play.Image = global::WindowsFormsApp.Properties.Resources.play;
+            this.Play.Image = global::RoomView.Properties.Resources.play;
             resources.ApplyResources(this.Play, "Play");
             this.Play.Name = "Play";
             this.Play.UseVisualStyleBackColor = true;

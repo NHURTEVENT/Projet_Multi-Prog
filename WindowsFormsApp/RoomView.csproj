@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0FEBE76B-C124-42D5-AF5A-277E30D1C2B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WindowsFormsApp</RootNamespace>
-    <AssemblyName>WindowsFormsApp</AssemblyName>
+    <RootNamespace>RoomView</RootNamespace>
+    <AssemblyName>RoomView</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -91,6 +91,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RoomController\RoomController.csproj">
+      <Project>{d21e3287-3698-4b22-b4d0-85f8af5134e2}</Project>
+      <Name>RoomController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{88b6220f-9b9f-44ff-ab32-c642699f9c26}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

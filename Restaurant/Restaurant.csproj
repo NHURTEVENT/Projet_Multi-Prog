@@ -158,13 +158,13 @@
       <Project>{f3c227b1-1f64-4c56-9025-277444292d24}</Project>
       <Name>RoomModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RoomView\RoomView.csproj">
-      <Project>{e2b87df2-e0c3-4bee-96aa-83b31682d702}</Project>
-      <Name>RoomView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{88b6220f-9b9f-44ff-ab32-c642699f9c26}</Project>
       <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsFormsApp\RoomView.csproj">
+      <Project>{0febe76b-c124-42d5-af5a-277e30d1c2b8}</Project>
+      <Name>RoomView</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

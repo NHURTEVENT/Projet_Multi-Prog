@@ -13,6 +13,7 @@ namespace Model
         public IAction CurrentAction { get; set; }
         public int RemainingTicks { get; set; }
         public Point Position { get; set; }
+        public Brush Color { get; set; }
 
         private bool tableFound = true;
 
@@ -28,7 +29,7 @@ namespace Model
         {
             this.Name = "Alfred";
             this.Type = PersonnelType.BUTLER;
-
+            this.Color = Brushes.Blue;
             ActionQueue = new List<IAction>();
 
             this.tables = tables;

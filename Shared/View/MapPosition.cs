@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Shared
+{
+    public enum MapPosition
+    {
+        TABLE1, TABLE2, TABLE3, TABLE4, TABLE5, TABLE6, TABLE7, TABLE8, TABLE9,
+        TABLE11, TABLE12, TABLE13, TABLE14, TABLE15, TABLE16, TABLE17, TABLE18, TABLE19,
+        TABLE21, TABLE22, TABLE23, TABLE24, TABLE25, TABLE26, TABLE27, TABLE28, TABLE29,
+        TABLE31, TABLE32, TABLE33,
+        WAITER, BUTLER, HEADWAITER, CHEF, PARTYCHEF, KITCHENCLERK, ROOMCLERK, DISHCLEANER, CLIENT
+    }
+}

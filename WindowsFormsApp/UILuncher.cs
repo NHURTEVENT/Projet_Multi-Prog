@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp
+namespace RoomView
 {
     public class UILuncher
     {
@@ -16,7 +16,7 @@ namespace WindowsFormsApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormView());
+            //Application.Run(new FormView());
         }
         // todo: implement
         

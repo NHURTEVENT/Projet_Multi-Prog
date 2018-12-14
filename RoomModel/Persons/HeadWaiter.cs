@@ -13,6 +13,8 @@ namespace Model {
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
+        public Brush Color { get; set; }
+
 
         public List<IDisposable> Unsubscribers;
         public List<ITable> Tables;
@@ -24,7 +26,7 @@ namespace Model {
         {
             this.Name = "Michel";
             this.Type = PersonnelType.HEADWAITER;
-
+            Color = Brushes.Green;
             this.Tables = tables;
             ClientOrder = new List<Dish>();
             Unsubscribers = new List<IDisposable>();

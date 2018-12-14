@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Controller;
+using Shared;
 
-
-
-
-namespace WindowsFormsApp
+namespace RoomView
 {
     public partial class FormView : Form
     {
+        /*
         private int xWaiter;
         private int yWaiter;
         private int xClient;
@@ -27,42 +27,46 @@ namespace WindowsFormsApp
         private int xChefP2, yChefP2;
         private int xKClurk, yKClurk;
         private int xDishCleaner, yDishCleaner;
-        private int xHeadWaiter, yHeadWaiter;
+        private int xHeadWaiter, yHeadWaiter;*/
         private DateTime actionTime;
         private string actionName;
+        private RoomManager room;
+
 
         private readonly string logFilePath = @"C:\Projets\Projet_Multi-Prog\WindowsFormsApp\log.txt";
 
-        public FormView()
+        public FormView(Timer timer, RoomManager room)
         {
             InitializeComponent();
+            this.room = room;
+            ticks = timer; 
 
-            xWaiter = 540;
-            yWaiter = 95;
+            //xWaiter = 540;
+            //yWaiter = 95;
 
-            xClient = 935;
-            yClient = 364;
+            //xClient = 935;
+            //yClient = 364;
 
-            xButler = 880;
-            yButler = 625;
+            //xButler = 880;
+            //yButler = 625;
 
-            xChef = 415;
-            yChef = 630;
+            //xChef = 415;
+            //yChef = 630;
 
-            xChefP1 = 283;
-            yChefP1 = 580;
+            //xChefP1 = 283;
+            //yChefP1 = 580;
 
-            xChefP2 = 283;
-            yChefP2 = 650;
+            //xChefP2 = 283;
+            //yChefP2 = 650;
 
-            xKClurk = 155;
-            yKClurk = 635;
+            //xKClurk = 155;
+            //yKClurk = 635;
 
-            xDishCleaner = 780;
-            yDishCleaner = 600;
+            //xDishCleaner = 780;
+            //yDishCleaner = 600;
 
-            xHeadWaiter = 30;
-            yHeadWaiter = 30;
+            //xHeadWaiter = 30;
+            //yHeadWaiter = 30;
 
         }
 
@@ -167,17 +171,25 @@ namespace WindowsFormsApp
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
+            //for each personnel, paint the point at it's coords
+
+       /*     foreach(IPerson p in room.Peoples )
+            {
+                e.Graphics.FillRectangle(p.Color, p.Position.X, p.Position.Y, 10, 10);
+            }
+
+*/
 
 
-            e.Graphics.FillRectangle(Brushes.Blue, xWaiter, yWaiter, 10, 10);
-            e.Graphics.FillRectangle(Brushes.Black, xClient, yClient, 10, 10);
-            e.Graphics.FillRectangle(Brushes.Brown, xButler, yButler, 10, 10);
-            e.Graphics.FillRectangle(Brushes.Red, xChef, yChef, 10, 10);
-            e.Graphics.FillRectangle(Brushes.Yellow, xChefP1, yChefP1, 10, 10);
-            e.Graphics.FillRectangle(Brushes.ForestGreen, xChefP2, yChefP2, 10, 10);
-            e.Graphics.FillRectangle(Brushes.Purple, xKClurk, yKClurk, 10, 10);
-            e.Graphics.FillRectangle(Brushes.Pink, xDishCleaner, yDishCleaner, 10, 10);
-            e.Graphics.FillRectangle(Brushes.DarkGray, xHeadWaiter, yHeadWaiter, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.Blue, xWaiter, yWaiter, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.Black, xClient, yClient, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.Brown, xButler, yButler, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.Red, xChef, yChef, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.Yellow, xChefP1, yChefP1, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.ForestGreen, xChefP2, yChefP2, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.Purple, xKClurk, yKClurk, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.Pink, xDishCleaner, yDishCleaner, 10, 10);
+            //e.Graphics.FillRectangle(Brushes.DarkGray, xHeadWaiter, yHeadWaiter, 10, 10);
 
         }
 
@@ -190,10 +202,12 @@ namespace WindowsFormsApp
 
         private void ticks_Tick(object sender, EventArgs e)
         {
+            /*
             xWaiter += 1;
             Invalidate();
             Update();
             Refresh();
+            */
         }
 
 
