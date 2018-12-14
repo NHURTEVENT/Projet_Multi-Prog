@@ -14,7 +14,7 @@ namespace Shared
         int Duration { get; set; }
         IClient ClientConcerned { get; set; }
         ITable TableConcerned { get; set; }
-        IUstensil Ustensil { get; set; }
+        IUtensil Ustensil { get; set; }
         IOrder OrderConcerned { get; set; }
 
 

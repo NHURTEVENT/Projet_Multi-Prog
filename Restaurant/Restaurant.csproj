@@ -150,10 +150,6 @@
       <Project>{d6ecea93-281c-443d-8100-96c3dbe468c8}</Project>
       <Name>KitchenModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KitchenView\KitchenView.csproj">
-      <Project>{af3ac714-b325-41ac-91b6-003c1c84e1c8}</Project>
-      <Name>KitchenView</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RoomController\RoomController.csproj">
       <Project>{D21E3287-3698-4B22-B4D0-85F8AF5134E2}</Project>
       <Name>RoomController</Name>
