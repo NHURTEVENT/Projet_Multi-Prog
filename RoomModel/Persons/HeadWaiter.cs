@@ -1,14 +1,15 @@
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace Model {
-	public class HeadWaiter : IHeadWaiter
+    public class HeadWaiter : IHeadWaiter
     {
 
         public string Name { get; set; }
-        public string Type { get; set; }
+        public PersonnelType Type { get; set; }
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
@@ -22,7 +23,7 @@ namespace Model {
         public HeadWaiter(List<ITable> tables)
         {
             this.Name = "Michel";
-            this.Type = "HeadWaiter";
+            this.Type = PersonnelType.HEADWAITER;
 
             this.Tables = tables;
             ClientOrder = new List<Dish>();

@@ -1,4 +1,5 @@
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +8,7 @@ namespace Model{
     public class Client : IClient
     {
         public string Name { get; set; }
-        public string Type { get; set; }
+        public PersonnelType Type { get; set; }
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
@@ -22,7 +23,7 @@ namespace Model{
         public Client(IAction CurrentAction, string Name = "Lucien")
         {
             this.Name = Name;
-            this.Type = "Client";
+            this.Type = PersonnelType.CLIENT;
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
@@ -119,7 +120,7 @@ namespace Model{
         {
             unsubscriber = table.Subscribe(this);
             myTable = table;
-            Console.WriteLine("Le client s'est abonné à la table");
+            Console.WriteLine("Le client s'est abonnï¿½ ï¿½ la table");
         }
 
         public void LeaveTable()

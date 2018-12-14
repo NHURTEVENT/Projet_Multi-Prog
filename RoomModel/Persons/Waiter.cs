@@ -1,4 +1,5 @@
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +8,7 @@ namespace Model {
 	public class Waiter : IWaiter {
 
         public string Name { get; set; }
-        public string Type { get; set; }
+        public PersonnelType Type { get; set; }
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
@@ -22,7 +23,7 @@ namespace Model {
         public Waiter(List<ITable> tables, ICounter counter)
         {
             this.Name = "Lucien";
-            this.Type = "Waiter";
+            this.Type = PersonnelType.WAITER;
             this.Tables = tables;
             ActionQueue = new List<IAction>();
             TableUnsubscribers = new List<IDisposable>();

@@ -1,4 +1,5 @@
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +9,7 @@ namespace Model
 	public class Butler : IButler
     {
         public string Name { get; set; }
-        public string Type { get; set; }
+        public PersonnelType Type { get; set; }
         public IAction CurrentAction { get; set; }
         public int RemainingTicks { get; set; }
         public Point Position { get; set; }
@@ -26,7 +27,7 @@ namespace Model
         public Butler(List<ITable> tables, List<IHeadWaiter> headWaiters)
         {
             this.Name = "Alfred";
-            this.Type = "Butler";
+            this.Type = PersonnelType.BUTLER;
 
             ActionQueue = new List<IAction>();
 
@@ -115,7 +116,7 @@ namespace Model
             {
                 if (table.state == "available")
                 {
-                    Console.WriteLine("Table trouvée");
+                    Console.WriteLine("Table trouvï¿½e");
                     tableFound = true;
                     table.IsNowOccuped();
                     headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", currentClient, table));

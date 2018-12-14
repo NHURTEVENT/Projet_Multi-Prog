@@ -20,10 +20,10 @@ namespace Restaurant {
 
         public Restaurant()
         {
-            
 
 
-            RoomManager = new RoomManager();
+            Configuration conf = DAO.Instance.getConfig();
+            RoomManager = new RoomManager(conf);
 
             myTimer.Tick += new EventHandler(RoomManager.onTick);
 

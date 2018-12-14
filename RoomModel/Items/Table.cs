@@ -1,15 +1,17 @@
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 
 namespace Model
 {
     public class Table : ITable
     {
-        public string squareNumber { get; set; }
-        public string row { get; set; }
-        public string position { get; set; }
+        public int squareNumber { get; set; }
+        public int row { get; set; }
+        public int column { get; set; }
+        public Point position { get; set; }
         public int size { get; set; }
         public string state { get; set; }
         List<IObserver<ITable>> observers;
@@ -23,6 +25,18 @@ namespace Model
 
         }
 
+        public Table(int squareNumber, int row, int column, int size)
+        {
+            this.squareNumber = squareNumber;
+            this.row = row;
+            this.column = column;
+            this.size = size;
+
+            this.state = "available";
+
+
+            observers = new List<IObserver<ITable>>();
+        }
 
         public void IsNowOccuped()
         {

@@ -1,3 +1,4 @@
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +8,7 @@ namespace Shared {
 
 
         string Name { get; set; }
-        string Type { get; set; }
+        PersonnelType Type { get; set; }
         IAction CurrentAction { get; set; }
         int RemainingTicks { get; set; }
         Point Position { get; set; }

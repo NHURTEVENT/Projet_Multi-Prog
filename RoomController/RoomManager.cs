@@ -1,5 +1,6 @@
 ﻿using Model;
 using Shared;
+using Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,11 @@ namespace Controller
         public List<IWaiter> waiters { get; set; }
         public List<IClerk> clerks { get; set; }
         public List<ITable> tables { get; set; }
+        public List<IButler> butlers { get; set; }
+        public List<IPerson> Peoples { get; set; }
 
 
-        public RoomManager(/*, Configuration config*/)
+        public RoomManager( Configuration config)
         {
             ticks = 1;
             clients = new List<IClient>();
