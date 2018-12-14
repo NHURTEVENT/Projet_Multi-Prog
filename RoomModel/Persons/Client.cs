@@ -27,6 +27,7 @@ namespace Model{
             this.Name = Name;
             this.Type = PersonnelType.CLIENT;
             Color = Brushes.Yellow;
+            this.Position = MapKeyPoints.positions[MapPosition.CLIENT];
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
@@ -35,6 +36,20 @@ namespace Model{
             ActionQueue = new List<IAction>();
         }
 
+
+        public Client(string Name = "Lucien")
+        {
+            this.Name = Name;
+            this.Type = PersonnelType.CLIENT;
+            Color = Brushes.Yellow;
+            this.Position = MapKeyPoints.positions[MapPosition.CLIENT];
+            //this.CurrentAction = CurrentAction;
+            //RemainingTicks = CurrentAction.Duration;
+            Position = new Point(0, 0);
+
+            Order = new List<Dish>();
+            ActionQueue = new List<IAction>();
+        }
 
         public void Book()
         {
@@ -70,7 +85,7 @@ namespace Model{
         private void CheckActionQueue()
         {
             if (ActionQueue.Count == 0)
-                ChangeAction(ActionFactory.CreateAction_());
+                ChangeAction(ActionFactory.CreateAction_("Wait", this, MapPosition.CLIENT));
             else
                 ChangeAction(ActionQueue[0]);
         }
@@ -131,7 +146,7 @@ namespace Model{
             myTable.IsNowFree();
             unsubscriber.Dispose();
 
-            this.Butler.ActionQueue.Add(ActionFactory.CreateAction_("CheckIn", this));
+            this.Butler.ActionQueue.Add(ActionFactory.CreateAction_("CheckIn", this, MapPosition.BUTLER, this));
         }
         
 
@@ -139,8 +154,8 @@ namespace Model{
         {
             if (changes.state == "served")
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("Eat"));
-                ActionQueue.Add(ActionFactory.CreateAction_("LeaveTable"));
+                ActionQueue.Add(ActionFactory.CreateAction_("Eat", this, MapPosition.TABLEX, this, this.myTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("LeaveTable", this, MapPosition.TABLEX, this, this.myTable));
             }
         }
 

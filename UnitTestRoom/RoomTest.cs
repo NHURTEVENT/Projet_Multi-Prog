@@ -53,7 +53,7 @@ namespace UnitTestRoom
         public void TestCreateAction()
         {
 
-            var action = new Action_("Wait", 1);
+            var action = new Action_("Wait", 1, MapPosition.CLIENT);
             Assert.AreEqual(action.Name, ActionFactory.CreateAction_("Wait").Name);
             Assert.AreEqual(action.Duration, ActionFactory.CreateAction_("Wait").Duration);
 
@@ -68,8 +68,8 @@ namespace UnitTestRoom
         public void TestChangeAction()
         {
             var client = ClientFactory.CreateClient("eatingClient1");
-            var action = new Action_("Eat", 3);
-            client.ChangeAction(ActionFactory.CreateAction_("Eat"));
+            var action = new Action_("Eat", 3, MapPosition.CLIENT, client);
+            client.ChangeAction(ActionFactory.CreateAction_("Eat", client));
 
             Assert.AreEqual(action.Name, client.CurrentAction.Name);
             Assert.AreEqual(action.Duration, client.RemainingTicks);

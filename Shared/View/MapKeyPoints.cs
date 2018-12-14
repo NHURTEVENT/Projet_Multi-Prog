@@ -7,20 +7,34 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class MapKeyPoints
+    public sealed class MapKeyPoints
     {
+        private static MapKeyPoints INSTANCE;
 
-        public static Dictionary<MapPosition, Point> positions = new Dictionary<MapPosition, Point>
+        private static Dictionary<MapPosition, Point> POSITION;
+
+        
+        public static Dictionary<MapPosition, Point> positions
         {
-            { MapPosition.WAITER, new Point(540,95) },
-            { MapPosition.CLIENT, new Point(935,364) },
-            { MapPosition.BUTLER, new Point(880,625) },
-            { MapPosition.CHEF, new Point(415,630) },
-            { MapPosition.PARTYCHEF, new Point(283,580) },
-            { MapPosition.KITCHENCLERK, new Point(155,635) },
-            { MapPosition.DISHCLEANER, new Point(780,600) },
-            { MapPosition.HEADWAITER, new Point(30,30) }
-        };
+            get
+            {   
+                if(POSITION == null){
+                    POSITION = new Dictionary<MapPosition, Point>
+                    {
+                        { MapPosition.WAITER, new Point(540,95) },
+                        { MapPosition.CLIENT, new Point(935,364) },
+                        { MapPosition.BUTLER, new Point(880,625) },
+                        { MapPosition.CHEF, new Point(415,630) },
+                        { MapPosition.PARTYCHEF, new Point(283,580) },
+                        { MapPosition.KITCHENCLERK, new Point(155,635) },
+                        { MapPosition.DISHCLEANER, new Point(780,600) },
+                        { MapPosition.HEADWAITER, new Point(30,30) },
+                        { MapPosition.TABLE1, new Point(5,45) }
+                    };  
+            }
+                return POSITION;
+            }
+        }
 
         
             //xWaiter = 540;

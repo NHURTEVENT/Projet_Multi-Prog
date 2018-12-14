@@ -23,24 +23,7 @@ namespace Controller
         public List<IButler> butlers { get; set; }
         public List<IPerson> Peoples { get; set; }
 
-/*        
-        public RoomManager( Configuration config)
-        {
-            ticks = 1;
-            clients = new List<IClient>();
-            clientsLeaving = new List<IClient>();
-            headWaiters = new List<IHeadWaiter>();
-            waiters = new List<IWaiter>();
-            clerks = new List<IClerk>();
-            tables = new List<ITable>();
 
-            tables.Add(new Table());
-            butler = RoomPersonnelFactory.CreateButler(tables, headWaiters);
-            headWaiters.Add(RoomPersonnelFactory.CreateHeadWaiter(tables));
-            clientGenerator = new ClientGenerator();
-
-        }
-*/        
         public RoomManager(Configuration config)
         {
             ticks = 1;
@@ -53,9 +36,9 @@ namespace Controller
             //these are unique for now but we make it a list for latter evolutivity
             butlers = new List<IButler>();
             Peoples = new List<IPerson>();
-            //recup les values de la config
+            //get values from the config and create corresponding objects
             setUpPersonnel(config);
-            //use la factory
+            
 
             clientGenerator = new ClientGenerator();
             butler = butlers.ElementAt(0);
@@ -129,7 +112,7 @@ namespace Controller
             {
                 Console.WriteLine("New Client");
                 this.clients.Add(newClient);
-                butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable", newClient));
+                butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable", butler, MapPosition.BUTLER, newClient));
             }
 
         }

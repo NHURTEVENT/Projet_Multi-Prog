@@ -27,6 +27,7 @@ namespace Model {
             this.Name = "Michel";
             this.Type = PersonnelType.HEADWAITER;
             Color = Brushes.Green;
+            this.Position = MapKeyPoints.positions[MapPosition.HEADWAITER];
             this.Tables = tables;
             ClientOrder = new List<Dish>();
             Unsubscribers = new List<IDisposable>();
@@ -38,7 +39,7 @@ namespace Model {
                 Console.WriteLine(Name + " s'est abonné à la table");
             }
 
-            ChangeAction(ActionFactory.CreateAction_());
+            ChangeAction(ActionFactory.CreateAction_("Wait", this, MapPosition.HEADWAITER));
 
         }
 
@@ -56,13 +57,13 @@ namespace Model {
 
         public void TakeClientInCharge(IClient currentClient, ITable clientTable)
         {
-            ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient", currentClient, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu", null, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", currentClient, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", null, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient", this, MapPosition.CLIENT, currentClient, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu", this, MapPosition.TABLEX, null, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", this, MapPosition.TABLEX, currentClient, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", this, MapPosition.HEADWAITER, null, clientTable));
 
             // Test HeadWaiter serve the dishes
-            ActionQueue.Add(ActionFactory.CreateAction_("BringDishes", null, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringDishes", this, MapPosition.TABLEX, null, clientTable));
 
         }
 
@@ -80,7 +81,7 @@ namespace Model {
         private void CheckActionQueue()
         {
             if (ActionQueue.Count == 0)
-                ChangeAction(ActionFactory.CreateAction_());
+                ChangeAction(ActionFactory.CreateAction_("Wait", this, MapPosition.HEADWAITER));
             else
                 ChangeAction(ActionQueue[0]);
         }
@@ -96,7 +97,7 @@ namespace Model {
                 {
                     case "TakeClientInCharge":
                         TakeClientInCharge(CurrentAction.ClientConcerned, CurrentAction.TableConcerned);
-                        CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable", null, CurrentAction.TableConcerned));
+                        CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable", this, MapPosition.TABLEX, null, CurrentAction.TableConcerned));
                         CheckActionQueue();
                         break;
 
@@ -158,7 +159,7 @@ namespace Model {
         {
             if (concernedTable.state == "toDress")
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", null, concernedTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", this, MapPosition.TABLEX, null, concernedTable));
             }
 
 

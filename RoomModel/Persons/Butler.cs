@@ -30,10 +30,11 @@ namespace Model
             this.Name = "Alfred";
             this.Type = PersonnelType.BUTLER;
             this.Color = Brushes.Blue;
+            this.Position = MapKeyPoints.positions[MapPosition.BUTLER];
             ActionQueue = new List<IAction>();
 
             this.tables = tables;
-            ChangeAction(ActionFactory.CreateAction_());
+            ChangeAction(ActionFactory.CreateAction_("Wait",this, MapPosition.BUTLER));
             newClients = new List<IClient>();
             checkInClients = new List<IClient>();
             this.headWaiters = headWaiters;
@@ -66,7 +67,7 @@ namespace Model
         {
             if (ActionQueue.Count == 0)
             {
-                ChangeAction(ActionFactory.CreateAction_());
+                ChangeAction(ActionFactory.CreateAction_("Wait", this, MapPosition.BUTLER));
             }
             else
                 ChangeAction(ActionQueue[0]);
@@ -120,7 +121,7 @@ namespace Model
                     Console.WriteLine("Table trouv�e");
                     tableFound = true;
                     table.IsNowOccuped();
-                    headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", currentClient, table));
+                    headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", this, MapPosition.BUTLER, currentClient, table));
                     currentClient.Butler = this;
                     newClients.Remove(currentClient);
                     break;
@@ -132,7 +133,7 @@ namespace Model
         public void CheckIn(IClient checkingInClient)
         {
 
-            checkingInClient.ActionQueue.Add(ActionFactory.CreateAction_("LeaveRestaurant"));
+            checkingInClient.ActionQueue.Add(ActionFactory.CreateAction_("LeaveRestaurant", checkingInClient, MapPosition.BUTLER, checkingInClient));
 
         }
 

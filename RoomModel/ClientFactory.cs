@@ -12,12 +12,17 @@ namespace Model
 
         public static IClient CreateEatingClient(string Name)
         {
-            return new Client(ActionFactory.CreateAction_("Eat"), Name);
+            var client = new Client(Name);
+            client.ChangeAction(ActionFactory.CreateAction_("Eat", (IPerson)client,MapPosition.CLIENT));
+            return client;
         }
 
         public static IClient CreateClient(string Name)
         {
-            return new Client(ActionFactory.CreateAction_(), Name);
+
+            var client = new Client(Name);
+            client.ChangeAction(ActionFactory.CreateAction_("Wait",(IPerson)client, MapPosition.CLIENT));
+            return client;
         }
 
     }

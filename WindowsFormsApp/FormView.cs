@@ -173,12 +173,13 @@ namespace RoomView
         {
             //for each personnel, paint the point at it's coords
 
-       /*     foreach(IPerson p in room.Peoples )
+            foreach(IPerson p in room.Peoples )
             {
                 e.Graphics.FillRectangle(p.Color, p.Position.X, p.Position.Y, 10, 10);
+
             }
 
-*/
+
 
 
             //e.Graphics.FillRectangle(Brushes.Blue, xWaiter, yWaiter, 10, 10);
@@ -202,12 +203,12 @@ namespace RoomView
 
         private void ticks_Tick(object sender, EventArgs e)
         {
-            /*
-            xWaiter += 1;
+            
+            //xWaiter += 1;
             Invalidate();
             Update();
             Refresh();
-            */
+           
         }
 
 

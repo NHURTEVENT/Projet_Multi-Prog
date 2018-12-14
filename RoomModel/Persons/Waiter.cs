@@ -27,6 +27,8 @@ namespace Model {
             this.Name = "Lucien";
             this.Type = PersonnelType.WAITER;
             this.Tables = tables;
+            var a = MapKeyPoints.positions[MapPosition.WAITER];
+            this.Position = MapKeyPoints.positions[MapPosition.WAITER];
             Color = Brushes.Red;
             ActionQueue = new List<IAction>();
             TableUnsubscribers = new List<IDisposable>();
@@ -126,8 +128,8 @@ namespace Model {
 
         public void OnNext(IOrder concernedOrder)
         {
-            ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", null, null, concernedOrder));
-            ActionQueue.Add(ActionFactory.CreateAction_("BringOrder", null, concernedOrder.Table, concernedOrder));
+            ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", this, MapPosition.TABLEX, null, null, concernedOrder));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringOrder", this, MapPosition.TABLEX, null, concernedOrder.Table, concernedOrder));
 
         }
 
@@ -135,7 +137,7 @@ namespace Model {
         {
             if (concernedTable.state == "toClean")
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("ClearTheTable", null, concernedTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("ClearTheTable", this, MapPosition.TABLEX, null, concernedTable));
             }
         }
 
