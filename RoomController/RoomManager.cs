@@ -19,6 +19,7 @@ namespace Controller
         public List<IWaiter> waiters { get; set; }
         public List<IClerk> clerks { get; set; }
         public List<ITable> tables { get; set; }
+        public ICounter counter { get; set; }
 
 
         public RoomManager(/*, Configuration config*/)
@@ -30,10 +31,12 @@ namespace Controller
             waiters = new List<IWaiter>();
             clerks = new List<IClerk>();
             tables = new List<ITable>();
+            counter = new Counter(15);
 
             tables.Add(new Table());
             butler = RoomPersonnelFactory.CreateButler(tables, headWaiters);
-            headWaiters.Add(RoomPersonnelFactory.CreateHeadWaiter(tables));
+            headWaiters.Add(RoomPersonnelFactory.CreateHeadWaiter(tables, counter));
+            waiters.Add(RoomPersonnelFactory.CreateWaiter(tables, counter));
             clientGenerator = new ClientGenerator();
 
         }
@@ -50,6 +53,12 @@ namespace Controller
             foreach (IHeadWaiter headWaiter in headWaiters)
             {
                 headWaiter.onTick();
+
+            }
+
+            foreach (IWaiter waiter in waiters)
+            {
+                waiter.onTick();
 
             }
 

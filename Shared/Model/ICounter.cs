@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface ICounter
+    public interface ICounter : IObservable<IOrder>
     {
-
-
+        void AddOrder(IOrder order);
+        void RemoveOrder(IOrder order);
 
     }
 }

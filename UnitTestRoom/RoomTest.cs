@@ -26,6 +26,7 @@ namespace UnitTestRoom
 
         List<ITable> tables = new List<ITable>();
         List<IHeadWaiter> headWaiters = new List<IHeadWaiter>();
+        ICounter counter = new Counter(15);
 
 
         [TestMethod]
@@ -39,8 +40,8 @@ namespace UnitTestRoom
         [TestMethod]
         public void TestCreateHeadWaiter()
         {
-            var headWaiter = new HeadWaiter(tables);
-            var headWaiter2 = RoomPersonnelFactory.CreateHeadWaiter(tables);
+            var headWaiter = new HeadWaiter(tables, counter);
+            var headWaiter2 = RoomPersonnelFactory.CreateHeadWaiter(tables, counter);
             Assert.AreEqual(headWaiter.GetType(), headWaiter2.GetType());
         }
 
@@ -82,6 +83,7 @@ namespace UnitTestRoom
     public class HeadWaiterTest
     {
 
+        ICounter counter = new Counter(15);
         List<ITable> tables = new List<ITable>();
 
 
@@ -89,9 +91,8 @@ namespace UnitTestRoom
         public void TestTakeOrder()
         {
             var client = ClientFactory.CreateClient("Client1");
-            IHeadWaiter headWaiter = RoomPersonnelFactory.CreateHeadWaiter(tables);
-
-            client.Order.Add(Dish.Riz_de_veau);
+            IHeadWaiter headWaiter = RoomPersonnelFactory.CreateHeadWaiter(tables, counter);
+            
 
             headWaiter.TakeOrder(client);
 

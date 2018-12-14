@@ -50,7 +50,7 @@ namespace Shared
                     return new Action_("DressTheTable", 1, null, ClientConcerned, TableConcerned);
 
                 case "FetchOrder":
-                    return new Action_("FetchOrder", 1, null, ClientConcerned, TableConcerned, OrderConcerned);
+                    return new Action_("FetchOrder", 2, null, ClientConcerned, TableConcerned, OrderConcerned);
 
                 case "BringOrder":
                     return new Action_("BringOrder", 2, null, ClientConcerned, TableConcerned);

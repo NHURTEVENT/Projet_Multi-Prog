@@ -12,11 +12,13 @@ namespace Model {
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
 
+        public IOrder CurrentOrder;
         public List<IAction> ActionQueue { get; set; }
+
+        ICounter Counter;
         List<ITable> Tables;
+        private IDisposable CounterUnsubscriber;
         public List<IDisposable> TableUnsubscribers;
-        public List<IOrder> WatchedOrder;
-        List<IDisposable> OrderUnsubscriber;
 
 
         public Waiter(List<ITable> tables, ICounter counter)
@@ -24,16 +26,21 @@ namespace Model {
             this.Name = "Lucien";
             this.Type = "Waiter";
             this.Tables = tables;
-            ActionQueue = new List<IAction>();
-            TableUnsubscribers = new List<IDisposable>();
-            OrderUnsubscriber = new List<IDisposable>();
+            this.Counter = counter;
 
+            ActionQueue = new List<IAction>();
+
+            TableUnsubscribers = new List<IDisposable>();
+            CounterUnsubscriber = Counter.Subscribe(this);
 
             foreach (ITable table in Tables)
             {
                 TableUnsubscribers.Add(table.Subscribe(this));
                 Console.WriteLine(Name + " observe the table");
             }
+
+            ChangeAction(ActionFactory.CreateAction_());
+
         }
 
 
@@ -64,20 +71,15 @@ namespace Model {
             table.IsNowClean();
         }
 
-        public void FollowNewOrder(IOrder newOrder)
-        {
-            OrderUnsubscriber.Add(newOrder.Subscribe(this));
-            Console.WriteLine(Name + " observe a new Order");
-        }
-
         public void FetchOrder(IOrder order)
         {
-            // TODO This function
+            Counter.RemoveOrder(order);
+            this.CurrentOrder = order;
         }
 
         public void BringOrder (ITable Table)
         {
-            throw new NotImplementedException();
+            Table.IsNowServed();
         }
 
         public void onTick()
@@ -95,7 +97,7 @@ namespace Model {
 
                     case "FetchOrder":
                         FetchOrder(CurrentAction.OrderConcerned);
-                        CheckActionQueue();
+                        ChangeAction(ActionFactory.CreateAction_("BringOrder", null, CurrentAction.OrderConcerned.Table, CurrentAction.OrderConcerned));
                         break;
 
                     case "BringOrder":
@@ -122,8 +124,10 @@ namespace Model {
 
         public void OnNext(IOrder concernedOrder)
         {
-            ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", null, null, concernedOrder));
-            ActionQueue.Add(ActionFactory.CreateAction_("BringOrder", null, concernedOrder.Table, concernedOrder));
+            if (Tables.Contains(concernedOrder.Table))
+            {
+                ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", null, null, concernedOrder));
+            }
 
         }
 

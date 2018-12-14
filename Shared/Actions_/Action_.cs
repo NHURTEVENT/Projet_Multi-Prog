@@ -24,6 +24,7 @@ namespace Shared
             this.Ustensil = Ustensil;
             this.ClientConcerned = ClientConcerned;
             this.TableConcerned = TableConcerned;
+            this.OrderConcerned = OrderConcerned;
         }
     }
 }

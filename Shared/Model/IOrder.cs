@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IOrder : IObservable<IOrder>
+    public interface IOrder
     {
 
         int OrderNum { get; set; }

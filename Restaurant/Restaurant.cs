@@ -31,7 +31,7 @@ namespace Restaurant {
 
 
             // Sets the timer interval to 5 seconds.
-            myTimer.Interval = 5000;
+            myTimer.Interval = 2000;
             myTimer.Start();
 
             // Runs the timer, and raises the event.

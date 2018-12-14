@@ -11,7 +11,7 @@ namespace Model{
         public int RemainingTicks { get; set; }
         public IAction CurrentAction { get; set; }
         public Point Position { get; set; }
-        public List<Dish> Order { get; set; }
+        public IOrder Order { get; set; }
         public List<IAction> ActionQueue { get; set; }
         public IButler Butler { get; set; }
 
@@ -27,7 +27,7 @@ namespace Model{
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
 
-            Order = new List<Dish>();
+            Order = new Order(new List<Dish>() { Dish.FRENCHFRIES }, null);
             ActionQueue = new List<IAction>();
         }
 
@@ -57,7 +57,7 @@ namespace Model{
             this.Position = position;
         }
 
-        public List<Dish> GiveOrder()
+        public IOrder GiveOrder()
         {
             return this.Order;
         }

@@ -15,9 +15,14 @@ namespace Model
             return new Butler(tables, headWaiters);
         }
 
-        public static IHeadWaiter CreateHeadWaiter(List<ITable> tables)
+        public static IHeadWaiter CreateHeadWaiter(List<ITable> tables, ICounter counter)
         {
-            return new HeadWaiter(tables);
+            return new HeadWaiter(tables, counter);
+        }
+
+        public static IWaiter CreateWaiter(List<ITable> tables, ICounter counter)
+        {
+            return new Waiter(tables, counter);
         }
     }
 }

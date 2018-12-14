@@ -21,24 +21,5 @@ namespace Model
             this.Dishes = dishes;
             this.Table = table;
         }
-        
-
-        public IDisposable Subscribe(IObserver<IOrder> observer)
-        {
-            if (!Observers.Contains(observer))
-                Observers.Add(observer);
-
-            return new OrderUnsubscriber(Observers, observer);
-        }
-
-
-        public void OnChange(string change)
-        {
-            foreach (IObserver<string> observer in Observers)
-            {
-                observer.OnNext(change);
-            }
-        }
-
     }
 }

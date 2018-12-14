@@ -15,24 +15,25 @@ namespace Model {
 
         public List<IDisposable> Unsubscribers;
         public List<ITable> Tables;
-        public List<Dish> ClientOrder { get; set; }
+        public ICounter Counter;
+        public IOrder ClientOrder { get; set; }
         public List<IAction> ActionQueue { get; set; }
 
 
-        public HeadWaiter(List<ITable> tables)
+        public HeadWaiter(List<ITable> tables, ICounter counter)
         {
             this.Name = "Michel";
             this.Type = "HeadWaiter";
 
+            this.Counter = counter;
             this.Tables = tables;
-            ClientOrder = new List<Dish>();
             Unsubscribers = new List<IDisposable>();
             ActionQueue = new List<IAction>();
 
             foreach (var table in Tables)
             {
                 Unsubscribers.Add(table.Subscribe(this));
-                Console.WriteLine(Name + " s'est abonné à la table");
+                Console.WriteLine(Name + " observe the table");
             }
 
             ChangeAction(ActionFactory.CreateAction_());
@@ -58,14 +59,12 @@ namespace Model {
             ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", currentClient, clientTable));
             ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", null, clientTable));
 
-            // Test HeadWaiter serve the dishes
-            ActionQueue.Add(ActionFactory.CreateAction_("BringDishes", null, clientTable));
-
         }
 
         public void TakeOrder(IClient client)
         {
             this.ClientOrder = client.GiveOrder();
+            this.ClientOrder.Table = CurrentAction.TableConcerned;
         }
 
         public void DressTable(ITable table)
@@ -120,12 +119,6 @@ namespace Model {
                         CheckActionQueue();
                         break;
 
-                    // Test HeadWaiter serve the dishes
-                    case "BringDishes":
-                        CurrentAction.TableConcerned.IsNowServed();
-                        CheckActionQueue();
-                        break;
-
                     default:
                         CheckActionQueue();
                         break;
@@ -146,8 +139,9 @@ namespace Model {
 
         private void TransmitOrder()
         {
-            Console.WriteLine("HeadWaiter just transmit order");
             // Socket Serveur --- send order + Table --> Client
+            Counter.AddOrder(ClientOrder);
+            Console.WriteLine("Order transmited");
         }
 
 
@@ -157,13 +151,6 @@ namespace Model {
             {
                 ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", null, concernedTable));
             }
-
-
-            if (concernedTable.state == "toClean")
-            {
-                concernedTable.IsNowClean();
-            }
-
         }
 
         public void OnError(Exception error)
