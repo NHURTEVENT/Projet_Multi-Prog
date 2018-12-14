@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IHeadWaiter : IPerson, IObserver<string>
+    public interface IHeadWaiter : IPerson, IObserver<ITable>
     {
 
         List<Dish> ClientOrder { get; set; }
-        List<IAction> ActionQueue { get; set; }
 
-        void takeClientInCharge(IClient client, ITable table);
+        void TakeClientInCharge(IClient currentClient, ITable clientTable);
         void TakeOrder(IClient client);
 
 

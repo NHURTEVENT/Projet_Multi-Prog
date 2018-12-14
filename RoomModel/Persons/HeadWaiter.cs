@@ -15,10 +15,9 @@ namespace Model {
 
         public List<IDisposable> Unsubscribers;
         public List<ITable> Tables;
-        public IClient ClientInCharge;
-        public ITable ClientTable;
         public List<Dish> ClientOrder { get; set; }
         public List<IAction> ActionQueue { get; set; }
+
 
         public HeadWaiter(List<ITable> tables)
         {
@@ -52,17 +51,15 @@ namespace Model {
         }
 
 
-        public void takeClientInCharge(IClient client, ITable table)
+        public void TakeClientInCharge(IClient currentClient, ITable clientTable)
         {
+            ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient", currentClient, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu", null, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", currentClient, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", null, clientTable));
 
-            this.ClientInCharge = client;
-            this.ClientTable = table;
-
-            ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient"));
-            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu"));
-            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder"));
-            ActionQueue.Add(ActionFactory.CreateAction_("GiveOrder"));
-
+            // Test HeadWaiter serve the dishes
+            ActionQueue.Add(ActionFactory.CreateAction_("BringDishes", null, clientTable));
 
         }
 
@@ -73,7 +70,16 @@ namespace Model {
 
         public void DressTable(ITable table)
         {
-            throw new NotImplementedException();
+            table.IsNowAvailable();
+        }
+
+
+        private void CheckActionQueue()
+        {
+            if (ActionQueue.Count == 0)
+                ChangeAction(ActionFactory.CreateAction_());
+            else
+                ChangeAction(ActionQueue[0]);
         }
 
         public void onTick()
@@ -86,37 +92,44 @@ namespace Model {
                 switch (CurrentAction.Name)
                 {
                     case "TakeClientInCharge":
-                        ClientInCharge.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable"));
+                        TakeClientInCharge(CurrentAction.ClientConcerned, CurrentAction.TableConcerned);
+                        CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable", null, CurrentAction.TableConcerned));
+                        CheckActionQueue();
                         break;
 
                     case "MoveWithClient":
-                        ClientInCharge.GetTable(ClientTable);
-                        ChangeAction(ActionFactory.CreateAction_("BringMenu"));
+                        CheckActionQueue();
                         break;
 
                     case "BringMenu":
-                        TakeOrder(ClientInCharge);
-                        ChangeAction(ActionFactory.CreateAction_("TakeOrder"));
+                        CheckActionQueue();
                         break;
 
                     case "TakeOrder":
-                        ClientInCharge.
-                        ChangeAction(ActionFactory.CreateAction_("GiveOrder"));
+                        TakeOrder(CurrentAction.ClientConcerned);
+                        CheckActionQueue();
+                        break;
+
+                    case "TransmitOrder":
+                        TransmitOrder();
+                        CheckActionQueue();
+                        break;
+
+                    case "DressTheTable":
+                        DressTable(CurrentAction.TableConcerned);
+                        CheckActionQueue();
+                        break;
+
+                    // Test HeadWaiter serve the dishes
+                    case "BringDishes":
+                        CurrentAction.TableConcerned.IsNowServed();
+                        CheckActionQueue();
                         break;
 
                     default:
+                        CheckActionQueue();
                         break;
                 }
-
-                if (ActionQueue.Count == 0)
-                {
-                    ChangeAction(ActionFactory.CreateAction_());
-                }
-                else
-                {
-                    ChangeAction(ActionQueue[0]);
-                }
-
             }
         }
 
@@ -124,16 +137,33 @@ namespace Model {
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
-            Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+            Console.WriteLine(Name + " " + CurrentAction.Name);
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);
             }
         }
 
-        public void OnNext(string value)
+        private void TransmitOrder()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("HeadWaiter just transmit order");
+            // Socket Serveur --- send order + Table --> Client
+        }
+
+
+        public void OnNext(ITable concernedTable)
+        {
+            if (concernedTable.state == "toDress")
+            {
+                ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", null, concernedTable));
+            }
+
+
+            if (concernedTable.state == "toClean")
+            {
+                concernedTable.IsNowClean();
+            }
+
         }
 
         public void OnError(Exception error)

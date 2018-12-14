@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientGenerator.cs" />
+    <Compile Include="OrderUnsubscriber.cs" />
+    <Compile Include="Items\Order.cs" />
     <Compile Include="RoomPersonnelFactory.cs" />
     <Compile Include="ClientFactory.cs" />
     <Compile Include="Items\Counter.cs" />

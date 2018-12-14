@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public interface IClerk : IPerson, IObserver<ITable>
+    public interface ICounter
     {
 
 

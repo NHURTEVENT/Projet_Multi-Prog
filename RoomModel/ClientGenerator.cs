@@ -22,20 +22,19 @@ namespace Model
             RemainingTicks = 2;
         }
 
-        public List<IClient> onTick()
+        public IClient onTick()
         {
-
+            IClient newClient = null;
             RemainingTicks--;
-            this.newClientList.Clear();
 
             if (RemainingTicks == 0)
             {
-                newClientList.Add(ClientFactory.CreateClient(ClientName + ClientNumber));
+                newClient = ClientFactory.CreateClient(ClientName + ClientNumber);
                 ClientNumber++;
-                RemainingTicks = 10;
+                RemainingTicks = 15;
             }
 
-            return this.newClientList;
+            return newClient;
         }
 
     }

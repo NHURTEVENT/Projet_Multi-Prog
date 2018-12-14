@@ -5,17 +5,20 @@ using System.Threading;
 
 namespace Shared
 {
-    public interface ITable : IObservable<string>
+    public interface ITable : IObservable<ITable>
     {
 
         string squareNumber { get; set; }
         string row { get; set; }
         string position { get; set; }
         int size { get; set; }
-        bool available { get; set; }
+        string state { get; set; }
 
         void IsNowOccuped();
+        void IsNowAvailable();
+        void IsNowServed();
         void IsNowFree();
+        void IsNowClean();
 
     }
 }

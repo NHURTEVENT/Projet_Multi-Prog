@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Restaurant {
+
 	public class Restaurant : IRestaurant  {
 
         private IKitchen kitchen;
@@ -27,8 +28,8 @@ namespace Restaurant {
             myTimer.Tick += new EventHandler(RoomManager.onTick);
 
 
-            // Sets the timer interval to 2 seconds.
-            myTimer.Interval = 2000;
+            // Sets the timer interval to 5 seconds.
+            myTimer.Interval = 5000;
             myTimer.Start();
 
             // Runs the timer, and raises the event.
@@ -48,7 +49,7 @@ namespace Restaurant {
         private static void TimerEventProcessor2(Object myObject, EventArgs myEventArgs)
         {
             Console.WriteLine("Test2");
-
+            Tuple<string, int> toto = new Tuple<string, int>("a", 1);
         }
     }
 

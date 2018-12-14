@@ -1,19 +1,19 @@
-﻿using Shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared;
 
 namespace Model
 {
-    class TableUnsubscriber : IDisposable
+    class OrderUnsubscriber : IDisposable
     {
 
-        private List<IObserver<ITable>> _observers;
-        private IObserver<ITable> _observer;
+        private List<IObserver<IOrder>> _observers;
+        private IObserver<IOrder> _observer;
 
-        public TableUnsubscriber(List<IObserver<ITable>> observers, IObserver<ITable> observer)
+        public OrderUnsubscriber(List<IObserver<IOrder>> observers, IObserver<IOrder> observer)
         {
             this._observers = observers;
             this._observer = observer;

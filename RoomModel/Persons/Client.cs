@@ -13,6 +13,7 @@ namespace Model{
         public Point Position { get; set; }
         public List<Dish> Order { get; set; }
         public List<IAction> ActionQueue { get; set; }
+        public IButler Butler { get; set; }
 
         private ITable myTable;
         private IDisposable unsubscriber;
@@ -62,11 +63,19 @@ namespace Model{
         }
 
 
+        private void CheckActionQueue()
+        {
+            if (ActionQueue.Count == 0)
+                ChangeAction(ActionFactory.CreateAction_());
+            else
+                ChangeAction(ActionQueue[0]);
+        }
+
         public void ChangeAction(IAction Action)
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
-            Console.WriteLine(Name + " starts to " + CurrentAction.Name);
+            Console.WriteLine(Name + " " + CurrentAction.Name);
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);
@@ -76,57 +85,33 @@ namespace Model{
         public void onTick()
         {
             RemainingTicks--;
-            if (RemainingTicks == 0)
-            {
-
-                if (ActionQueue.Count == 0)
-                {
-                    ChangeAction(ActionFactory.CreateAction_());
-                }
-                else
-                {
-                    ChangeAction(ActionQueue[0]);
-                }
-
-            }
 
             if (RemainingTicks == 0)
             {
                 switch (CurrentAction.Name)
                 {
-                    case "TableFound":
-                        ChangeAction(ActionFactory.CreateAction_("MoveToTable"));
-                        break;
-
                     case "MoveToTable":
-                        ChangeAction(ActionFactory.CreateAction_("Wait"));
+                        GetTable(CurrentAction.TableConcerned);
+                        CheckActionQueue();
                         break;
 
                     case "Eat":
-                        ChangeAction(ActionFactory.CreateAction_("Diggest"));
+                        CheckActionQueue();
                         break;
 
-                    case "Diggest":
-                        ChangeAction(ActionFactory.CreateAction_("Leave"));
-                        break;
-
-                    case "Leave":
+                    case "LeaveTable":
                         LeaveTable();
-                        ChangeAction(ActionFactory.CreateAction_("Leaved"));
+                        CheckActionQueue();
                         break;
 
-                    case "Wait":
-                        Console.WriteLine(Name + " is waiting");
+                    case "LeaveRestaurant":
                         RemainingTicks++;
                         break;
 
                     default:
+                        CheckActionQueue();
                         break;
                 }
-            }
-            else
-            {
-                Console.WriteLine(this.Name + " " + this.CurrentAction.Name);
             }
         }
 
@@ -135,29 +120,25 @@ namespace Model{
             unsubscriber = table.Subscribe(this);
             myTable = table;
             Console.WriteLine("Le client s'est abonné à la table");
-            CurrentAction.Name = "TableFound";
         }
 
         public void LeaveTable()
         {
             myTable.IsNowFree();
             unsubscriber.Dispose();
+
+            this.Butler.ActionQueue.Add(ActionFactory.CreateAction_("CheckIn", this));
         }
         
 
-        public void OnNext(string changes)
+        public void OnNext(ITable changes)
         {
-            switch (changes)
+            if (changes.state == "served")
             {
-                case "dishServed":
-                    ChangeAction(ActionFactory.CreateAction_("Eat"));
-                    break;
-
-                default:
-                    break;
+                ActionQueue.Add(ActionFactory.CreateAction_("Eat"));
+                ActionQueue.Add(ActionFactory.CreateAction_("LeaveTable"));
             }
         }
-
 
 
         public void OnError(Exception error)

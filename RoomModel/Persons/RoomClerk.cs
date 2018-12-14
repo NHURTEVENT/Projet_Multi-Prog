@@ -1,16 +1,19 @@
 using Shared;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Model {
-	public class RoomClerk : IPerson {
-        public int remainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string currentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IAction CurrentAction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int RemainingTicks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Point Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+	public class RoomClerk : IClerk {
+
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int RemainingTicks { get; set; }
+        public IAction CurrentAction { get; set; }
+        public Point Position { get; set; }
+
+        public List<IAction> ActionQueue { get; set; }
+
 
         public void RefillWater(ITable table)
         {
@@ -24,28 +27,71 @@ namespace Model {
 
         public Point GetPosition()
         {
-            throw new NotImplementedException();
+            return this.Position;
         }
 
         public void Move(Point position)
         {
-            throw new NotImplementedException();
+            this.Position = position;
         }
 
-        public void setTask(string task)
+        private void CheckActionQueue()
         {
-            throw new NotImplementedException();
-        }
-
-        public void onTick()
-        {
-            throw new NotImplementedException();
+            if (ActionQueue.Count == 0)
+                ChangeAction(ActionFactory.CreateAction_());
+            else
+                ChangeAction(ActionQueue[0]);
         }
 
         public void ChangeAction(IAction Action)
         {
+            this.CurrentAction = Action;
+            RemainingTicks = Action.Duration;
+            Console.WriteLine(Name + " " + CurrentAction.Name);
+            if (ActionQueue.Contains(Action))
+            {
+                ActionQueue.Remove(Action);
+            }
+        }
+
+        public void onTick()
+        {
+            RemainingTicks--;
+
+            if (RemainingTicks == 0)
+            {
+                switch (CurrentAction.Name)
+                {
+                    case "RefillWater":
+                        RefillWater(CurrentAction.TableConcerned);
+                        CheckActionQueue();
+                        break;
+
+                    case "RefillBread":
+                        RefillBread(CurrentAction.TableConcerned);
+                        CheckActionQueue();
+                        break;
+
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public void OnNext(ITable table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCompleted()
+        {
             throw new NotImplementedException();
         }
     }
-
 }
