@@ -32,16 +32,20 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormView));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Clear = new System.Windows.Forms.Button();
+            this.TimeX10 = new System.Windows.Forms.Button();
+            this.TimeX1 = new System.Windows.Forms.Button();
+            this.Pause = new System.Windows.Forms.Button();
+            this.Play = new System.Windows.Forms.Button();
+            this.title = new System.Windows.Forms.Label();
+            this.Logs = new System.Windows.Forms.RichTextBox();
             this.ticks = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,44 +70,74 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.button4);
-            this.splitContainer2.Panel1.Controls.Add(this.button3);
-            this.splitContainer2.Panel1.Controls.Add(this.button2);
-            this.splitContainer2.Panel1.Controls.Add(this.button1);
+            this.splitContainer2.Panel1.Controls.Add(this.Clear);
+            this.splitContainer2.Panel1.Controls.Add(this.TimeX10);
+            this.splitContainer2.Panel1.Controls.Add(this.TimeX1);
+            this.splitContainer2.Panel1.Controls.Add(this.Pause);
+            this.splitContainer2.Panel1.Controls.Add(this.Play);
+            this.splitContainer2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel1_Paint);
             // 
-            // button3
+            // splitContainer2.Panel2
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.Highlight;
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = false;
+            this.splitContainer2.Panel2.Controls.Add(this.title);
+            this.splitContainer2.Panel2.Controls.Add(this.Logs);
             // 
-            // button4
+            // Clear
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.Highlight;
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.Name = "button4";
-            this.button4.UseVisualStyleBackColor = false;
+            resources.ApplyResources(this.Clear, "Clear");
+            this.Clear.Name = "Clear";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
-            // button2
+            // TimeX10
             // 
-            this.button2.Image = global::WindowsFormsApp.Properties.Resources.pauseSmall;
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.TimeX10.BackColor = System.Drawing.SystemColors.Highlight;
+            resources.ApplyResources(this.TimeX10, "TimeX10");
+            this.TimeX10.Name = "TimeX10";
+            this.TimeX10.UseVisualStyleBackColor = false;
+            this.TimeX10.Click += new System.EventHandler(this.TimeX10_Click);
             // 
-            // button1
+            // TimeX1
             // 
-            this.button1.Image = global::WindowsFormsApp.Properties.Resources.play;
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.TimeX1.BackColor = System.Drawing.SystemColors.Highlight;
+            resources.ApplyResources(this.TimeX1, "TimeX1");
+            this.TimeX1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.TimeX1.Name = "TimeX1";
+            this.TimeX1.UseVisualStyleBackColor = false;
+            this.TimeX1.Click += new System.EventHandler(this.TimeX1_Click);
+            // 
+            // Pause
+            // 
+            this.Pause.Image = global::WindowsFormsApp.Properties.Resources.pauseSmall;
+            resources.ApplyResources(this.Pause, "Pause");
+            this.Pause.Name = "Pause";
+            this.Pause.UseVisualStyleBackColor = true;
+            this.Pause.Click += new System.EventHandler(this.Pause_Click);
+            // 
+            // Play
+            // 
+            this.Play.Image = global::WindowsFormsApp.Properties.Resources.play;
+            resources.ApplyResources(this.Play, "Play");
+            this.Play.Name = "Play";
+            this.Play.UseVisualStyleBackColor = true;
+            this.Play.Click += new System.EventHandler(this.Play_Click);
+            // 
+            // title
+            // 
+            resources.ApplyResources(this.title, "title");
+            this.title.Name = "title";
+            // 
+            // Logs
+            // 
+            this.Logs.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.Logs, "Logs");
+            this.Logs.Name = "Logs";
+            this.Logs.ReadOnly = true;
+            this.Logs.TextChanged += new System.EventHandler(this.Logs_TextChanged);
             // 
             // ticks
             // 
-            this.ticks.Enabled = true;
+            this.ticks.Interval = 1000;
             this.ticks.Tick += new System.EventHandler(this.ticks_Tick);
             // 
             // FormView
@@ -125,6 +159,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -132,14 +167,17 @@
         }
 
         #endregion
-        //Divisions of the form and components
+
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button TimeX10;
+        private System.Windows.Forms.Button TimeX1;
+        private System.Windows.Forms.Button Pause;
+        private System.Windows.Forms.Button Play;
         private System.Windows.Forms.Timer ticks;
+        private System.Windows.Forms.RichTextBox Logs;
+        private System.Windows.Forms.Button Clear;
+        private System.Windows.Forms.Label title;
     }
 }
 
