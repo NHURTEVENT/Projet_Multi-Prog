@@ -87,7 +87,10 @@ namespace Controller
             {
                 Console.WriteLine("New Client");
                 this.clients.Add(newClient);
-                butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable", newClient));
+                lock (butler.ActionQueue)
+                {
+                    butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable", newClient));
+                }
             }
 
         }

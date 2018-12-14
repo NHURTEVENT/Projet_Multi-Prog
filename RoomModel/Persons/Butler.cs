@@ -18,7 +18,6 @@ namespace Model
         public List<IAction> ActionQueue { get; set; }
 
         private List<ITable> tables;
-        private List<IClient> newClients;
         private List<IClient> checkInClients;
         private List<IHeadWaiter> headWaiters;
 
@@ -32,7 +31,6 @@ namespace Model
 
             this.tables = tables;
             ChangeAction(ActionFactory.CreateAction_());
-            newClients = new List<IClient>();
             checkInClients = new List<IClient>();
             this.headWaiters = headWaiters;
 
@@ -67,12 +65,10 @@ namespace Model
                 ChangeAction(ActionFactory.CreateAction_());
             }
             else
-                ChangeAction(ActionQueue[0]);
-        }
-
-        public void Redirect(IClient client)
-        {
-            throw new NotImplementedException();
+                lock (ActionQueue)
+                {
+                    ChangeAction(ActionQueue[0]);
+                }
         }
 
         public void onTick()
@@ -118,9 +114,11 @@ namespace Model
                     Console.WriteLine("Table trouvée");
                     tableFound = true;
                     table.IsNowOccuped();
-                    headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", currentClient, table));
+                    lock (headWaiters[0].ActionQueue)
+                    {
+                        headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", currentClient, table));
+                    }
                     currentClient.Butler = this;
-                    newClients.Remove(currentClient);
                     break;
                 }
             }
@@ -129,8 +127,11 @@ namespace Model
 
         public void CheckIn(IClient checkingInClient)
         {
-
-            checkingInClient.ActionQueue.Add(ActionFactory.CreateAction_("LeaveRestaurant"));
+            checkingInClient.Pay();
+            lock (checkingInClient.ActionQueue)
+            {
+                checkingInClient.ActionQueue.Add(ActionFactory.CreateAction_("LeaveRestaurant"));
+            }
 
         }
 

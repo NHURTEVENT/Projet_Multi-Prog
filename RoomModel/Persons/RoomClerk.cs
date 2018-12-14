@@ -15,6 +15,14 @@ namespace Model {
         public List<IAction> ActionQueue { get; set; }
 
 
+        public RoomClerk()
+        {
+
+            ActionQueue = new List<IAction>();
+            ChangeAction(ActionFactory.CreateAction_());
+
+        }
+
         public void RefillWater(ITable table)
         {
             throw new NotImplementedException();
@@ -40,7 +48,10 @@ namespace Model {
             if (ActionQueue.Count == 0)
                 ChangeAction(ActionFactory.CreateAction_());
             else
-                ChangeAction(ActionQueue[0]);
+                lock (ActionQueue)
+                {
+                    ChangeAction(ActionQueue[0]);
+                }
         }
 
         public void ChangeAction(IAction Action)
@@ -81,7 +92,12 @@ namespace Model {
 
         public void OnNext(ITable table)
         {
+            lock (ActionQueue)
+            {
+
+            }
             throw new NotImplementedException();
+
         }
 
         public void OnError(Exception error)

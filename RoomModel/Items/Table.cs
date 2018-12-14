@@ -26,12 +26,18 @@ namespace Model
 
         public void IsNowOccuped()
         {
-            this.state = "occuped";
+            lock (state)
+            {
+                state = "occuped";
+            }
         }
 
         public void IsNowAvailable()
         {
-            this.state = "available";
+            lock (state)
+            {
+                state = "available";
+            }
         }
 
         public void IsNowServed()
@@ -59,42 +65,48 @@ namespace Model
         
         public void OnChange(string changeType)
         {
-            switch (changeType)
+            lock (state)
             {
-                case "dishServed":
-                    this.state = "served";
-                    foreach (var observer in observers)
+                lock (observers)
+                {
+                    switch (changeType)
                     {
-                        observer.OnNext(this);
-                    }
-                    break;
+                        case "dishServed":
+                            this.state = "served";
+                            foreach (var observer in observers)
+                            {
+                                observer.OnNext(this);
+                            }
+                            break;
 
-                case "dishFinished":
-                    this.state = "toClean";
-                    foreach (var observer in observers)
-                    {
-                        observer.OnNext(this);
-                    }
-                    break;
+                        case "dishFinished":
+                            this.state = "toClean";
+                            foreach (var observer in observers)
+                            {
+                                observer.OnNext(this);
+                            }
+                            break;
 
-                case "breadFinished":
-                    this.state = "toRefill";
-                    foreach (var observer in observers)
-                    {
-                        observer.OnNext(this);
-                    }
-                    break;
+                        case "breadFinished":
+                            this.state = "toRefill";
+                            foreach (var observer in observers)
+                            {
+                                observer.OnNext(this);
+                            }
+                            break;
 
-                case "deserved":
-                    this.state = "toDress";
-                    foreach (var observer in observers)
-                    {
-                        observer.OnNext(this);
-                    }
-                    break;
+                        case "deserved":
+                            this.state = "toDress";
+                            foreach (var observer in observers)
+                            {
+                                observer.OnNext(this);
+                            }
+                            break;
 
-                default:
-                    break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
     }

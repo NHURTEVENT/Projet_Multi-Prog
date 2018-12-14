@@ -7,9 +7,7 @@ namespace Shared
 	public interface IButler : IPerson
     {
         
-        void Redirect(IClient client);
         bool FindTable(IClient currentClient);
-
 
     }
 

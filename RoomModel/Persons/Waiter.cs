@@ -97,7 +97,10 @@ namespace Model {
 
                     case "FetchOrder":
                         FetchOrder(CurrentAction.OrderConcerned);
-                        ChangeAction(ActionFactory.CreateAction_("BringOrder", null, CurrentAction.OrderConcerned.Table, CurrentAction.OrderConcerned));
+                        lock (ActionQueue)
+                        {
+                            ChangeAction(ActionFactory.CreateAction_("BringOrder", null, CurrentAction.OrderConcerned.Table, CurrentAction.OrderConcerned));
+                        }
                         break;
 
                     case "BringOrder":
@@ -119,14 +122,20 @@ namespace Model {
                 ChangeAction(ActionFactory.CreateAction_());
             }
             else
-                ChangeAction(ActionQueue[0]);
+                lock (ActionQueue)
+                {
+                    ChangeAction(ActionQueue[0]);
+                }
         }
 
         public void OnNext(IOrder concernedOrder)
         {
             if (Tables.Contains(concernedOrder.Table))
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", null, null, concernedOrder));
+                lock (ActionQueue)
+                {
+                    ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", null, null, concernedOrder));
+                }
             }
 
         }
@@ -135,7 +144,10 @@ namespace Model {
         {
             if (concernedTable.state == "toClean")
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("ClearTheTable", null, concernedTable));
+                lock (ActionQueue)
+                {
+                    ActionQueue.Add(ActionFactory.CreateAction_("ClearTheTable", null, concernedTable));
+                }
             }
         }
 

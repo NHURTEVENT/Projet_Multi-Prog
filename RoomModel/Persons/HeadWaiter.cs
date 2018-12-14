@@ -54,11 +54,13 @@ namespace Model {
 
         public void TakeClientInCharge(IClient currentClient, ITable clientTable)
         {
-            ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient", currentClient, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu", null, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", currentClient, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", null, clientTable));
-
+            lock (ActionQueue)
+            {
+                ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient", currentClient, clientTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("BringMenu", null, clientTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", currentClient, clientTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", null, clientTable));
+            }
         }
 
         public void TakeOrder(IClient client)
@@ -78,7 +80,10 @@ namespace Model {
             if (ActionQueue.Count == 0)
                 ChangeAction(ActionFactory.CreateAction_());
             else
-                ChangeAction(ActionQueue[0]);
+                lock (ActionQueue)
+                {
+                    ChangeAction(ActionQueue[0]);
+                }
         }
 
         public void onTick()
@@ -92,7 +97,10 @@ namespace Model {
                 {
                     case "TakeClientInCharge":
                         TakeClientInCharge(CurrentAction.ClientConcerned, CurrentAction.TableConcerned);
-                        CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable", null, CurrentAction.TableConcerned));
+                        lock (ActionQueue)
+                        {
+                            CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable", null, CurrentAction.TableConcerned));
+                        }
                         CheckActionQueue();
                         break;
 
@@ -149,7 +157,10 @@ namespace Model {
         {
             if (concernedTable.state == "toDress")
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", null, concernedTable));
+                lock (ActionQueue)
+                {
+                    ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", null, concernedTable));
+                }
             }
         }
 

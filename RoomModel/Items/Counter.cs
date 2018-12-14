@@ -21,8 +21,11 @@ namespace Model {
 
         public void AddOrder(IOrder newOrder)
         {
-            newOrder.OrderNum = ++OrderNb;
-            Orders.Add(newOrder);
+            lock (Orders)
+            {
+                newOrder.OrderNum = ++OrderNb;
+                Orders.Add(newOrder);
+            }
 
             // TO DELETE WHEN KITCHEN IMPLEMENTED
             OrderPrepared(OrderNb);
@@ -31,12 +34,15 @@ namespace Model {
 
         public void OrderPrepared(int OrderNum)
         {
-            foreach (IOrder order in Orders)
+            lock (Orders)
             {
-                if (order.OrderNum == OrderNum)
+                foreach (IOrder order in Orders)
                 {
-                    Onchange(order);
-                    break;
+                    if (order.OrderNum == OrderNum)
+                    {
+                        Onchange(order);
+                        break;
+                    }
                 }
             }
         }
@@ -51,9 +57,12 @@ namespace Model {
 
         public void RemoveOrder(IOrder order)
         {
-            if (Orders.Contains(order))
+            lock (Orders)
             {
-                Orders.Remove(order);
+                if (Orders.Contains(order))
+                {
+                    Orders.Remove(order);
+                }
             }
         }
 
