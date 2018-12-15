@@ -58,17 +58,17 @@ namespace Shared
                 case "ClearTheTable":
                     return new Action_("ClearTheTable", 1, null, ClientConcerned, TableConcerned);
 
-                case "TakeBread":
-                    return new Action_("TakeBread", 1, null, ClientConcerned, TableConcerned);
+                case "FetchBread":
+                    return new Action_("FetchBread", 1, null, ClientConcerned, TableConcerned);
 
-                case "BringBread":
-                    return new Action_("BringBread", 1, null, ClientConcerned, TableConcerned);
+                case "RefillBread":
+                    return new Action_("RefillBread", 1, null, ClientConcerned, TableConcerned);
 
-                case "TakeWater":
-                    return new Action_("TakeWater", 1, null, ClientConcerned, TableConcerned);
+                case "FetchWater":
+                    return new Action_("FetchWater", 1, null, ClientConcerned, TableConcerned);
 
-                case "BringWater":
-                    return new Action_("BringWater", 1, null, ClientConcerned, TableConcerned);
+                case "RefillWater":
+                    return new Action_("RefillWater", 1, null, ClientConcerned, TableConcerned);
 
                 default:
                     return new Action_("Wait", 1);

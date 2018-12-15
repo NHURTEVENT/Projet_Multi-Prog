@@ -15,6 +15,7 @@ namespace Model{
         public List<IAction> ActionQueue { get; set; }
         public IButler Butler { get; set; }
 
+        private int waitingTicks;
         private ITable myTable;
         private IDisposable unsubscriber;
 
@@ -26,6 +27,8 @@ namespace Model{
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;
             Position = new Point(0,0);
+            myTable = null;
+            waitingTicks = 0;
 
             Order = new Order(new List<Dish>() { Dish.FRENCHFRIES }, null);
             ActionQueue = new List<IAction>();
@@ -39,12 +42,25 @@ namespace Model{
 
         public void ConsumeWaterAndBread()
         {
-            throw new NotImplementedException();
+            Random rnd = new Random();
+            switch (rnd.Next(0, 2))
+            {
+                case 0:
+                    myTable.IsEmpty("bread");
+                    break;
+
+                case 1:
+                    myTable.IsEmpty("water");
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         public void Pay()
         {
-            throw new NotImplementedException();
+            Console.WriteLine(Name + " just paid");
         }
 
         public Point GetPosition()
@@ -66,12 +82,18 @@ namespace Model{
         private void CheckActionQueue()
         {
             if (ActionQueue.Count == 0)
+            {
                 ChangeAction(ActionFactory.CreateAction_());
+                waitingTicks++;
+            }
             else
+            {
                 ChangeAction(ActionQueue[0]);
+                waitingTicks = 0;
+            }
         }
 
-        public void ChangeAction(IAction Action)
+        private void ChangeAction(IAction Action)
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
@@ -85,6 +107,11 @@ namespace Model{
         public void onTick()
         {
             RemainingTicks--;
+
+            if(waitingTicks == 3 && myTable != null)
+            {
+                ConsumeWaterAndBread();
+            }
 
             if (RemainingTicks == 0)
             {
@@ -126,6 +153,7 @@ namespace Model{
         {
             myTable.IsNowFree();
             unsubscriber.Dispose();
+            myTable = null;
 
             this.Butler.ActionQueue.Add(ActionFactory.CreateAction_("CheckIn", this));
         }

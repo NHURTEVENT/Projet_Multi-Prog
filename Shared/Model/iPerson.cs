@@ -15,8 +15,6 @@ namespace Shared {
         List<IAction> ActionQueue { get; set; }
 
         void onTick();
-        void ChangeAction(IAction Action);
-
 
 
         Point GetPosition();

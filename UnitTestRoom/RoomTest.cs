@@ -70,7 +70,8 @@ namespace UnitTestRoom
         {
             var client = ClientFactory.CreateClient("eatingClient1");
             var action = new Action_("Eat", 3);
-            client.ChangeAction(ActionFactory.CreateAction_("Eat"));
+            client.ActionQueue.Add(ActionFactory.CreateAction_("Eat"));
+            client.onTick();
 
             Assert.AreEqual(action.Name, client.CurrentAction.Name);
             Assert.AreEqual(action.Duration, client.RemainingTicks);

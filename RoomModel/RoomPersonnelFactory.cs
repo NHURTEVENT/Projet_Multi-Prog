@@ -24,5 +24,10 @@ namespace Model
         {
             return new Waiter(tables, counter);
         }
+
+        public static IClerk CreateClerk(List<ITable> tables)
+        {
+            return new RoomClerk(tables);
+        }
     }
 }

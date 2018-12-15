@@ -44,7 +44,7 @@ namespace Model {
         }
 
 
-        public void ChangeAction(IAction Action)
+        private void ChangeAction(IAction Action)
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;

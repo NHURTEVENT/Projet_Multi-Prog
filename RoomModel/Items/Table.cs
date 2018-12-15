@@ -12,6 +12,7 @@ namespace Model
         public string position { get; set; }
         public int size { get; set; }
         public string state { get; set; }
+        public string lack { get; set; }
         List<IObserver<ITable>> observers;
 
         public Table()
@@ -20,9 +21,26 @@ namespace Model
             this.size = 4;
             
             observers = new List<IObserver<ITable>>();
+            lack = "nothing";
 
         }
 
+        public void Refilled()
+        {
+            lock (lack)
+            {
+                this.lack = "nothing";
+            }
+        }
+
+        public void IsEmpty(string empty)
+        {
+            lock (lack)
+            {
+                lack = empty;
+                OnChange("lackSomething");
+            }
+        }
 
         public void IsNowOccuped()
         {
@@ -87,8 +105,7 @@ namespace Model
                             }
                             break;
 
-                        case "breadFinished":
-                            this.state = "toRefill";
+                        case "lackSomething":
                             foreach (var observer in observers)
                             {
                                 observer.OnNext(this);

@@ -37,6 +37,7 @@ namespace Controller
             butler = RoomPersonnelFactory.CreateButler(tables, headWaiters);
             headWaiters.Add(RoomPersonnelFactory.CreateHeadWaiter(tables, counter));
             waiters.Add(RoomPersonnelFactory.CreateWaiter(tables, counter));
+            clerks.Add(RoomPersonnelFactory.CreateClerk(tables));
             clientGenerator = new ClientGenerator();
 
         }
@@ -59,6 +60,12 @@ namespace Controller
             foreach (IWaiter waiter in waiters)
             {
                 waiter.onTick();
+
+            }
+
+            foreach (IClerk clerk in clerks)
+            {
+                clerk.onTick();
 
             }
 

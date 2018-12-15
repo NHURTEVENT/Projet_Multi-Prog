@@ -13,24 +13,47 @@ namespace Model {
         public Point Position { get; set; }
 
         public List<IAction> ActionQueue { get; set; }
+        private List<IDisposable> Unsubscribers;
+        private List<ITable> Tables;
 
-
-        public RoomClerk()
+        public RoomClerk(List<ITable> tables)
         {
+            this.Name = "Marcel";
+            this.Type = "Clerk";
+
+            this.Tables = tables;
 
             ActionQueue = new List<IAction>();
+            Unsubscribers = new List<IDisposable>();
+
+            foreach (ITable table in tables)
+            {
+                Unsubscribers.Add(table.Subscribe(this));
+                Console.WriteLine(Name + " observe the table");
+            }
+
             ChangeAction(ActionFactory.CreateAction_());
 
         }
 
+        public void FetchWater()
+        {
+            // TODO +1 semaphore water containers
+        }
+
+        public void FetchBread()
+        {
+            // TODO +1 semaphore bread basket
+        }
+
         public void RefillWater(ITable table)
         {
-            throw new NotImplementedException();
+            table.Refilled();
         }
 
         public void RefillBread(ITable table)
         {
-            throw new NotImplementedException();
+            table.Refilled();
         }
 
         public Point GetPosition()
@@ -54,7 +77,7 @@ namespace Model {
                 }
         }
 
-        public void ChangeAction(IAction Action)
+        private void ChangeAction(IAction Action)
         {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
@@ -73,8 +96,18 @@ namespace Model {
             {
                 switch (CurrentAction.Name)
                 {
+                    case "FetchWater":
+                        FetchWater();
+                        CheckActionQueue();
+                        break;
+
                     case "RefillWater":
                         RefillWater(CurrentAction.TableConcerned);
+                        CheckActionQueue();
+                        break;
+
+                    case "FetchBread":
+                        FetchBread();
                         CheckActionQueue();
                         break;
 
@@ -83,8 +116,8 @@ namespace Model {
                         CheckActionQueue();
                         break;
 
-
                     default:
+                        CheckActionQueue();
                         break;
                 }
             }
@@ -94,9 +127,22 @@ namespace Model {
         {
             lock (ActionQueue)
             {
+                switch (table.lack)
+                {
+                    case "water":
+                        ActionQueue.Add(ActionFactory.CreateAction_("FetchWater"));
+                        ActionQueue.Add(ActionFactory.CreateAction_("RefillWater", null, table));
+                        break;
 
+                    case "bread":
+                        ActionQueue.Add(ActionFactory.CreateAction_("FetchBread"));
+                        ActionQueue.Add(ActionFactory.CreateAction_("RefillBread", null, table));
+                        break;
+
+                    default:
+                        break;
+                }
             }
-            throw new NotImplementedException();
 
         }
 
