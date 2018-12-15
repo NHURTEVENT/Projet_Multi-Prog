@@ -26,7 +26,7 @@ namespace Model{
         {
             this.Name = Name;
             this.Type = PersonnelType.CLIENT;
-            Color = Brushes.Yellow;
+            Color = Brushes.Purple;
             this.Position = MapKeyPoints.positions[MapPosition.CLIENT];
             this.CurrentAction = CurrentAction;
             RemainingTicks = CurrentAction.Duration;

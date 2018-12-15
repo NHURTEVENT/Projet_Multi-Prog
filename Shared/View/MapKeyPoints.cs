@@ -22,14 +22,14 @@ namespace Shared
                     POSITION = new Dictionary<MapPosition, Point>
                     {
                         { MapPosition.WAITER, new Point(540,95) },
-                        { MapPosition.CLIENT, new Point(935,364) },
-                        { MapPosition.BUTLER, new Point(880,625) },
+                        { MapPosition.CLIENT, new Point(781, 497) },
+                        { MapPosition.BUTLER, new Point(726, 461) },
                         { MapPosition.CHEF, new Point(415,630) },
                         { MapPosition.PARTYCHEF, new Point(283,580) },
                         { MapPosition.KITCHENCLERK, new Point(155,635) },
-                        { MapPosition.DISHCLEANER, new Point(780,600) },
-                        { MapPosition.HEADWAITER, new Point(30,30) },
-                        { MapPosition.TABLE1, new Point(5,45) }
+                        { MapPosition.DISHCLEANER, new Point(569, 482) },
+                        { MapPosition.HEADWAITER, new Point(410, 387) },
+                        { MapPosition.TABLE1, new Point(26, 27) }
                     };  
             }
                 return POSITION;

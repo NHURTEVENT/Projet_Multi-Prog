@@ -35,11 +35,15 @@
             this.Clear = new System.Windows.Forms.Button();
             this.TimeX10 = new System.Windows.Forms.Button();
             this.TimeX1 = new System.Windows.Forms.Button();
-            this.Pause = new System.Windows.Forms.Button();
-            this.Play = new System.Windows.Forms.Button();
             this.title = new System.Windows.Forms.Label();
             this.Logs = new System.Windows.Forms.RichTextBox();
             this.ticks = new System.Windows.Forms.Timer(this.components);
+            this.Pause = new System.Windows.Forms.Button();
+            this.Play = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -79,6 +83,10 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.label4);
+            this.splitContainer2.Panel2.Controls.Add(this.label3);
+            this.splitContainer2.Panel2.Controls.Add(this.label2);
+            this.splitContainer2.Panel2.Controls.Add(this.label1);
             this.splitContainer2.Panel2.Controls.Add(this.title);
             this.splitContainer2.Panel2.Controls.Add(this.Logs);
             // 
@@ -106,22 +114,6 @@
             this.TimeX1.UseVisualStyleBackColor = false;
             this.TimeX1.Click += new System.EventHandler(this.TimeX1_Click);
             // 
-            // Pause
-            // 
-            this.Pause.Image = global::RoomView.Properties.Resources.pauseSmall;
-            resources.ApplyResources(this.Pause, "Pause");
-            this.Pause.Name = "Pause";
-            this.Pause.UseVisualStyleBackColor = true;
-            this.Pause.Click += new System.EventHandler(this.Pause_Click);
-            // 
-            // Play
-            // 
-            this.Play.Image = global::RoomView.Properties.Resources.play;
-            resources.ApplyResources(this.Play, "Play");
-            this.Play.Name = "Play";
-            this.Play.UseVisualStyleBackColor = true;
-            this.Play.Click += new System.EventHandler(this.Play_Click);
-            // 
             // title
             // 
             resources.ApplyResources(this.title, "title");
@@ -138,7 +130,47 @@
             // ticks
             // 
             this.ticks.Interval = 1000;
-            this.ticks.Tick += new System.EventHandler(this.ticks_Tick);
+            // 
+            // Pause
+            // 
+            this.Pause.Image = global::RoomView.Properties.Resources.pauseSmall;
+            resources.ApplyResources(this.Pause, "Pause");
+            this.Pause.Name = "Pause";
+            this.Pause.UseVisualStyleBackColor = true;
+            this.Pause.Click += new System.EventHandler(this.Pause_Click);
+            // 
+            // Play
+            // 
+            this.Play.Image = global::RoomView.Properties.Resources.play;
+            resources.ApplyResources(this.Play, "Play");
+            this.Play.Name = "Play";
+            this.Play.UseVisualStyleBackColor = true;
+            this.Play.Click += new System.EventHandler(this.Play_Click);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.BackColor = System.Drawing.Color.Purple;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.label1.Name = "label1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.BackColor = System.Drawing.Color.SteelBlue;
+            this.label2.Name = "label2";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.BackColor = System.Drawing.Color.Green;
+            this.label3.Name = "label3";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.BackColor = System.Drawing.Color.Red;
+            this.label4.Name = "label4";
             // 
             // FormView
             // 
@@ -152,6 +184,7 @@
             this.MaximizeBox = false;
             this.Name = "FormView";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormView_FormClosing);
             this.Load += new System.EventHandler(this.FormView_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormView_Paint);
             this.Resize += new System.EventHandler(this.FormView_Resize);
@@ -160,6 +193,7 @@
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -178,6 +212,10 @@
         private System.Windows.Forms.RichTextBox Logs;
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Label title;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
