@@ -21,7 +21,7 @@ namespace Shared
                 if(POSITION == null){
                     POSITION = new Dictionary<MapPosition, Point>
                     {
-                        { MapPosition.WAITER, new Point(540,95) },
+                        { MapPosition.WAITER, new Point(410,398) },
                         { MapPosition.CLIENT, new Point(781, 497) },
                         { MapPosition.BUTLER, new Point(726, 461) },
                         { MapPosition.CHEF, new Point(415,630) },
