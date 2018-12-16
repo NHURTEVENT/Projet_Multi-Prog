@@ -77,6 +77,8 @@ namespace Controller
             Console.WriteLine("");
             Console.WriteLine(ticks);
 
+            Logger.log +="\n";
+            Logger.log +=(ticks + "\n");
             newClient(clientGenerator.onTick());
 
             butler.onTick();
@@ -100,6 +102,7 @@ namespace Controller
                 foreach (var client in clientsLeaving)
                 {
                     clients.Remove(client);
+                    Peoples.Remove(client);
                 }
             clientsLeaving.Clear();
 
@@ -111,7 +114,9 @@ namespace Controller
             if (newClient != null)
             {
                 Console.WriteLine("New Client");
+                Logger.log += "New Client\n";
                 this.clients.Add(newClient);
+                Peoples.Add(newClient);
                 butler.ActionQueue.Add(ActionFactory.CreateAction_("LookForTable", butler, MapPosition.BUTLER, newClient));
             }
 

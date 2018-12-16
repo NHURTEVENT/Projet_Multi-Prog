@@ -57,6 +57,7 @@ namespace Model
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " " + CurrentAction.Name);
+            Logger.log +=(Name + " " + CurrentAction.Name+"\n");
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);
@@ -119,9 +120,10 @@ namespace Model
                 if (table.state == "available")
                 {
                     Console.WriteLine("Table trouv�e");
+                    Logger.log += "table trouvee";
                     tableFound = true;
                     table.IsNowOccuped();
-                    headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", this, MapPosition.BUTLER, currentClient, table));
+                    headWaiters[0].ActionQueue.Add(ActionFactory.CreateAction_("TakeClientInCharge", this, MapPosition.TABLE1WAITER, currentClient, table));
                     currentClient.Butler = this;
                     newClients.Remove(currentClient);
                     break;
@@ -133,7 +135,7 @@ namespace Model
         public void CheckIn(IClient checkingInClient)
         {
 
-            checkingInClient.ActionQueue.Add(ActionFactory.CreateAction_("LeaveRestaurant", checkingInClient, MapPosition.BUTLER, checkingInClient));
+            checkingInClient.ActionQueue.Add(ActionFactory.CreateAction_("LeaveRestaurant", checkingInClient, MapPosition.CLIENT, checkingInClient));
 
         }
 

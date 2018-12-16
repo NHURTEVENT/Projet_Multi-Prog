@@ -37,6 +37,7 @@ namespace Model {
             {
                 Unsubscribers.Add(table.Subscribe(this));
                 Console.WriteLine(Name + " s'est abonné à la table");
+                Logger.log += (Name + " s'est abonné à la table \n");
             }
 
             ChangeAction(ActionFactory.CreateAction_("Wait", this, MapPosition.HEADWAITER));
@@ -58,12 +59,12 @@ namespace Model {
         public void TakeClientInCharge(IClient currentClient, ITable clientTable)
         {
             ActionQueue.Add(ActionFactory.CreateAction_("MoveWithClient", this, MapPosition.CLIENT, currentClient, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu", this, MapPosition.TABLEX, null, clientTable));
-            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", this, MapPosition.TABLEX, currentClient, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringMenu", this, MapPosition.TABLE1WAITER, null, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("TakeOrder", this, MapPosition.TABLE1WAITER, currentClient, clientTable));
             ActionQueue.Add(ActionFactory.CreateAction_("TransmitOrder", this, MapPosition.HEADWAITER, null, clientTable));
 
             // Test HeadWaiter serve the dishes
-            ActionQueue.Add(ActionFactory.CreateAction_("BringDishes", this, MapPosition.TABLEX, null, clientTable));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringDishes", this, MapPosition.TABLE1WAITER, null, clientTable));
 
         }
 
@@ -97,7 +98,8 @@ namespace Model {
                 {
                     case "TakeClientInCharge":
                         TakeClientInCharge(CurrentAction.ClientConcerned, CurrentAction.TableConcerned);
-                        CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable", this, MapPosition.TABLEX, null, CurrentAction.TableConcerned));
+                        CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("MoveToTable", CurrentAction.ClientConcerned, MapPosition.TABLE1, null, CurrentAction.TableConcerned));
+                        CurrentAction.ClientConcerned.ActionQueue.Add(ActionFactory.CreateAction_("WaitAtTable", CurrentAction.ClientConcerned, MapPosition.TABLE1, null, CurrentAction.TableConcerned));
                         CheckActionQueue();
                         break;
 
@@ -142,6 +144,7 @@ namespace Model {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " " + CurrentAction.Name);
+            Logger.log += (Name + " " + CurrentAction.Name+"\n");
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);
@@ -151,6 +154,7 @@ namespace Model {
         private void TransmitOrder()
         {
             Console.WriteLine("HeadWaiter just transmit order");
+            Logger.log += ("HeadWaiter just transmit order\n");
             // Socket Serveur --- send order + Table --> Client
         }
 
@@ -159,7 +163,7 @@ namespace Model {
         {
             if (concernedTable.state == "toDress")
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", this, MapPosition.TABLEX, null, concernedTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("DressTheTable", this, MapPosition.TABLE1WAITER, null, concernedTable));
             }
 
 

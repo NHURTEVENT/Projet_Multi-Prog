@@ -51,6 +51,7 @@ namespace Model {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " " + CurrentAction.Name);
+            Logger.log += (Name + " " + CurrentAction.Name+"\n");
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);

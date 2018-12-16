@@ -82,3 +82,216 @@ Set timer X10 at: 15/12/2018 17:04:08 )
 Pause simulation at: 15/12/2018 17:04:19 )
 Start simulation at: 15/12/2018 17:05:19 )
 Set timer X1 at: 15/12/2018 17:05:21 )
+Start simulation at: 16/12/2018 15:47:59 )
+Set timer X10 at: 16/12/2018 15:48:33 )
+Pause simulation at: 16/12/2018 15:48:39 )
+Start simulation at: 16/12/2018 16:02:47 )
+Pause simulation at: 16/12/2018 16:03:18 )
+Start simulation at: 16/12/2018 16:07:37 )
+Start simulation at: 16/12/2018 16:08:33 )
+Start simulation at: 16/12/2018 16:17:46 )
+Pause simulation at: 16/12/2018 16:18:09 )
+Start simulation at: 16/12/2018 16:18:10 )
+Start simulation at: 16/12/2018 16:18:11 )
+Start simulation at: 16/12/2018 16:18:11 )
+Start simulation at: 16/12/2018 16:18:11 )
+Start simulation at: 16/12/2018 16:18:12 )
+Start simulation at: 16/12/2018 16:18:12 )
+Start simulation at: 16/12/2018 16:18:12 )
+Start simulation at: 16/12/2018 16:18:12 )
+Start simulation at: 16/12/2018 16:18:12 )
+Start simulation at: 16/12/2018 16:18:13 )
+Start simulation at: 16/12/2018 16:18:13 )
+Start simulation at: 16/12/2018 16:18:13 )
+Start simulation at: 16/12/2018 16:18:13 )
+Start simulation at: 16/12/2018 16:18:13 )
+Start simulation at: 16/12/2018 16:18:13 )
+Start simulation at: 16/12/2018 16:18:13 )
+Start simulation at: 16/12/2018 16:18:14 )
+Start simulation at: 16/12/2018 16:18:14 )
+Start simulation at: 16/12/2018 16:18:14 )
+Start simulation at: 16/12/2018 16:18:14 )
+Start simulation at: 16/12/2018 16:18:14 )
+Start simulation at: 16/12/2018 16:18:15 )
+Pause simulation at: 16/12/2018 16:18:22 )
+Start simulation at: 16/12/2018 16:20:47 )
+Set timer X10 at: 16/12/2018 16:25:08 )
+Set timer X10 at: 16/12/2018 19:50:44 )
+Start simulation at: 16/12/2018 19:53:33 )
+Start simulation at: 16/12/2018 19:56:14 )
+Start simulation )
+Start simulation at: 16/12/2018 19:57:36 )
+Start simulation
+Pause simulation
+Set timer X10
+Pause simulation
+Set timer X1
+Start simulation
+Pause simulation
+Start simulation
+Pause simulation
+Start simulation
+Pause simulation
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+log
+
+
+
+
+
+Lucien observe the table
+Michel s'est abonné à la table 
+Michel Wait
+Alfred Wait
+
+1
+Alfred Wait
+Michel Wait
+
+
+2
+client1 Wait
+New Client
+Alfred LookForTable
+Michel Wait
+client1 Wait
+
+
+3
+table trouveeAlfred Wait
+Michel TakeClientInCharge
+client1 Wait
+
+
+4
+Alfred Wait
+Michel MoveWithClient
+client1 MoveToTable
+
+
+5
+Alfred Wait
+Michel BringMenu
+Le client s'est abonne a la table 
+client1 WaitAtTable
+
+
+
+6
+Alfred Wait
+Michel TakeOrder
+
+
+7
+Alfred Wait
+Michel TransmitOrder
+
+
+8
+Alfred Wait
+
+
+9
+Alfred Wait
+HeadWaiter just transmit order
+Michel BringDishes
+
+
+10
+Alfred Wait
+client1 Wait
+
+
+11
+Alfred Wait
+Michel Wait
+client1 Eat
+
+
+12
+Alfred Wait
+Michel Wait
+
+
+13
+Alfred Wait
+Michel Wait
+
+
+14
+Alfred Wait
+Michel Wait
+client1 LeaveTable
+
+
+15
+Alfred Wait
+Michel Wait
+client1 Wait
+

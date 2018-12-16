@@ -95,6 +95,7 @@ namespace Model{
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " " + CurrentAction.Name);
+            Logger.log += (Name + " " + CurrentAction.Name+"\n");
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);
@@ -139,6 +140,8 @@ namespace Model{
             unsubscriber = table.Subscribe(this);
             myTable = table;
             Console.WriteLine("Le client s'est abonn� � la table");
+            Logger.log += ("Le client s'est abonne a la table \n");
+
         }
 
         public void LeaveTable()
@@ -146,7 +149,7 @@ namespace Model{
             myTable.IsNowFree();
             unsubscriber.Dispose();
 
-            this.Butler.ActionQueue.Add(ActionFactory.CreateAction_("CheckIn", this, MapPosition.BUTLER, this));
+            this.Butler.ActionQueue.Add(ActionFactory.CreateAction_("CheckIn", this, MapPosition.CLIENT, this));
         }
         
 

@@ -75,6 +75,10 @@ namespace Shared
 
                 case "Wait":
                     return new Action_("Wait", 1, Position, Person, null, ClientConcerned, TableConcerned);
+
+                case "WaitAtTable":
+                    return new Action_("WaitAtTable", 5, Position, Person, null, ClientConcerned, TableConcerned);
+
                 default:
                     //for when refactored so tablex is not default
                     throw new Exception("always specify table if table x");

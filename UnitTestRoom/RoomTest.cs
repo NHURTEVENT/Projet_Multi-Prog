@@ -14,7 +14,8 @@ namespace UnitTestRoom
         public void TestCreateClient()
         {
 
-            var client = new Client(ActionFactory.CreateAction_());
+            var client = new Client();
+            client.ChangeAction(ActionFactory.CreateAction_("Wait", client, MapPosition.CLIENT));
             Assert.AreEqual(client.GetType(), ClientFactory.CreateClient("client1").GetType());
 
         }

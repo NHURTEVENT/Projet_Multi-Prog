@@ -29,7 +29,8 @@ namespace Shared
                         { MapPosition.KITCHENCLERK, new Point(155,635) },
                         { MapPosition.DISHCLEANER, new Point(569, 482) },
                         { MapPosition.HEADWAITER, new Point(410, 387) },
-                        { MapPosition.TABLE1, new Point(26, 27) }
+                        { MapPosition.TABLE1, new Point(26, 27) },
+                        { MapPosition.TABLE1WAITER, new Point(14, 3) },
                     };  
             }
                 return POSITION;

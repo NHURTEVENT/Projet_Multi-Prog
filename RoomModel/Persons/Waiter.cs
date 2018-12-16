@@ -39,6 +39,7 @@ namespace Model {
             {
                 TableUnsubscribers.Add(table.Subscribe(this));
                 Console.WriteLine(Name + " observe the table");
+                Logger.log += (Name + " observe the table\n");
             }
         }
 
@@ -48,6 +49,7 @@ namespace Model {
             this.CurrentAction = Action;
             RemainingTicks = Action.Duration;
             Console.WriteLine(Name + " " + CurrentAction.Name);
+            Logger.log += (Name + " " + CurrentAction.Name+"\n");
             if (ActionQueue.Contains(Action))
             {
                 ActionQueue.Remove(Action);
@@ -74,6 +76,7 @@ namespace Model {
         {
             OrderUnsubscriber.Add(newOrder.Subscribe(this));
             Console.WriteLine(Name + " observe a new Order");
+            Logger.log += (Name + " observe a new Order\n");
         }
 
         public void FetchOrder(IOrder order)
@@ -120,7 +123,7 @@ namespace Model {
         {
             if (ActionQueue.Count == 0)
             {
-                ChangeAction(ActionFactory.CreateAction_());
+                ChangeAction(ActionFactory.CreateAction_("Wait", this, MapPosition.WAITER));
             }
             else
                 ChangeAction(ActionQueue[0]);
@@ -128,8 +131,8 @@ namespace Model {
 
         public void OnNext(IOrder concernedOrder)
         {
-            ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", this, MapPosition.TABLEX, null, null, concernedOrder));
-            ActionQueue.Add(ActionFactory.CreateAction_("BringOrder", this, MapPosition.TABLEX, null, concernedOrder.Table, concernedOrder));
+            ActionQueue.Add(ActionFactory.CreateAction_("FetchOrder", this, MapPosition.TABLE1WAITER, null, null, concernedOrder));
+            ActionQueue.Add(ActionFactory.CreateAction_("BringOrder", this, MapPosition.TABLE1WAITER, null, concernedOrder.Table, concernedOrder));
 
         }
 
@@ -137,7 +140,7 @@ namespace Model {
         {
             if (concernedTable.state == "toClean")
             {
-                ActionQueue.Add(ActionFactory.CreateAction_("ClearTheTable", this, MapPosition.TABLEX, null, concernedTable));
+                ActionQueue.Add(ActionFactory.CreateAction_("ClearTheTable", this, MapPosition.TABLE1WAITER, null, concernedTable));
             }
         }
 

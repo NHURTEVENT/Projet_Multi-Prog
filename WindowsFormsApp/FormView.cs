@@ -210,6 +210,9 @@ namespace RoomView
                 g.FillRectangle(p.Color, p.Position.X, p.Position.Y, 10, 10);
 
             }
+            LogMsg();
+            
+
             //xWaiter += 1;
             Invalidate();
             Update();
@@ -224,7 +227,9 @@ namespace RoomView
 
 
             StreamWriter sw = new StreamWriter(logFilePath, true);    //writing in logfile and log file path
-            sw.WriteLine($"{actionName} at: {actionTime.ToString()} )");  //log message
+            sw.WriteLine($"{Logger.log}");  //log message
+            //sw.WriteLine($"{actionName} at: {actionTime.ToString()} )");  //log message
+            Logger.log = "";
             sw.Close();
             Logs.Text = " ";
         }
